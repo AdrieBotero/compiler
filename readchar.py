@@ -43,6 +43,15 @@ def main():
 def get_next_token():
     return 0
 
+def real_machine(line, forward_p):
+    error = []  # on here we are going to store every error we get
+    xx_counter = 0  # counter for xx
+    yy_counter = 0  # counter for yy
+
+    current_char = line[forward_p] # current didigit
+
+    # check if first character is a digit
+    
 
 def id_machine(string_line, forward_p):
     word = ""

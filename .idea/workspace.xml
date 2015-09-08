@@ -21,20 +21,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="readchar.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="readchar.py" pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/PycharmProjects/compiler/readchar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.8088235">
+              <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="journal" pinned="false" current-in-tab="true">
+      <file leaf-file-name="journal" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/PycharmProjects/compiler/journal">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9264706">
+            <state vertical-scroll-proportion="0.0">
               <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
@@ -89,8 +89,8 @@
         <option value="$USER_HOME$/PycharmProjects/untitled/reserved_words" />
         <option value="$USER_HOME$/PycharmProjects/untitled/readchar.py" />
         <option value="$USER_HOME$/PycharmProjects/untitled/journal" />
-        <option value="$USER_HOME$/PycharmProjects/compiler/readchar.py" />
         <option value="$USER_HOME$/PycharmProjects/compiler/journal" />
+        <option value="$USER_HOME$/PycharmProjects/compiler/readchar.py" />
       </list>
     </option>
   </component>
@@ -630,18 +630,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/compiler/readchar.py">
+    <entry file="file://$USER_HOME$/PycharmProjects/compiler/journal">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/compiler/journal">
+    <entry file="file://$USER_HOME$/PycharmProjects/compiler/readchar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9264706">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.8088235">
+          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
           <folding />
         </state>
       </provider>
