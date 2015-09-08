@@ -15,4 +15,8 @@ Sept 03, 2015. Today I worked on my REALLONG machine and got it done for the mos
 and debug it. I also did an algorithm on paper with a state diagram. I also did a machines of machines method as a check
 for character and to send the data to the corresponding machine.
 
-Sept 06, 2015
+Sept 06, 2015 Today I had to redo my ID_machine because it was not working properly. I also tight things up in my reallong
+machine. I spend some time testing. I still need to test it by reading the file which ill be working on next.
+
+Sept 07, 2015 today I setup git for this project. I realized I am constantly changing stuff and i would like to be able
+to look at my history of changes. and thats all i did today. 
