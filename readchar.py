@@ -23,7 +23,6 @@ tokens = {
     6: ('RELOP', 'GT'),
 }
 
-
 # global pointers
 
 # forward_p = 0
@@ -35,8 +34,10 @@ def main():
 
     # read_lines()
 
-    machines_of_machines("var 123 2.34E+5", 0)
+    #machines_of_machines("var 123 2.34E+5", 0)
     #long_real_machine("2.34E+5", 0)
+
+    print int_machine("12d", 0)
 
 
 def get_next_token():
@@ -64,6 +65,38 @@ def id_machine(string_line, forward_p):
             break
     print word
     return True, forward_p, ('ID', word)  # return data back to check next character
+
+
+def int_machine(line, forward_p):
+    error = []  # append everything that is wrong with line
+    char_max = 0  # counter for characters
+    my_string = ""
+    # get current character
+    current_char = line[forward_p]
+    # check if current char is a digit
+    if current_char.isdigit():
+        # if current char is a digit then we continue
+        # check for leading zero
+        if current_char is '0' and line[forward_p+1].isdigit():
+            error.append(error_list.get(3))
+        while current_char.isdigit():
+            # add 1 to char_max to counter
+            char_max += 1
+            # add character to string
+            my_string += current_char
+            # check the max of character
+            if char_max > 10 and error_list.get(2) not in error:
+                error.append(error_list.get(2))  # if number are over max then we append error
+            # get next character
+            forward_p += 1
+            try:
+                current_char = line[forward_p]
+            except IndexError:
+                break
+
+        return True, forward_p, ('INT', my_string, error)
+    else:  # else we need to return an error with what kind of things
+        return False, forward_p
 
 
 def machines_of_machines(line, forward_p):
