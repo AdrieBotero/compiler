@@ -1,0 +1,18 @@
+Today August 25, 2015 started working on my compilers project. I went over the notes that the teacher had as write in class.
+Redraw some of the machine for understanding purposes. I also ready page 106 and look at some example code and diagrams.
+I wrote down an algorithms for the ID machine.
+
+Today August 27, 2015 I looked at some video on youtube about compilers. I also did my reserve word file. I added the words
+from the grammar paper the teacher gave us into the file. I also store lexer error in a dictionary for user later in my
+program.
+
+Today August 31, 2015 started coding Relop machine, but I first did an algorithm on paper to have a clear idea what i am
+coding. relop machine seem to be working fine.
+
+Sept 01, 2015 I came to school really early to work on my compiler. Add more testing condition to the relop machine.
+
+Sept 03, 2015. Today I worked on my REALLONG machine and got it done for the most part. I still need to add checking error.
+and debug it. I also did an algorithm on paper with a state diagram. I also did a machines of machines method as a check
+for character and to send the data to the corresponding machine.
+
+Sept 06, 2015
