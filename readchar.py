@@ -11,7 +11,13 @@ error_list = {
     8: "REAL yy with trailer",
     9: "LONGREAL zz too long",
     10: "LONGREAL zz with leading zero",
-    11: "Unrecognized Symbol"
+    11: "LONGREAL xx too Long",
+    12: "LONGREAL xx with leading zero",
+    13: "LONGREAL xx with trailer of zeros",
+    14: "LONGREAL yy too long",
+    15: "LONGREAL yy with leading zero",
+    16: "Unrecognized Symbol",
+    17: "LONGREAL yy with trailer of zeros"
 }
 
 tokens = {
@@ -34,21 +40,23 @@ def main():
 
     # read_lines()
 
-    #machines_of_machines("var 123 2.34E+5", 0)
-    #long_real_machine("2.34E+5", 0)
+    # machines_of_machines("var 123 2.34E+5", 0)
+    print long_real_machine("23454.345E2", 0)
 
-    print int_machine("12d", 0)
+    # print int_machine("12d", 0)
+    # print real_machine('022213.33', 0)
 
 
 def get_next_token():
     return 0
+
 
 def real_machine(line, forward_p):
     error = []  # on here we are going to store every error we get
     xx_counter = 0  # counter for xx
     yy_counter = 0  # counter for yy
     my_string = ""
-    current_char = line[forward_p] # current didigit
+    current_char = line[forward_p]  # current didigit
     # check for leading zero
     if current_char == '0' and line[forward_p+1].isdigit():
         error.append(error_list.get(7))
@@ -60,7 +68,9 @@ def real_machine(line, forward_p):
             my_string += current_char
             # add one to xx counter
             xx_counter += 1
-            if xx_counter > 5:  # here we are checking if xx counter goes over limit
+            forward_p += 1
+            current_char = line[forward_p]
+            if xx_counter > 5 and error_list.get(5) not in error:  # here we are checking if xx counter goes over limit
                 error.append(error_list.get(5))  # if it does then we add error to the error array
             if current_char is '.':
                 forward_p += 1  # increase pointer
@@ -75,12 +85,16 @@ def real_machine(line, forward_p):
                     my_string += current_char
                     # increment pointer
                     forward_p += 1
-                    current_char = line[forward_p]
-                    if yy_counter > 5:
-                        error.append(error_list.get(8))  # if true then add error to array
+                    if yy_counter > 5 and error_list.get(6) not in error:
+                        error.append(error_list.get(6))  # if true then add error to array
+                    try:
+                        current_char = line[forward_p]
+                    except IndexError:
+                        break
 
+                return True, forward_p, ('REAL', my_string, error)
     else:
-        return False
+        return False, None, None,
 
 
 def id_machine(string_line, forward_p):
@@ -182,9 +196,7 @@ def white_space_machine(line, forward_p):
 
 def long_real_machine(line, forward_p):
     # work on this next time
-    print line
     current_char = line[forward_p]  # get current character
-    print current_char
     string_to_return = ""
     counter_xx = 0  # this will keep characters count
     counter_yy = 0  # yy counter
@@ -192,50 +204,54 @@ def long_real_machine(line, forward_p):
     error = []  # error array
     # check for zeros
     # if current char is zero then we
-    if current_char is 0 and line[forward_p + 1].isdigit():  # if current char is a 0 and the next char is a digit
-        return False
-    while current_char.isdigit():  # while we have a digit
-        counter_xx += 1  # we increment the counter for xx
-        string_to_return += current_char  # we add current char to the string
-        forward_p += 1
-        current_char = line[forward_p]  # get next character
-        print "checking current character " + current_char
-    if current_char == '.' and line[forward_p + 1].isdigit():  # checking for dot and next character
-        forward_p += 1
-        string_to_return += current_char  # we get next character
-        print "string return is " + string_to_return
-        current_char = line[forward_p]
-        print "next char is " + current_char
-        while current_char.isdigit():
-            string_to_return += current_char
-            counter_yy += 1
+    if current_char is '0' and line[forward_p + 1].isdigit():  # if current char is a 0 and the next char is a digit
+        error.append(error_list.get(12))
+    if current_char.isdigit():
+        while current_char.isdigit():  # while we have a digit
+            counter_xx += 1  # we increment the counter for xx
+            string_to_return += current_char  # we add current char to the string
             forward_p += 1
-            current_char = line[forward_p]
-            print string_to_return
-        print "next character " + current_char
-        if current_char is 'E' and line[forward_p + 1].isdigit() or current_char is 'E' and \
-                line[forward_p + 1] == '+' or current_char is 'E' and line[forward_p + 1] == '-':
-            #  add char to place holder
-            string_to_return += current_char
-            counter_zz += 1
-            forward_p += 1
-            current_char = line[forward_p]
-            print 'after E ' + current_char
-            while current_char.isdigit() or current_char == '+' or current_char == '-':
-                string_to_return += current_char
-                print "string return " + string_to_return
-                counter_zz += 1
+            current_char = line[forward_p]  # get next character
+            if counter_xx > 5 and error_list.get(11) not in error: # check for limit of xx
+                error.append(error_list.get(11))  # if true then add error to array
+            if current_char is '0' and line[forward_p + 1] is '0':
+                error.append(error_list.get(13))
+            if current_char == '.' and line[forward_p + 1].isdigit():  # checking for dot and next character
                 forward_p += 1
-                try:
-                    current_char = line[forward_p]
-                except IndexError:
-                    break
-            return True, forward_p, ('LONG_REAL', string_to_return)
-        else:
-            back_p = forward_p
-            print "forward_point" + str(back_p)
+                string_to_return += current_char  # we get next character
+                current_char = line[forward_p]
+                while current_char.isdigit():
+                    string_to_return += current_char
+                    counter_yy += 1
+                    forward_p += 1
+                    if counter_yy > 5 and error_list.get(14) not in error:
+                        error.append(error_list.get(14))
+                    if current_char is '0' and line[forward_p+1] is '0':
+                        error.append(error_list.get(17))
+                    try:
+                        current_char = line[forward_p]
+                    except IndexError:
+                        break
+                    if current_char is 'E' and line[forward_p + 1].isdigit() or current_char is 'E' and \
+                            line[forward_p + 1] == '+' or current_char is 'E' and line[forward_p + 1] == '-':
+                        #  add char to place holder
+                        string_to_return += current_char
+                        counter_zz += 1
+                        forward_p += 1
+                        current_char = line[forward_p]
+                        while current_char.isdigit() or current_char == '+' or current_char == '-':
+                            string_to_return += current_char
+                            counter_zz += 1
+                            forward_p += 1
+                            if counter_zz > 2 and error_list.get(9) not in error_list:
+                                error.append(error_list.get(9))
+                            try:
+                                current_char = line[forward_p]
+                            except IndexError:
+                                break
+                return True, forward_p, ('LONG_REAL', string_to_return, error)
     else:
-        return False, None
+        return False, None, None
 
 
 def relop_machine(line, forward_p, back_p):
