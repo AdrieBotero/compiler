@@ -36,15 +36,8 @@ tokens = {
 
 
 def main():
-    # **Error Array**
 
-    # read_lines()
-
-    # machines_of_machines("var 123 2.34E+5", 0)
-    print long_real_machine("23454.345E2", 0)
-
-    # print int_machine("12d", 0)
-    # print real_machine('022213.33', 0)
+        print machines_of_machines('var x, y: integer;', 0)
 
 
 def get_next_token():
@@ -109,14 +102,12 @@ def id_machine(string_line, forward_p):
         # check if character is a letter
 
         word += current_character
-        print current_character + " is a letter or digit"
         # add characters
         forward_p += 1  # then we increment pointer to get next character
         try:
             current_character = string_line[forward_p]  # get next character in the string
         except IndexError:
             break
-    print word
     return True, forward_p, ('ID', word)  # return data back to check next character
 
 
@@ -149,7 +140,7 @@ def int_machine(line, forward_p):
 
         return True, forward_p, ('INT', my_string, error)
     else:  # else we need to return an error with what kind of things
-        return False, forward_p
+        return False, forward_p, None
 
 
 def machines_of_machines(line, forward_p):
@@ -173,13 +164,33 @@ def machines_of_machines(line, forward_p):
                 for i in token:
                     print i
                 break
-            success, temp_fp = long_real_machine(l, fp)
+            success, temp_fp, token = long_real_machine(l, fp)
             if success:
                 bp = temp_fp
                 fp = temp_fp
                 for i in token:
                     print i
                 break
+            success, temp_fp, token = real_machine(l, fp)
+            if success:
+                bp = temp_fp
+                fp = temp_fp
+                for i in token:
+                    print i
+                break
+            success, temp_fp, token = int_machine(l, fp)
+            if success:
+                bp = temp_fp
+                fp = temp_fp
+                for i in token:
+                    print i
+                break
+            success, temp_fp, token = relop_machine(l, fp)
+            if success:
+                bp = temp_fp
+                fp = temp_fp
+                for i in token:
+                    print i
 
 
 def white_space_machine(line, forward_p):
@@ -254,7 +265,7 @@ def long_real_machine(line, forward_p):
         return False, None, None
 
 
-def relop_machine(line, forward_p, back_p):
+def relop_machine(line, forward_p):
     # store line
     l = line
     # get first char
@@ -265,7 +276,7 @@ def relop_machine(line, forward_p, back_p):
         # get next character
         character = l[forward_p]
         if character == "=":
-            return tokens[1], forward_p  # return ('RELOP', 'LE')
+            return True, forward_p, tokens[1]  # return ('RELOP', 'LE')
         elif character == ">":
             return tokens[2], forward_p  # return ('RELOP', 'NE')
         else:
@@ -284,7 +295,6 @@ def relop_machine(line, forward_p, back_p):
 def read_lines():
     file_name = open('read_it', 'r')
     file_write_to = open("write_it.txt", "w")
-    # print file_name.read(10)
     print file_name
     # set limit for character in line
     char_limit = 72
@@ -293,14 +303,14 @@ def read_lines():
     # parse file
     for line in file_name:
         char = len(line)
-
-        print line
         file_write_to.writelines("{0}\t{1}".format(counter, line))
         # Check line characters
         # if characters limits is bigger than 72 then it will display error
         if char > char_limit:
             file_write_to.writelines("character limit exceeded\n")
             print "character limit exceeded"
+            # pass data to machines of machines
+            print machines_of_machines(char, 0)
         counter += 1
     file_write_to.close()
     file_name.close()

@@ -27,3 +27,5 @@ INT Machine. For the most the project is coming a long. I believe int machine is
 today as well and i will approach it the same way i did my int machine. That is draw state diagram and then write the
 algorithm form it.
 
+Sept 12, 2015, reworked on REAL AND LONG MACHINES. added new error messages to list and added more logic to machines of
+machines. I still need to fix machines of machines because is still kind of buggy.
