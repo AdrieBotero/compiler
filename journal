@@ -29,3 +29,6 @@ algorithm form it.
 
 Sept 12, 2015, reworked on REAL AND LONG MACHINES. added new error messages to list and added more logic to machines of
 machines. I still need to fix machines of machines because is still kind of buggy.
+
+Sept 13 2015, Today I am going to be working on the token file and fix my machines of machines. I'll be also working on
+reading the character from the file and test it.

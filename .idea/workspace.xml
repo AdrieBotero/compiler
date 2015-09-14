@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dac4f008-5893-4162-9289-a667cb2f85ab" name="Default" comment="tight things up and test machines">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/StateMachines/IDMachine.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/StateMachines/INTMachine.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/StateMachines/LONGREALMachine.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MachineOfMachines.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/StateMachines/REALMachine.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/StateMachines/RELOPMachine.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/StateMachines/WhiteSpaceMachine.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/StateMachines/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test_file.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/journal" afterPath="$PROJECT_DIR$/journal" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/read_it" afterPath="$PROJECT_DIR$/read_it" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readchar.py" afterPath="$PROJECT_DIR$/readchar.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_it.txt" afterPath="$PROJECT_DIR$/write_it.txt" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,18 +35,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="readchar.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="readchar.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readchar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7058824">
-              <caret line="190" column="28" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MachineOfMachines.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MachineOfMachines.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding>
-                <element signature="e#987#2893#0" expanded="false" />
-                <element signature="e#3706#4879#0" expanded="false" />
-                <element signature="e#6477#6961#0" expanded="false" />
-                <element signature="e#7008#10111#0" expanded="false" />
-                <element signature="e#10995#11782#0" expanded="false" />
+                <element signature="e#30#76#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="REALMachine.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/StateMachines/REALMachine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LONGREALMachine.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.82191783">
+              <caret line="79" column="27" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_file.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_file.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -47,27 +91,7 @@
         <entry file="file://$PROJECT_DIR$/journal">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="82" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reserved_words" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reserved_words">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="write_it.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/write_it.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="22" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="22" />
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -77,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/read_it">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+              <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -104,10 +128,19 @@
         <option value="$PROJECT_DIR$/../untitled/reserved_words" />
         <option value="$PROJECT_DIR$/../untitled/readchar.py" />
         <option value="$PROJECT_DIR$/../untitled/journal" />
-        <option value="$PROJECT_DIR$/read_it" />
         <option value="$PROJECT_DIR$/write_it.txt" />
-        <option value="$PROJECT_DIR$/readchar.py" />
         <option value="$PROJECT_DIR$/journal" />
+        <option value="$PROJECT_DIR$/StateMachines/INTMachine.py" />
+        <option value="$PROJECT_DIR$/IDMachine.py" />
+        <option value="$PROJECT_DIR$/LONGREALMachine.py" />
+        <option value="$PROJECT_DIR$/StateMachines/RELOPMachine.py" />
+        <option value="$PROJECT_DIR$/read_it" />
+        <option value="$PROJECT_DIR$/MachineOfMachines.py" />
+        <option value="$PROJECT_DIR$/StateMachines/WhiteSpaceMachine.py" />
+        <option value="$PROJECT_DIR$/test_file.txt" />
+        <option value="$PROJECT_DIR$/readchar.py" />
+        <option value="$PROJECT_DIR$/StateMachines/REALMachine.py" />
+        <option value="$PROJECT_DIR$/StateMachines/LONGREALMachine.py" />
       </list>
     </option>
   </component>
@@ -163,7 +196,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -182,12 +214,27 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compiler_project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StateMachines" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -208,6 +255,11 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="905" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/StateMachines" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.readchar">
     <configuration default="false" name="readchar" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -378,21 +430,21 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3990964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3433735" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40813252" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298193" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298193" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -411,25 +463,113 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>42</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>50</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>64</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/StateMachines/REALMachine.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="95" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/readchar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/journal">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -466,59 +606,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/journal">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reserved_words">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/write_it.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/read_it">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="28" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/readchar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -558,13 +646,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -604,13 +686,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -650,13 +726,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -696,13 +766,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -734,13 +798,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -772,13 +830,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -802,13 +854,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="71" selection-start-line="19" selection-start-column="71" selection-end-line="19" selection-end-column="71" />
-          <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -828,10 +874,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/read_it">
+    <entry file="file://$PROJECT_DIR$/reserved_words">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -844,33 +890,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reserved_words">
+    <entry file="file://$PROJECT_DIR$/StateMachines/INTMachine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="20" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/journal">
+    <entry file="file://$PROJECT_DIR$/StateMachines/RELOPMachine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.98284316">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StateMachines/IDMachine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="82" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StateMachines/WhiteSpaceMachine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/readchar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7058824">
-          <caret line="190" column="28" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MachineOfMachines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding>
-            <element signature="e#987#2893#0" expanded="false" />
-            <element signature="e#3706#4879#0" expanded="false" />
-            <element signature="e#6477#6961#0" expanded="false" />
-            <element signature="e#7008#10111#0" expanded="false" />
-            <element signature="e#10995#11782#0" expanded="false" />
+            <element signature="e#30#76#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/journal">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/read_it">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_file.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StateMachines/REALMachine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StateMachines/LONGREALMachine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.82191783">
+          <caret line="79" column="27" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>

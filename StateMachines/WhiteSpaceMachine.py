@@ -1,7 +1,5 @@
 __author__ = 'andreasbotero'
 
-from MachineOfMachines import machines_of_machines
-
 error_list = {
     1: "ID too long",
     2: "INT to long",
@@ -23,10 +21,17 @@ error_list = {
 }
 
 
-def main():
-    my_file = open('test_file.txt', 'r')
-    machines_of_machines(my_file)
-
-
-if __name__ == "__main__":
-    main()
+def white_space_machine(line, forward_p):
+    # check if white space tab or new line exist in current character
+    current_character = line[forward_p]  # get current character
+    if current_character == ' ' or current_character == '\t' or current_character == '\n':
+        while current_character == ' ' or current_character == '\t' or current_character == '\n':
+            # increment forward pointer
+            forward_p += 1
+            try:
+                current_character = line[forward_p]
+            except IndexError:
+                break
+        return True, forward_p
+    else:
+        return False, None
