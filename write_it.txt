@@ -28,3 +28,5 @@ Line No.|Lexeme          |Token-Type      |Attribute
        7|5555            |INT             |Some string
        7|88888888        |INT             |Some string
        7|20000           |INT             |Some string
+       7|002             |INT             |Some string
+       7|222222222222222 |INT             |Some string
