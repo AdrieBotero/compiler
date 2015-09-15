@@ -60,4 +60,5 @@ Line No.|Lexeme          |Token-Type      |Attribute
        6|123.10001E12    |LONG_REAL       |Some string
        6|12.0012E12      |LONG_REAL       |Some string
        6|12.1123E123     |LONG_REAL       |Some string
-I was also able to get the Int Machine to recognize when and INT has a trailing of zeros.
+I was also able to get the Int Machine to recognize when and INT has a trailing of zeros. I still need to work on the
+reserve words and check for them.
