@@ -1,6 +1,23 @@
-1	var x, y: integer;
-2	function gcd(a, b: integer): integer;
-3	begin
-4	    if b = 0 then gcd := a
-5	    else gcd := gcd(b, a mod b)
-6	end;
+Line No.|Lexeme          |Token-Type      |Attribute
+       1|these           |ID              |Some string
+       1|are             |ID              |Some string
+       1|ids             |ID              |Some string
+       1|more            |ID              |Some string
+       1|ids             |ID              |Some string
+       3|1234.123        |REAL            |Some string
+       3|00124.123       |REAL            |Some string
+       3|1234123.123     |REAL            |Some string
+       3|1234.123400     |REAL            |Some string
+       3|1234.12341234   |REAL            |Some string
+       4|1234.123E11     |LONG_REAL       |Some string
+       4|00123.123E11    |LONG_REAL       |Some string
+       4|12341234.123E12 |LONG_REAL       |Some string
+       4|1234.12300E12   |LONG_REAL       |Some string
+       5|12.12345E11     |LONG_REAL       |Some string
+       5|123.10001E12    |LONG_REAL       |Some string
+       5|12.0012E12      |LONG_REAL       |Some string
+       5|12.1123E123     |LONG_REAL       |Some string
+       6|12.12345E11     |LONG_REAL       |Some string
+       6|123.10001E12    |LONG_REAL       |Some string
+       6|12.0012E12      |LONG_REAL       |Some string
+       6|12.1123E123     |LONG_REAL       |Some string

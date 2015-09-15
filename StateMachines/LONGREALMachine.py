@@ -85,8 +85,8 @@ def long_real_machine(line, forward_p):
                                 current_char = line[forward_p]
                             except IndexError:
                                 break
-                        return True, forward_p, ('LONG_REAL', string_to_return, error)
 
+                        return True, forward_p, ('LONG_REAL', string_to_return, error)
                     else:
                         return False, None, None
         return False, None, None

@@ -28,51 +28,6 @@ error_list = {
 }
 
 
-def machines_of_machines(file_to_analyze):
-    line_number = 0
-    for line in file_to_analyze:
-        line_number += 1
-        l = line
-        fp = 0
-        # we are going to run the through the machines
-        while fp < len(l):
-            while True:
-                success, temp_fp, token = id_machine(l, fp)  # get status, pointer and token of id machine
-                if success:
-                    fp = temp_fp
-                    for i in token:
-                        print i
-                    break
-                success, temp_fp = white_space_machine(l, fp)
-                if success:
-                    fp = temp_fp
-                    break
-                success, temp_fp, token = long_real_machine(l, fp)
-                if success:
-                    fp = temp_fp
-                    for i in token:
-                        print i
-                    break
-                success, temp_fp, token = real_machine(l, fp)
-                if success:
-                    fp = temp_fp
-                    for i in token:
-                        print i
-                    break
-                success, temp_fp, token = int_machine(l, fp)
-                if success:
-                    fp = temp_fp
-                    for i in token:
-                        print i
-                    break
-                success, temp_fp, token = relop_machine(l, fp)
-                if success:
-                    fp = temp_fp
-                    for i in token:
-                        print i
-                    break
-
-
 def read_lines():
     file_name = open('read_it', 'r')
     file_write_to = open("write_it.txt", "w")
@@ -96,3 +51,61 @@ def read_lines():
     file_write_to.close()
     file_name.close()
     # print file_name.readline()
+
+
+def machines_of_machines(file_to_analyze):
+    token_file = open('write_it.txt', "w")
+
+    # write properties of the data into file
+    table_template = "{0:8}|{1:16}|{2:16}|{3:7}\n"
+    token_file.write(table_template.format('Line No.', 'Lexeme', 'Token-Type', 'Attribute'))
+    # token_file.write('{Line No.\tLexeme\tToken-Type\tAttribute\n')
+    line_number = 0
+    for line in file_to_analyze:
+        line_number += 1
+        l = line
+        fp = 0
+        # we are going to run the through the machines
+        while fp < len(l):
+            while True:
+                success, temp_fp, token = id_machine(l, fp)  # get status, pointer and token of id machine
+                # token_file.writelines("{0}\t\t\t{1}\t\t{2}\t\t{3}\n".format(line_number, token[1],
+                # token[0], 'Some string'))
+                if success:
+                    token_file.writelines(table_template.format(line_number, token[1], token[0], 'Some string'))
+                    fp = temp_fp
+                    for i in token:
+                        print i
+                    break
+                    #
+                success, temp_fp = white_space_machine(l, fp)
+                if success:
+                    fp = temp_fp
+                    break
+                success, temp_fp, token = long_real_machine(l, fp)
+                if success:
+                    token_file.writelines(table_template.format(line_number, token[1], token[0], 'Some string'))
+                    fp = temp_fp
+                    for i in token:
+                        print i
+                    break
+                success, temp_fp, token = real_machine(l, fp)
+                if success:
+                    token_file.writelines(table_template.format(line_number, token[1], token[0], 'Some string'))
+                    fp = temp_fp
+                    for i in token:
+                        print i
+                    break
+                success, temp_fp, token = int_machine(l, fp)
+                if success:
+                    fp = temp_fp
+                    for i in token:
+                        print i
+                    break
+                success, temp_fp, token = relop_machine(l, fp)
+                if success:
+                    fp = temp_fp
+                    for i in token:
+                        print i
+                    break
+    token_file.close()
