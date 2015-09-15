@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dac4f008-5893-4162-9289-a667cb2f85ab" name="Default" comment="tight things up and test machines">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StateMachines/LONGREALMachine.py" afterPath="$PROJECT_DIR$/StateMachines/LONGREALMachine.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StateMachines/INTMachine.py" afterPath="$PROJECT_DIR$/StateMachines/INTMachine.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachineOfMachines.py" afterPath="$PROJECT_DIR$/MachineOfMachines.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/journal" afterPath="$PROJECT_DIR$/journal" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_file.txt" afterPath="$PROJECT_DIR$/test_file.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_it.txt" afterPath="$PROJECT_DIR$/write_it.txt" />
     </list>
@@ -42,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/MachineOfMachines.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+              <caret line="100" column="112" selection-start-line="100" selection-start-column="112" selection-end-line="100" selection-end-column="112" />
               <folding>
                 <element signature="e#30#76#0" expanded="true" />
               </folding>
@@ -50,10 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IDMachine.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IDMachine.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/StateMachines/IDMachine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.740038">
+            <state vertical-scroll-proportion="0.0">
               <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
@@ -80,11 +78,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="write_it.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="write_it.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/write_it.txt">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.59574467">
+              <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="INTMachine.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/StateMachines/INTMachine.py">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <caret line="37" column="42" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -131,7 +139,6 @@
         <option value="$PROJECT_DIR$/../untitled/reserved_words" />
         <option value="$PROJECT_DIR$/../untitled/readchar.py" />
         <option value="$PROJECT_DIR$/../untitled/journal" />
-        <option value="$PROJECT_DIR$/StateMachines/INTMachine.py" />
         <option value="$PROJECT_DIR$/IDMachine.py" />
         <option value="$PROJECT_DIR$/LONGREALMachine.py" />
         <option value="$PROJECT_DIR$/StateMachines/RELOPMachine.py" />
@@ -140,10 +147,11 @@
         <option value="$PROJECT_DIR$/readchar.py" />
         <option value="$PROJECT_DIR$/StateMachines/REALMachine.py" />
         <option value="$PROJECT_DIR$/StateMachines/LONGREALMachine.py" />
-        <option value="$PROJECT_DIR$/write_it.txt" />
-        <option value="$PROJECT_DIR$/MachineOfMachines.py" />
         <option value="$PROJECT_DIR$/test_file.txt" />
         <option value="$PROJECT_DIR$/journal" />
+        <option value="$PROJECT_DIR$/StateMachines/INTMachine.py" />
+        <option value="$PROJECT_DIR$/MachineOfMachines.py" />
+        <option value="$PROJECT_DIR$/write_it.txt" />
       </list>
     </option>
   </component>
@@ -153,8 +161,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="2" />
     <option name="y" value="25" />
-    <option name="width" value="1260" />
-    <option name="height" value="733" />
+    <option name="width" value="1918" />
+    <option name="height" value="917" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -198,6 +206,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -233,11 +242,10 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -427,17 +435,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="25" width="1260" height="733" extended-state="0" />
+    <frame x="2" y="25" width="1918" height="917" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16288877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3990964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16415663" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.113663845" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298193" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -509,7 +517,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/MachineOfMachines.py</url>
-          <line>110</line>
+          <line>111</line>
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -842,13 +850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/StateMachines/INTMachine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="20" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/StateMachines/RELOPMachine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.98284316">
@@ -886,24 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MachineOfMachines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
-          <folding>
-            <element signature="e#30#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_file.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/journal">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -912,10 +895,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/write_it.txt">
+    <entry file="file://$PROJECT_DIR$/StateMachines/IDMachine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_file.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -928,10 +919,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/StateMachines/IDMachine.py">
+    <entry file="file://$PROJECT_DIR$/StateMachines/INTMachine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.740038">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="42" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MachineOfMachines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="100" column="112" selection-start-line="100" selection-start-column="112" selection-end-line="100" selection-end-column="112" />
+          <folding>
+            <element signature="e#30#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/write_it.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59574467">
+          <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
           <folding />
         </state>
       </provider>

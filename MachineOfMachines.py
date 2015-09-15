@@ -98,6 +98,7 @@ def machines_of_machines(file_to_analyze):
                     break
                 success, temp_fp, token = int_machine(l, fp)
                 if success:
+                    token_file.writelines(table_template.format(line_number, token[1], token[0], 'Some string'))
                     fp = temp_fp
                     for i in token:
                         print i

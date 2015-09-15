@@ -4,6 +4,9 @@ Line No.|Lexeme          |Token-Type      |Attribute
        1|ids             |ID              |Some string
        1|more            |ID              |Some string
        1|ids             |ID              |Some string
+       2|1234            |INT             |Some string
+       2|12345678901     |INT             |Some string
+       2|001234          |INT             |Some string
        3|1234.123        |REAL            |Some string
        3|00124.123       |REAL            |Some string
        3|1234123.123     |REAL            |Some string
@@ -21,3 +24,7 @@ Line No.|Lexeme          |Token-Type      |Attribute
        6|123.10001E12    |LONG_REAL       |Some string
        6|12.0012E12      |LONG_REAL       |Some string
        6|12.1123E123     |LONG_REAL       |Some string
+       7|12              |INT             |Some string
+       7|5555            |INT             |Some string
+       7|88888888        |INT             |Some string
+       7|20000           |INT             |Some string

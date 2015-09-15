@@ -17,7 +17,8 @@ error_list = {
     14: "LONGREAL yy too long",
     15: "LONGREAL yy with leading zero",
     16: "Unrecognized Symbol",
-    17: "LONGREAL yy with trailer of zeros"
+    17: "LONGREAL yy with trailer of zeros",
+    18: "INT with trailing of zeros"
 }
 
 
@@ -31,7 +32,7 @@ def int_machine(line, forward_p):
     if current_char.isdigit():
         # if current char is a digit then we continue
         # check for leading zero
-        if current_char is '0' and line[forward_p+1].isdigit():
+        if current_char is '0' and line[forward_p + 1].isdigit():
             error.append(error_list.get(3))
         while current_char.isdigit():
             # add 1 to char_max to counter
@@ -42,6 +43,8 @@ def int_machine(line, forward_p):
             if char_max > 10 and error_list.get(2) not in error:
                 error.append(error_list.get(2))  # if number are over max then we append error
             # get next character
+            if current_char is '0' and line[forward_p + 1] is '0' and error_list.get(18) not in error:
+                error.append(error_list.get(18))
             forward_p += 1
             try:
                 current_char = line[forward_p]
