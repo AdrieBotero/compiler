@@ -9,6 +9,7 @@ Line No.|Lexeme          |Token-Type      |Attribute
        1|love            |ID              |Some string
        1|or              |REV             |Some string
        1|of              |REV             |Some string
+       1|array           |REV             |Some string
        2|1234            |INT             |Some string
        2|12345678901     |INT             |Some string
        2|001234          |INT             |Some string

@@ -46,7 +46,7 @@ def read_lines():
             file_write_to.writelines("character limit exceeded\n")
             print "character limit exceeded"
             # pass data to machines of machines
-            print machines_of_machines(char, 0)
+            # print machines_of_machines(char)
         counter += 1
     file_write_to.close()
     file_name.close()
@@ -54,13 +54,9 @@ def read_lines():
 
 
 def machines_of_machines(file_to_analyze):
-
     token_file = open('write_it.txt', "w")
-
-    global r_w_exist
-    r_w_exist = False  # checking if word exist
     # write properties of the data into file
-    table_template = "{0:8}|{1:16}|{2:16}|{3:7}\n"  # Colummns for table
+    table_template = "{0:8}|{1:16}|{2:16}|{3:7}\n"  # Columns for table
     token_file.write(table_template.format('Line No.', 'Lexeme', 'Token-Type', 'Attribute'))
     # token_file.write('{Line No.\tLexeme\tToken-Type\tAttribute\n')
     line_number = 0
@@ -87,7 +83,6 @@ def machines_of_machines(file_to_analyze):
                     # set temp variable for
                     temp_list[0] = "REV"
                     token = tuple(temp_list)
-                    print "EXIST"
 
                 if success:
                     # write to the token file
@@ -129,4 +124,4 @@ def machines_of_machines(file_to_analyze):
                     for i in token:
                         print i
                     break
-    token_file.close()
+    token_file.close()  # close token file.
