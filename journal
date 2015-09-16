@@ -62,3 +62,41 @@ Line No.|Lexeme          |Token-Type      |Attribute
        6|12.1123E123     |LONG_REAL       |Some string
 I was also able to get the Int Machine to recognize when and INT has a trailing of zeros. I still need to work on the
 reserve words and check for them.
+In the evening I decided to start the reserve word checking. and I seem to be able to accomplished it. current table
+Line No.|Lexeme          |Token-Type      |Attribute
+       1|if              |REV             |Some string
+       1|or              |REV             |Some string
+       1|these           |ID              |Some string
+       1|are             |ID              |Some string
+       1|ids             |ID              |Some string
+       1|more            |ID              |Some string
+       1|ids             |ID              |Some string
+       1|love            |ID              |Some string
+       1|or              |REV             |Some string
+       1|of              |REV             |Some string
+       2|1234            |INT             |Some string
+       2|12345678901     |INT             |Some string
+       2|001234          |INT             |Some string
+       3|1234.123        |REAL            |Some string
+       3|00124.123       |REAL            |Some string
+       3|1234123.123     |REAL            |Some string
+       3|1234.123400     |REAL            |Some string
+       3|1234.12341234   |REAL            |Some string
+       4|1234.123E11     |LONG_REAL       |Some string
+       4|00123.123E11    |LONG_REAL       |Some string
+       4|12341234.123E12 |LONG_REAL       |Some string
+       4|1234.12300E12   |LONG_REAL       |Some string
+       5|12.12345E11     |LONG_REAL       |Some string
+       5|123.10001E12    |LONG_REAL       |Some string
+       5|12.0012E12      |LONG_REAL       |Some string
+       5|12.1123E123     |LONG_REAL       |Some string
+       6|12.12345E11     |LONG_REAL       |Some string
+       6|123.10001E12    |LONG_REAL       |Some string
+       6|12.0012E12      |LONG_REAL       |Some string
+       6|12.1123E123     |LONG_REAL       |Some string
+       7|12              |INT             |Some string
+       7|5555            |INT             |Some string
+       7|88888888        |INT             |Some string
+       7|20000           |INT             |Some string
+       7|002             |INT             |Some string
+       7|222222222222222 |INT             |Some string

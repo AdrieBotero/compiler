@@ -25,6 +25,7 @@ error_list = {
 
 def main():
     my_file = open('test_file.txt', 'r')
+    r_w = open("reserved_words")
     machines_of_machines(my_file)
 
 

@@ -20,8 +20,14 @@ error_list = {
     17: "LONGREAL yy with trailer of zeros"
 }
 
+# open file  and load it into a datastructure
+
 
 def id_machine(string_line, forward_p):
+
+    # open file of reserve words
+    r_words_files = open("reserved_words")
+
     word = ""
     current_character = string_line[forward_p]  # get current character
     if not current_character.isalpha():
@@ -30,7 +36,6 @@ def id_machine(string_line, forward_p):
 
     while current_character.isalpha() | current_character.isdigit():
         # store get next character and store is in character variable
-        # check if character is a letter
 
         word += current_character
         # add characters
