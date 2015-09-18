@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dac4f008-5893-4162-9289-a667cb2f85ab" name="Default" comment="Test Commiting with PyCharm">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StateMachines/IDMachine.py" afterPath="$PROJECT_DIR$/StateMachines/IDMachine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StateMachines/LONGREALMachine.py" afterPath="$PROJECT_DIR$/StateMachines/LONGREALMachine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachineOfMachines.py" afterPath="$PROJECT_DIR$/MachineOfMachines.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/journal" afterPath="$PROJECT_DIR$/journal" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_file.txt" afterPath="$PROJECT_DIR$/test_file.txt" />
+    <list default="true" id="dac4f008-5893-4162-9289-a667cb2f85ab" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_it.txt" afterPath="$PROJECT_DIR$/write_it.txt" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -115,7 +109,7 @@
         <entry file="file://$PROJECT_DIR$/journal">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.81060606">
-              <caret line="104" column="60" selection-start-line="104" selection-start-column="60" selection-end-line="104" selection-end-column="60" />
+              <caret line="104" column="59" selection-start-line="104" selection-start-column="59" selection-end-line="104" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -462,13 +456,20 @@
       <option name="project" value="LOCAL" />
       <updated>1442447352543</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Made some progress creating the listing file and writing each line to the file and errors under that line. it some what works but not quite.">
+      <created>1442544965648</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1442544965648</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="25" width="1260" height="733" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -484,7 +485,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298193" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -506,7 +506,8 @@
     <MESSAGE value="couldn't push so i am commiting again with push" />
     <MESSAGE value="Reserve words checking seem to be working now" />
     <MESSAGE value="Test Commiting with PyCharm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test Commiting with PyCharm" />
+    <MESSAGE value="Made some progress creating the listing file and writing each line to the file and errors under that line. it some what works but not quite." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made some progress creating the listing file and writing each line to the file and errors under that line. it some what works but not quite." />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6923077" />
   </component>
   <component name="XDebuggerManager">
@@ -988,7 +989,7 @@
     <entry file="file://$PROJECT_DIR$/journal">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.81060606">
-          <caret line="104" column="60" selection-start-line="104" selection-start-column="60" selection-end-line="104" selection-end-column="60" />
+          <caret line="104" column="59" selection-start-line="104" selection-start-column="59" selection-end-line="104" selection-end-column="59" />
           <folding />
         </state>
       </provider>
