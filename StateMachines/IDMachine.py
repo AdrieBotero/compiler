@@ -1,7 +1,7 @@
 __author__ = 'andreasbotero'
 
 error_list = {
-    1: "ID too long",
+    1: "Buffer size too long",
     2: "INT to long",
     3: "INT with leading zeros",
     4: "INT too long with leading zeros",
@@ -17,16 +17,17 @@ error_list = {
     14: "LONGREAL yy too long",
     15: "LONGREAL yy with leading zero",
     16: "Unrecognized Symbol",
-    17: "LONGREAL yy with trailer of zeros"
+    17: "LONGREAL yy with trailer of zeros",
+    18: "ID too long"
 }
+
 
 # open file  and load it into a datastructure
 
 
 def id_machine(string_line, forward_p):
-
+    error = []
     # open file of reserve words
-    r_words_files = open("reserved_words")
 
     word = ""
     current_character = string_line[forward_p]  # get current character
@@ -36,12 +37,17 @@ def id_machine(string_line, forward_p):
 
     while current_character.isalpha() | current_character.isdigit():
         # store get next character and store is in character variable
-
+        # character limit
         word += current_character
+        if len(word) > 5 and error_list.get(18) not in error:  # check if character limit is more than 10
+            error.append(error_list.get(18))
         # add characters
         forward_p += 1  # then we increment pointer to get next character
         try:
             current_character = string_line[forward_p]  # get next character in the string
         except IndexError:
             break
-    return True, forward_p, ('ID', word)  # return data back to check next character
+    # if len(string_line) > 72 and error_list.get(1) not in error:
+    #     error.append(error_list.get(1))
+    return True, forward_p, ('ID', word, error)  # return data back to check next character
+

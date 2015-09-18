@@ -100,3 +100,6 @@ Line No.|Lexeme          |Token-Type      |Attribute
        7|20000           |INT             |Some string
        7|002             |INT             |Some string
        7|222222222222222 |INT             |Some string
+
+Sept 17, 2015 started to think about the listing file. Alright the identifier errors kind of work under the listing file
+I still need to figure out why it is print my errors twice.

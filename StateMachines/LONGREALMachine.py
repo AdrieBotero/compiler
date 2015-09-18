@@ -79,7 +79,7 @@ def long_real_machine(line, forward_p):
                             string_to_return += current_char
                             counter_zz += 1
                             forward_p += 1
-                            if counter_zz > 2 and error_list.get(9) not in error_list:
+                            if counter_zz > 2 and error_list.get(9) not in error_list:  # fix this if
                                 error.append(error_list.get(9))
                             try:
                                 current_char = line[forward_p]

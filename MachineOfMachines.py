@@ -55,15 +55,18 @@ def read_lines():
 
 def machines_of_machines(file_to_analyze):
     token_file = open('write_it.txt', "w")
+    list_file = open('list_file', 'w')
     # write properties of the data into file
     table_template = "{0:8}|{1:16}|{2:16}|{3:7}\n"  # Columns for table
     token_file.write(table_template.format('Line No.', 'Lexeme', 'Token-Type', 'Attribute'))
     # token_file.write('{Line No.\tLexeme\tToken-Type\tAttribute\n')
     line_number = 0
     for line in file_to_analyze:
+
         line_number += 1
         l = line
         fp = 0
+        list_file.writelines("{0}\t{1}".format(line_number, l)) # write lines to list file
         # we are going to run the through the machines
         while fp < len(l):
             while True:
@@ -71,14 +74,19 @@ def machines_of_machines(file_to_analyze):
                 # token_file.writelines("{0}\t\t\t{1}\t\t{2}\t\t{3}\n".format(line_number, token[1],
                 # token[0], 'Some string'))
                 # turn token into list
+                # send ling to list file
+
                 t = token
                 try:
                     temp_list = list(t)
                 except TypeError:
                     pass
                 current_word = temp_list[1]
-                # check if current word is a reserve word
 
+                line_errors = temp_list[2]
+                for error in line_errors:
+                    list_file.writelines("LEXERR: {0}: {1}\n".format(error, current_word))
+                # check if current word is a reserve word
                 if current_word in open('reserved_words').read():
                     # set temp variable for
                     temp_list[0] = "REV"
@@ -125,3 +133,4 @@ def machines_of_machines(file_to_analyze):
                         print i
                     break
     token_file.close()  # close token file.
+    list_file.close()  # close list file

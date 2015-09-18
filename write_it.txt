@@ -3,13 +3,20 @@ Line No.|Lexeme          |Token-Type      |Attribute
        1|or              |REV             |Some string
        1|these           |ID              |Some string
        1|are             |ID              |Some string
-       1|ids             |ID              |Some string
+       1|idsssssss       |ID              |Some string
        1|more            |ID              |Some string
        1|ids             |ID              |Some string
        1|love            |ID              |Some string
        1|or              |REV             |Some string
        1|of              |REV             |Some string
        1|array           |REV             |Some string
+       1|more            |ID              |Some string
+       1|array           |REV             |Some string
+       1|not             |REV             |Some string
+       1|massage         |ID              |Some string
+       1|is              |ID              |Some string
+       1|of              |REV             |Some string
+       1|an              |ID              |Some string
        2|1234            |INT             |Some string
        2|12345678901     |INT             |Some string
        2|001234          |INT             |Some string
