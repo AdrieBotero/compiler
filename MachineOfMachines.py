@@ -71,11 +71,6 @@ def machines_of_machines(file_to_analyze):
         while fp < len(l):
             while True:
                 success, temp_fp, token = id_machine(l, fp)  # get status, pointer and token of id machine
-                # token_file.writelines("{0}\t\t\t{1}\t\t{2}\t\t{3}\n".format(line_number, token[1],
-                # token[0], 'Some string'))
-                # turn token into list
-                # send ling to list file
-
                 t = token
                 try:
                     temp_list = list(t)
