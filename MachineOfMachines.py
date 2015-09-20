@@ -61,12 +61,12 @@ def machines_of_machines(file_to_analyze):
     token_file.write(table_template.format('Line No.', 'Lexeme', 'Token-Type', 'Attribute'))
     # token_file.write('{Line No.\tLexeme\tToken-Type\tAttribute\n')
     line_number = 0
+    errors = []
     for line in file_to_analyze:
-
         line_number += 1
         l = line
         fp = 0
-        list_file.writelines("{0}\t{1}".format(line_number, l)) # write lines to list file
+        list_file.writelines("{0}\t\t{1}".format(line_number, l))  # write lines to list file
         # we are going to run the through the machines
         while fp < len(l):
             while True:
@@ -77,46 +77,72 @@ def machines_of_machines(file_to_analyze):
                 except TypeError:
                     pass
                 current_word = temp_list[1]
+                current_errors = temp_list[2]
 
-                line_errors = temp_list[2]
-                for error in line_errors:
-                    list_file.writelines("LEXERR: {0}: {1}\n".format(error, current_word))
+                # list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(line_errors), current_word))
                 # check if current word is a reserve word
                 if current_word in open('reserved_words').read():
                     # set temp variable for
-                    temp_list[0] = "REV"
+                    temp_list[0] = "14 REV"
                     token = tuple(temp_list)
 
                 if success:
                     # write to the token file
-                    token_file.writelines(table_template.format(line_number, token[1], token[0], 'Some string'))
-
+                    if current_errors:
+                        list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
+                    token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     for i in token:
                         print i
                     break
-                    #
                 success, temp_fp = white_space_machine(l, fp)
                 if success:
                     fp = temp_fp
                     break
                 success, temp_fp, token = long_real_machine(l, fp)
+                t = token
+                try:
+                    temp_list = list(t)
+                except TypeError:
+                    pass
+                current_word = temp_list[1]
+                current_errors = temp_list[2]
                 if success:
-                    token_file.writelines(table_template.format(line_number, token[1], token[0], 'Some string'))
+                    if current_errors:
+                        list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
+                    token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     for i in token:
                         print i
                     break
                 success, temp_fp, token = real_machine(l, fp)
+                t = token
+                try:
+                    temp_list = list(t)
+                except TypeError:
+                    pass
+                current_word = temp_list[1]
+                current_errors = temp_list[2]
                 if success:
-                    token_file.writelines(table_template.format(line_number, token[1], token[0], 'Some string'))
+                    if current_errors:
+                        list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
+                    token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     for i in token:
                         print i
                     break
                 success, temp_fp, token = int_machine(l, fp)
+                t = token
+                try:
+                    temp_list = list(t)
+                except TypeError:
+                    pass
+                current_word = temp_list[1]
+                current_errors = temp_list[2]
                 if success:
-                    token_file.writelines(table_template.format(line_number, token[1], token[0], 'Some string'))
+                    if current_errors:
+                        list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
+                    token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     for i in token:
                         print i

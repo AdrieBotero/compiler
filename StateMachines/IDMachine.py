@@ -49,5 +49,5 @@ def id_machine(string_line, forward_p):
             break
     # if len(string_line) > 72 and error_list.get(1) not in error:
     #     error.append(error_list.get(1))
-    return True, forward_p, ('ID', word, error)  # return data back to check next character
+    return True, forward_p, ('10 ID', word, error)  # return data back to check next character
 

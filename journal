@@ -103,3 +103,31 @@ Line No.|Lexeme          |Token-Type      |Attribute
 
 Sept 17, 2015 started to think about the listing file. Alright the identifier errors kind of work under the listing file
 I still need to figure out why it is print my errors twice.
+
+Sept 19, 2015 Today I worked on the List file and it seem to be working now. this is what it looks like now
+1		if or these are idsssssss array
+LEXERR: ID too long: idsssssss
+2		1234 12345678901 001234
+LEXERR: INT to long: 12345678901
+LEXERR: INT with leading zeros,INT with trailing of zeros: 001234
+3		1234.123 00124.123 1234123.123 1234.123400 1234.12341234
+LEXERR: REAL xx with leading zeros: 00124.123
+LEXERR: REAL xx too long: 1234123.123
+LEXERR: REAL yy too long : 1234.123400
+LEXERR: REAL yy too long : 1234.12341234
+4		1234.123E11 00123.123E11 12341234.123E12 1234.12300E12
+LEXERR: LONGREAL xx with leading zero: 00123.123E11
+LEXERR: LONGREAL xx too Long: 12341234.123E12
+5		12.12345E11 123.10001E12 12.0012E12 12.1123E123
+LEXERR: LONGREAL yy with trailer of zeros: 123.10001E12
+LEXERR: LONGREAL zz too long: 12.1123E123
+6		12.12345E11 123.10001E12 12.0012E12 12.1123E123
+LEXERR: LONGREAL yy with trailer of zeros: 123.10001E12
+LEXERR: LONGREAL zz too long: 12.1123E123
+7		12 5555 88888888 20000 002 222222222222222
+LEXERR: INT with trailing of zeros: 20000
+LEXERR: INT with leading zeros,INT with trailing of zeros: 002
+LEXERR: INT to long: 222222222222222
+
+I have to start working on the token file some more. I added code to the token file for the Token but i am not quite
+sure what i need to for the attribute column. I will work on that tomorrow.

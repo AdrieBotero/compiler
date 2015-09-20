@@ -41,6 +41,7 @@ def int_machine(line, forward_p):
             my_string += current_char
             # check the max of character
             if char_max > 10 and error_list.get(2) not in error:
+                # get key of dic.
                 error.append(error_list.get(2))  # if number are over max then we append error
             # get next character
             if current_char is '0' and line[forward_p + 1] is '0' and error_list.get(18) not in error:
@@ -51,6 +52,6 @@ def int_machine(line, forward_p):
             except IndexError:
                 break
 
-        return True, forward_p, ('INT', my_string, error)
+        return True, forward_p, ('11 INT', my_string, error)
     else:  # else we need to return an error with what kind of things
         return False, forward_p, None

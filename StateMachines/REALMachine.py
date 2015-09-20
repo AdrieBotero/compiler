@@ -62,7 +62,7 @@ def real_machine(line, forward_p):
                     except IndexError:
                         break
 
-                return True, forward_p, ('REAL', my_string, error)
+                return True, forward_p, ('13 REAL', my_string, error)
         return False, None, None
     else:
         return False, None, None
