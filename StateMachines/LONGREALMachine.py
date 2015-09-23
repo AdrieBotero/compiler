@@ -1,6 +1,7 @@
 __author__ = 'andreasbotero'
 
 error_list = {
+    0: "NULL",
     1: "ID too long",
     2: "INT to long",
     3: "INT with leading zeros",
@@ -33,15 +34,19 @@ def long_real_machine(line, forward_p):
     # check for zeros
     # if current char is zero then we
     if current_char is '0' and line[forward_p + 1].isdigit():  # if current char is a 0 and the next char is a digit
-        error.append(error_list.get(12))
+        key = '12'
+        error_string = error_list.get(12)
+        error.append(key + " " + error_string)
     if current_char.isdigit():
         while current_char.isdigit():  # while we have a digit
             counter_xx += 1  # we increment the counter for xx
             string_to_return += current_char  # we add current char to the string
             forward_p += 1
             current_char = line[forward_p]  # get next character
-            if counter_xx > 5 and error_list.get(11) not in error: # check for limit of xx
-                error.append(error_list.get(11))  # if true then add error to array
+            if counter_xx > 5 and ('11 ' + error_list.get(11)) not in error: # check for limit of xx
+                key = '11'
+                error_string = error_list.get(11)
+                error.append(key + " " + error_string)  # if true then add error to array
             if current_char is '0' and line[forward_p + 1] is '0':
                 error.append(error_list.get(13))
             if current_char == '.' and line[forward_p + 1].isdigit():  # checking for dot and next character
@@ -52,8 +57,10 @@ def long_real_machine(line, forward_p):
                     string_to_return += current_char
                     counter_yy += 1
                     forward_p += 1
-                    if counter_yy > 5 and error_list.get(14) not in error:
-                        error.append(error_list.get(14))
+                    if counter_yy > 5 and ('14 ' + error_list.get(14)) not in error:
+                        key = '14'
+                        error_string = error_list.get(14)
+                        error.append(key + " " + error_string)
                     if current_char is '0' and line[forward_p+1] is '0':
                         error.append(error_list.get(17))
                     try:
@@ -78,14 +85,19 @@ def long_real_machine(line, forward_p):
                         while current_char.isdigit():
                             string_to_return += current_char
                             counter_zz += 1
+                            if current_char is '+' or current_char is '-':
+                                counter_zz -= 1
                             forward_p += 1
-                            if counter_zz > 2 and error_list.get(9) not in error_list:  # fix this if
-                                error.append(error_list.get(9))
+                            if counter_zz > 2 and ('9 ' + error_list.get(9)) not in error_list:  # fix this if
+                                key = '9'
+                                error_string = error_list.get(9)
+                                error.append(key + " " + error_string)
                             try:
                                 current_char = line[forward_p]
                             except IndexError:
                                 break
-
+                        if not error:
+                            error.append("0 " + error_list.get(0))
                         return True, forward_p, ('12 LONG_REAL', string_to_return, error)
                     else:
                         return False, None, None

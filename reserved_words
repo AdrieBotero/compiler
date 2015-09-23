@@ -8,8 +8,8 @@ num
 of
 integer
 real
-function id
-procedure id
+function
+procedure
 begin
 end
 assignop

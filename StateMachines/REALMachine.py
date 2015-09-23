@@ -1,6 +1,7 @@
 __author__ = 'andreasbotero'
 
 error_list = {
+    0: "NULL",
     1: "ID too long",
     2: "INT to long",
     3: "INT with leading zeros",
@@ -29,8 +30,9 @@ def real_machine(line, forward_p):
     current_char = line[forward_p]  # current didigit
     # check for leading zero
     if current_char == '0' and line[forward_p + 1].isdigit():
-        error.append(error_list.get(7))
-
+        key = '7'
+        error_string = error_list.get(7)
+        error.append(key + " " + error_string)
     # check if first character is a digit
     if current_char.isdigit():
         while current_char.isdigit():
@@ -40,8 +42,11 @@ def real_machine(line, forward_p):
             xx_counter += 1
             forward_p += 1
             current_char = line[forward_p]
-            if xx_counter > 5 and error_list.get(5) not in error:  # here we are checking if xx counter goes over limit
-                error.append(error_list.get(5))  # if it does then we add error to the error array
+            # here we are checking if xx counter goes over limit
+            if xx_counter > 5 and ('5 ' + error_list.get(5)) not in error:
+                key = '5'
+                error_string = error_list.get(5)
+                error.append(key + " " + error_string)  # if it does then we add error to the error array
             if current_char is '.':
                 forward_p += 1  # increase pointer
                 my_string += current_char  # add current character to the string
@@ -55,13 +60,16 @@ def real_machine(line, forward_p):
                     my_string += current_char
                     # increment pointer
                     forward_p += 1
-                    if yy_counter > 5 and error_list.get(6) not in error:
-                        error.append(error_list.get(6))  # if true then add error to array
+                    if yy_counter > 5 and ('6 ' + error_list.get(6)) not in error:
+                        key = '6'
+                        error_string = error_list.get(6)
+                        error.append(key + " " + error_string)  # if true then add error to array
                     try:
                         current_char = line[forward_p]
                     except IndexError:
                         break
-
+                if not error:
+                    error.append("0 " + error_list.get(0))
                 return True, forward_p, ('13 REAL', my_string, error)
         return False, None, None
     else:

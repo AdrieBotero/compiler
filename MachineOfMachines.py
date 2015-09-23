@@ -8,6 +8,7 @@ from StateMachines.RELOPMachine import relop_machine
 from StateMachines.WhiteSpaceMachine import white_space_machine
 
 error_list = {
+    0: "NULL",
     1: "ID too long",
     2: "INT to long",
     3: "INT with leading zeros",
@@ -48,6 +49,8 @@ def read_lines():
             # pass data to machines of machines
             # print machines_of_machines(char)
         counter += 1
+    # Generate EOF token now!
+
     file_write_to.close()
     file_name.close()
     # print file_name.readline()
@@ -62,6 +65,13 @@ def machines_of_machines(file_to_analyze):
     # token_file.write('{Line No.\tLexeme\tToken-Type\tAttribute\n')
     line_number = 0
     errors = []
+    # store reserve words in dic
+    reserve_dic = {}
+    key_for_rev = 1
+    for rev in open('reserved_words'):  # go through the file for reserve words
+        reserve_dic[key_for_rev] = rev[0:len(rev)-1]
+        key_for_rev += 1
+    print reserve_dic
     for line in file_to_analyze:
         line_number += 1
         l = line
@@ -81,14 +91,16 @@ def machines_of_machines(file_to_analyze):
 
                 # list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(line_errors), current_word))
                 # check if current word is a reserve word
-                if current_word in open('reserved_words').read():
+                if current_word in reserve_dic.values():
                     # set temp variable for
                     temp_list[0] = "14 REV"
                     token = tuple(temp_list)
 
                 if success:
                     # write to the token file
-                    if current_errors:
+                    if current_errors and ("0 " + error_list.get(0)) not in current_errors:
+                        temp_list[0] = "99 LEXERR"
+                        token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
@@ -107,8 +119,11 @@ def machines_of_machines(file_to_analyze):
                     pass
                 current_word = temp_list[1]
                 current_errors = temp_list[2]
+
                 if success:
-                    if current_errors:
+                    if current_errors and ("0 " + error_list.get(0)) not in current_errors:
+                        temp_list[0] = "99 LEXERR"
+                        token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
@@ -124,7 +139,9 @@ def machines_of_machines(file_to_analyze):
                 current_word = temp_list[1]
                 current_errors = temp_list[2]
                 if success:
-                    if current_errors:
+                    if current_errors and ("0 " + error_list.get(0)) not in current_errors:
+                        temp_list[0] = "99 LEXERR"
+                        token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
@@ -140,7 +157,9 @@ def machines_of_machines(file_to_analyze):
                 current_word = temp_list[1]
                 current_errors = temp_list[2]
                 if success:
-                    if current_errors:
+                    if current_errors and ("0 " + error_list.get(0)) not in current_errors:
+                        temp_list[0] = "99 LEXERR"
+                        token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp

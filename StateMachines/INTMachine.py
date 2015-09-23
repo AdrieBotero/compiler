@@ -1,6 +1,7 @@
 __author__ = 'andreasbotero'
 
 error_list = {
+    0: "NULL",
     1: "ID too long",
     2: "INT to long",
     3: "INT with leading zeros",
@@ -33,24 +34,32 @@ def int_machine(line, forward_p):
         # if current char is a digit then we continue
         # check for leading zero
         if current_char is '0' and line[forward_p + 1].isdigit():
-            error.append(error_list.get(3))
+            key = '3'
+            error_string = error_list.get(3)
+            error.append(key + " " + error_string)
         while current_char.isdigit():
             # add 1 to char_max to counter
             char_max += 1
             # add character to string
             my_string += current_char
             # check the max of character
-            if char_max > 10 and error_list.get(2) not in error:
+            if char_max > 10 and ('2 ' + error_list.get(2)) not in error:
                 # get key of dic.
-                error.append(error_list.get(2))  # if number are over max then we append error
+                key = '2'
+                error_string = error_list.get(2)
+                error.append(key+" "+error_string)  # if number are over max then we append error
             # get next character
-            if current_char is '0' and line[forward_p + 1] is '0' and error_list.get(18) not in error:
-                error.append(error_list.get(18))
+            if current_char is '0' and line[forward_p + 1] is '0' and ('18 ' + error_list.get(18)) not in error:
+                key = '18'
+                error_string = error_list.get(18)
+                error.append(key + " " + error_string)
             forward_p += 1
             try:
                 current_char = line[forward_p]
             except IndexError:
                 break
+        if not error:
+            error.append("0 " + error_list.get(0))
 
         return True, forward_p, ('11 INT', my_string, error)
     else:  # else we need to return an error with what kind of things

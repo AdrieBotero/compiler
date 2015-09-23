@@ -1,33 +1,33 @@
 Line No.|Lexeme          |Token-Type      |Attribute
-       1|if              |14 REV          |       
-       1|or              |14 REV          |       
-       1|these           |10 ID           |       
-       1|are             |10 ID           |       
-       1|idsssssss       |10 ID           |ID too long
-       1|array           |14 REV          |       
-       2|1234            |11 INT          |       
-       2|12345678901     |11 INT          |INT to long
-       2|001234          |11 INT          |INT with leading zeros,INT with trailing of zeros
-       3|1234.123        |13 REAL         |       
-       3|00124.123       |13 REAL         |REAL xx with leading zeros
-       3|1234123.123     |13 REAL         |REAL xx too long
-       3|1234.123400     |13 REAL         |REAL yy too long 
-       3|1234.12341234   |13 REAL         |REAL yy too long 
-       4|1234.123E11     |12 LONG_REAL    |       
-       4|00123.123E11    |12 LONG_REAL    |LONGREAL xx with leading zero
-       4|12341234.123E12 |12 LONG_REAL    |LONGREAL xx too Long
-       4|1234.12300E12   |12 LONG_REAL    |       
-       5|12.12345E11     |12 LONG_REAL    |       
-       5|123.10001E12    |12 LONG_REAL    |LONGREAL yy with trailer of zeros
-       5|12.0012E12      |12 LONG_REAL    |       
-       5|12.1123E123     |12 LONG_REAL    |LONGREAL zz too long
-       6|12.12345E11     |12 LONG_REAL    |       
-       6|123.10001E12    |12 LONG_REAL    |LONGREAL yy with trailer of zeros
-       6|12.0012E12      |12 LONG_REAL    |       
-       6|12.1123E123     |12 LONG_REAL    |LONGREAL zz too long
-       7|12              |11 INT          |       
-       7|5555            |11 INT          |       
-       7|88888888        |11 INT          |       
-       7|20000           |11 INT          |INT with trailing of zeros
-       7|002             |11 INT          |INT with leading zeros,INT with trailing of zeros
-       7|222222222222222 |11 INT          |INT to long
+       1|if              |14 REV          |0 NULL 
+       1|or              |14 REV          |0 NULL 
+       1|these           |10 ID           |0 NULL 
+       1|are             |10 ID           |0 NULL 
+       1|idsssssssss     |99 LEXERR       |18 ID too long
+       1|array           |14 REV          |0 NULL 
+       2|1234            |11 INT          |0 NULL 
+       2|12345678901     |99 LEXERR       |2 INT to long
+       2|001234          |99 LEXERR       |3 INT with leading zeros,18 INT with trailing of zeros
+       3|1234.123        |13 REAL         |0 NULL 
+       3|00124.123       |99 LEXERR       |7 REAL xx with leading zeros
+       3|1234123.123     |99 LEXERR       |5 REAL xx too long
+       3|1234.123400     |99 LEXERR       |6 REAL yy too long 
+       3|1234.12341234   |99 LEXERR       |6 REAL yy too long 
+       4|1234.123E11     |12 LONG_REAL    |0 NULL 
+       4|00123.123E11    |99 LEXERR       |12 LONGREAL xx with leading zero
+       4|12341234.123E12 |99 LEXERR       |11 LONGREAL xx too Long
+       4|1234.12300E12   |12 LONG_REAL    |0 NULL 
+       5|12.1234511E+11  |99 LEXERR       |14 LONGREAL yy too long
+       5|123.10001E-12   |99 LEXERR       |LONGREAL yy with trailer of zeros
+       5|12.0012E-112    |99 LEXERR       |9 LONGREAL zz too long
+       5|12.1123E123     |99 LEXERR       |9 LONGREAL zz too long
+       6|12.12345E11     |12 LONG_REAL    |0 NULL 
+       6|123.10001E12    |99 LEXERR       |LONGREAL yy with trailer of zeros
+       6|12.0012E12      |12 LONG_REAL    |0 NULL 
+       6|12.1123E123     |99 LEXERR       |9 LONGREAL zz too long
+       7|12              |11 INT          |0 NULL 
+       7|5555            |11 INT          |0 NULL 
+       7|88888888        |11 INT          |0 NULL 
+       7|20000           |99 LEXERR       |18 INT with trailing of zeros
+       7|002             |99 LEXERR       |3 INT with leading zeros,18 INT with trailing of zeros
+       7|222222222222222 |99 LEXERR       |2 INT to long

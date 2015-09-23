@@ -1,6 +1,7 @@
 __author__ = 'andreasbotero'
 
 error_list = {
+    0: "NULL",
     1: "Buffer size too long",
     2: "INT to long",
     3: "INT with leading zeros",
@@ -39,8 +40,10 @@ def id_machine(string_line, forward_p):
         # store get next character and store is in character variable
         # character limit
         word += current_character
-        if len(word) > 5 and error_list.get(18) not in error:  # check if character limit is more than 10
-            error.append(error_list.get(18))
+        if len(word) > 10 and error_list.get(18) not in error:  # check if character limit is more than 10
+            key = '18'
+            error_string = error_list.get(18)
+            error.append(key+" "+error_string)
         # add characters
         forward_p += 1  # then we increment pointer to get next character
         try:
@@ -49,5 +52,7 @@ def id_machine(string_line, forward_p):
             break
     # if len(string_line) > 72 and error_list.get(1) not in error:
     #     error.append(error_list.get(1))
+    if not error:
+        error.append("0 " + error_list.get(0))
     return True, forward_p, ('10 ID', word, error)  # return data back to check next character
 

@@ -131,3 +131,6 @@ LEXERR: INT to long: 222222222222222
 
 I have to start working on the token file some more. I added code to the token file for the Token but i am not quite
 sure what i need to for the attribute column. I will work on that tomorrow.
+
+Sept. 22 2015, Today I am just fixing little bugs and make things more neat and try to finish with the token file.
+Token file seem to be looking better now.
