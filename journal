@@ -134,3 +134,5 @@ sure what i need to for the attribute column. I will work on that tomorrow.
 
 Sept. 22 2015, Today I am just fixing little bugs and make things more neat and try to finish with the token file.
 Token file seem to be looking better now.
+
+Sept 26 2015, so today I am working on getting the memory address of the ids and put them in the token file.

@@ -59,6 +59,8 @@ def read_lines():
 def machines_of_machines(file_to_analyze):
     token_file = open('write_it.txt', "w")
     list_file = open('list_file', 'w')
+    symbol_table_file = open('symbol_file', 'w')  # open file for symbols
+    id_dic = {}
     # write properties of the data into file
     table_template = "{0:8}|{1:16}|{2:16}|{3:7}\n"  # Columns for table
     token_file.write(table_template.format('Line No.', 'Lexeme', 'Token-Type', 'Attribute'))
@@ -97,11 +99,19 @@ def machines_of_machines(file_to_analyze):
                     token = tuple(temp_list)
 
                 if success:
+
                     # write to the token file
                     if current_errors and ("0 " + error_list.get(0)) not in current_errors:
                         temp_list[0] = "99 LEXERR"
                         token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
+                    # add ids to dictionary that are not rev and ids that dont have errors
+                    if token[0] == '10 ID' and current_errors[0] == '0 NULL':
+                        id_dic[token[1]] = hex(id(token[1]))
+                        current_errors[0] = hex(id(token[1]))
+                        for key, value in id_dic.iteritems():
+                            symbol_table_file.writelines("{0}\t{1}\n".format(key, value))
+
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     for i in token:
@@ -174,3 +184,4 @@ def machines_of_machines(file_to_analyze):
                     break
     token_file.close()  # close token file.
     list_file.close()  # close list file
+    symbol_table_file.close()
