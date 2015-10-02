@@ -109,8 +109,8 @@ def machines_of_machines(file_to_analyze):
                     if token[0] == '10 ID' and current_errors[0] == '0 NULL':
                         id_dic[token[1]] = hex(id(token[1]))
                         current_errors[0] = hex(id(token[1]))
-                        for key, value in id_dic.iteritems():
-                            symbol_table_file.writelines("{0}\t{1}\n".format(key, value))
+                        # for key, value in id_dic.iteritems():
+                        #     symbol_table_file.writelines("{0}\t{1}\n".format(key, value))
 
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
@@ -182,6 +182,8 @@ def machines_of_machines(file_to_analyze):
                     for i in token:
                         print i
                     break
+    for key, value in id_dic.iteritems():
+        symbol_table_file.writelines("{0}\t{1}\n".format(key, value))
     token_file.close()  # close token file.
     list_file.close()  # close list file
     symbol_table_file.close()

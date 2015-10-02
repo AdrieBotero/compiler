@@ -1,8 +1,8 @@
 Line No.|Lexeme          |Token-Type      |Attribute
        1|if              |14 REV          |0 NULL 
        1|or              |14 REV          |0 NULL 
-       1|these           |10 ID           |0x100672c90
-       1|are             |10 ID           |0x100645df0
+       1|these           |10 ID           |0x10fae4c90
+       1|are             |10 ID           |0x10fab7df0
        1|idsssssssss     |99 LEXERR       |18 ID too long
        1|array           |14 REV          |0 NULL 
        2|1234            |11 INT          |0 NULL 
