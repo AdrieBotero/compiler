@@ -101,4 +101,4 @@ def long_real_machine(line, forward_p):
                         return True, forward_p, ('12 LONG_REAL', string_to_return, error)
                     else:
                         return False, None, None
-        return False, None, None
+    return False, None, None

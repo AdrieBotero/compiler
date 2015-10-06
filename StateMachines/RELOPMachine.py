@@ -21,16 +21,21 @@ error_list = {
 }
 
 tokens = {
-    1: ('RELOP', 'LE'),
-    2: ('RELOP', 'NE'),
-    3: ('RELOP', 'LT'),
-    4: ('RELOP', 'EQ'),
-    5: ('RELOP', 'GE'),
-    6: ('RELOP', 'GT'),
+    1: ('RELOP', 'LE', '<='),
+    2: ('RELOP', 'NE', '<>'),
+    3: ('RELOP', 'LT', '<'),
+    4: ('RELOP', 'EQ', '='),
+    5: ('RELOP', 'GE', '>='),
+    6: ('RELOP', 'GT', '>'),
 }
 
 
 def relop_machine(line, forward_p):
+    # current_char = line[forward_p]
+    # if current_char is '<' and line[forward_p+1] is '=':
+    #     forward_p += 1
+    #     return True, forward_p, tokens[1]
+
     # store line
     l = line
     # get first char
@@ -41,17 +46,21 @@ def relop_machine(line, forward_p):
         # get next character
         character = l[forward_p]
         if character == "=":
+            forward_p += 1
             return True, forward_p, tokens[1]  # return ('RELOP', 'LE')
         elif character == ">":
+            forward_p += 1
             return True, forward_p, tokens[2]  # return ('RELOP', 'NE')
         else:
-            return True, forward_p - 1, tokens[3],  # return ('RELOP', 'LT')
+            return True, forward_p, tokens[3],  # return ('RELOP', 'LT')
     elif character == "=":
+        forward_p += 1
         return True, forward_p, tokens[4]  # return ('RELOP', 'EQ')
     elif character == ">":
         forward_p += 1
         character = l[forward_p]
         if character == "=":
+            forward_p +=1
             return True, forward_p, tokens[5]  # return ('RELOP', 'GE')
         else:
             return True, forward_p, tokens[6]  # return ('RELOP', 'GT')

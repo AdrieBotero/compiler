@@ -6,6 +6,8 @@ from StateMachines.LONGREALMachine import long_real_machine
 from StateMachines.REALMachine import real_machine
 from StateMachines.RELOPMachine import relop_machine
 from StateMachines.WhiteSpaceMachine import white_space_machine
+from StateMachines.addop_machine import addop
+from StateMachines.mulop_machine import mulup
 
 error_list = {
     0: "NULL",
@@ -114,8 +116,8 @@ def machines_of_machines(file_to_analyze):
 
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
-                    for i in token:
-                        print i
+                    # for i in token:
+                    #     print i
                     break
                 success, temp_fp = white_space_machine(l, fp)
                 if success:
@@ -137,8 +139,8 @@ def machines_of_machines(file_to_analyze):
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
-                    for i in token:
-                        print i
+                    # for i in token:
+                    #     print i
                     break
                 success, temp_fp, token = real_machine(l, fp)
                 t = token
@@ -155,8 +157,8 @@ def machines_of_machines(file_to_analyze):
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
-                    for i in token:
-                        print i
+                    # for i in token:
+                    #     print i
                     break
                 success, temp_fp, token = int_machine(l, fp)
                 t = token
@@ -173,8 +175,8 @@ def machines_of_machines(file_to_analyze):
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
                     token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
-                    for i in token:
-                        print i
+                    # for i in token:
+                    #     print i
                     break
                 success, temp_fp, token = relop_machine(l, fp)
                 if success:
