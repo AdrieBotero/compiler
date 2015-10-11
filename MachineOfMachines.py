@@ -180,6 +180,12 @@ def machines_of_machines(file_to_analyze):
                     break
                 success, temp_fp, token = relop_machine(l, fp)
                 if success:
+                    #  add relops to table
+                    relop_table = []
+                    relop_table.append(token[2])
+                    item_index = relop_table.index(token[2])
+
+                    token_file.writelines(table_template.format(line_number, token[2], token[0], item_index))
                     fp = temp_fp
                     for i in token:
                         print i

@@ -142,4 +142,52 @@ October 2 2015 Built addop and mulop machines. and wrote on journal.
 October 4 2015 finished with my addop and mulop machines. i still need to work on my catch all machines.
 
 october 6 2015 add addop and  mulop to my machines of machines and test them
+here how the table looks now
+Line No.|Lexeme          |Token-Type      |Attribute
+       1|add             |10 ID           |0x10676eee0
+       1|>               |RELOP           |0x10676eee0
+       1|<               |RELOP           |0x10676eee0
+       1|=               |RELOP           |0x10676eee0
+       1|<>              |RELOP           |0x10676eee0
+       1|<=              |RELOP           |0x10676eee0
+       1|>=              |RELOP           |0x10676eee0
+       2|if              |14 REV          |0 NULL
+       2|or              |14 REV          |0 NULL
+       2|these           |10 ID           |0x1067f0e40
+       2|are             |10 ID           |0x10676ee68
+       2|idsssssssss     |99 LEXERR       |18 ID too long
+       2|array           |14 REV          |0 NULL
+       3|1234            |11 INT          |0 NULL
+       3|12345678901     |99 LEXERR       |2 INT to long
+       3|001234          |99 LEXERR       |3 INT with leading zeros,18 INT with trailing of zeros
+       4|1234.123        |13 REAL         |0 NULL
+       4|00124.123       |99 LEXERR       |7 REAL xx with leading zeros
+       4|1234123.123     |99 LEXERR       |5 REAL xx too long
+       4|1234.123400     |99 LEXERR       |6 REAL yy too long
+       4|1234.12341234   |99 LEXERR       |6 REAL yy too long
+       5|1234.123E11     |12 LONG_REAL    |0 NULL
+       5|00123.123E11    |99 LEXERR       |12 LONGREAL xx with leading zero
+       5|12341234.123E12 |99 LEXERR       |11 LONGREAL xx too Long
+       5|1234.12300E12   |12 LONG_REAL    |0 NULL
+       6|12.1234511E+11  |99 LEXERR       |14 LONGREAL yy too long
+       6|123.10001E-12   |99 LEXERR       |LONGREAL yy with trailer of zeros
+       6|12.0012E-112    |99 LEXERR       |9 LONGREAL zz too long
+       6|12.1123E123     |99 LEXERR       |9 LONGREAL zz too long
+       7|12.12345E11     |12 LONG_REAL    |0 NULL
+       7|123.10001E12    |99 LEXERR       |LONGREAL yy with trailer of zeros
+       7|12.0012E12      |12 LONG_REAL    |0 NULL
+       7|12.1123E123     |99 LEXERR       |9 LONGREAL zz too long
+       8|12              |11 INT          |0 NULL
+       8|5555            |11 INT          |0 NULL
+       8|88888888        |11 INT          |0 NULL
+       8|20000           |99 LEXERR       |18 INT with trailing of zeros
+       8|002             |99 LEXERR       |3 INT with leading zeros,18 INT with trailing of zeros
+       8|222222222222222 |99 LEXERR       |2 INT to long
+       9|add             |10 ID           |0x10676ef80
+       9|>               |RELOP           |0x10676ef80
+       9|<               |RELOP           |0x10676ef80
+       9|=               |RELOP           |0x10676ef80
+I still need to fix my fix the relops being added to the dictionary
 
+October 11, 2015 Today ill be workin go on the relop machines make it more functional and that is put all relops
+in a table and get their index.

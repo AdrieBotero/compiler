@@ -1,9 +1,18 @@
 Line No.|Lexeme          |Token-Type      |Attribute
-       1|add             |10 ID           |0x10796af30
+       1|add             |10 ID           |0x10feedee0
+       1|>               |RELOP           |      0
+       1|<               |RELOP           |      0
+       1|=               |RELOP           |      0
+       1|<>              |RELOP           |      0
+       1|<=              |RELOP           |      0
+       1|>=              |RELOP           |      0
+       1|this            |10 ID           |0x10ff71ea0
+       1|NOT             |10 ID           |0x10feedf80
+       1|yessssssssssss  |99 LEXERR       |18 ID too long,18 ID too long,18 ID too long,18 ID too long
        2|if              |14 REV          |0 NULL 
        2|or              |14 REV          |0 NULL 
-       2|these           |10 ID           |0x107997e40
-       2|are             |10 ID           |0x10796af80
+       2|these           |10 ID           |0x10ff71f30
+       2|are             |10 ID           |0x10feede68
        2|idsssssssss     |99 LEXERR       |18 ID too long
        2|array           |14 REV          |0 NULL 
        3|1234            |11 INT          |0 NULL 
@@ -32,4 +41,7 @@ Line No.|Lexeme          |Token-Type      |Attribute
        8|20000           |99 LEXERR       |18 INT with trailing of zeros
        8|002             |99 LEXERR       |3 INT with leading zeros,18 INT with trailing of zeros
        8|222222222222222 |99 LEXERR       |2 INT to long
-       9|add             |10 ID           |0x10796af58
+       9|add             |10 ID           |0x10ff6e058
+       9|>               |RELOP           |      0
+       9|<               |RELOP           |      0
+       9|=               |RELOP           |      0
