@@ -42,7 +42,10 @@ def long_real_machine(line, forward_p):
             counter_xx += 1  # we increment the counter for xx
             string_to_return += current_char  # we add current char to the string
             forward_p += 1
-            current_char = line[forward_p]  # get next character
+            try:
+                current_char = line[forward_p]  # get next character
+            except IndexError:
+                break
             if counter_xx > 5 and ('11 ' + error_list.get(11)) not in error: # check for limit of xx
                 key = '11'
                 error_string = error_list.get(11)

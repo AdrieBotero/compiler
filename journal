@@ -189,5 +189,5 @@ Line No.|Lexeme          |Token-Type      |Attribute
        9|=               |RELOP           |0x10676ef80
 I still need to fix my fix the relops being added to the dictionary
 
-October 11, 2015 Today ill be workin go on the relop machines make it more functional and that is put all relops
+October 11, 2015 Today ill be working go on the relop machines make it more functional and that is put all relops
 in a table and get their index.

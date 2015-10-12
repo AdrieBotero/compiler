@@ -7,7 +7,8 @@ from StateMachines.REALMachine import real_machine
 from StateMachines.RELOPMachine import relop_machine
 from StateMachines.WhiteSpaceMachine import white_space_machine
 from StateMachines.addop_machine import addop
-from StateMachines.mulop_machine import mulup
+from StateMachines.mulop_machine import mulop
+from StateMachines.catch_all import catch_all_machine
 
 error_list = {
     0: "NULL",
@@ -59,6 +60,9 @@ def read_lines():
 
 
 def machines_of_machines(file_to_analyze):
+    relop_table = []  # relop table
+    mulup_table = []  # mulup table
+    addop_table = []  # addop table
     token_file = open('write_it.txt', "w")
     list_file = open('list_file', 'w')
     symbol_table_file = open('symbol_file', 'w')  # open file for symbols
@@ -73,7 +77,7 @@ def machines_of_machines(file_to_analyze):
     reserve_dic = {}
     key_for_rev = 1
     for rev in open('reserved_words'):  # go through the file for reserve words
-        reserve_dic[key_for_rev] = rev[0:len(rev)-1]
+        reserve_dic[key_for_rev] = rev[0:len(rev) - 1]
         key_for_rev += 1
     print reserve_dic
     for line in file_to_analyze:
@@ -84,24 +88,55 @@ def machines_of_machines(file_to_analyze):
         # we are going to run the through the machines
         while fp < len(l):
             while True:
-                success, temp_fp, token = id_machine(l, fp)  # get status, pointer and token of id machine
-                t = token
-                try:
-                    temp_list = list(t)
-                except TypeError:
-                    pass
-                current_word = temp_list[1]
-                current_errors = temp_list[2]
-
-                # list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(line_errors), current_word))
-                # check if current word is a reserve word
-                if current_word in reserve_dic.values():
-                    # set temp variable for
-                    temp_list[0] = "14 REV"
-                    token = tuple(temp_list)
-
+                success, temp_fp, token = addop(l, fp)
                 if success:
+                    addop_table.append(token[2])
+                    item_index = addop_table.index(token[2])
+                    token_file.writelines(
+                        table_template.format(line_number, token[2], token[0], 'Index ' + str(item_index)))
+                    fp = temp_fp
+                    break
+                success, temp_fp, token = mulop(l, fp)
+                if success:
+                    mulup_table.append(token[2])
+                    item_index = mulup_table.index(token[2])
+                    token_file.writelines(
+                        table_template.format(line_number, token[2], token[0], 'Index ' + str(item_index)))
+                    for i in token:
+                        print i
+                    fp = temp_fp
 
+                    break
+                success, temp_fp, token = id_machine(l, fp)  # get status, pointer and token of id machine
+                # t = token
+                # try:
+                #     temp_list = list(t)
+                # except TypeError:
+                #     pass
+                # current_word = temp_list[1]
+                # current_errors = temp_list[2]
+                #
+                # # list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(line_errors), current_word))
+                # # check if current word is a reserve word
+                # if current_word in reserve_dic.values():
+                #     # set temp variable for
+                #     temp_list[0] = "14 REV"
+                #     token = tuple(temp_list)
+                if success:
+                    t = token
+                    try:
+                        temp_list = list(t)
+                    except TypeError:
+                        pass
+                    current_word = temp_list[1]
+                    current_errors = temp_list[2]
+
+                    # list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(line_errors), current_word))
+                    # check if current word is a reserve word
+                    if current_word in reserve_dic.values():
+                        # set temp variable for
+                        temp_list[0] = "14 REV"
+                        token = tuple(temp_list)
                     # write to the token file
                     if current_errors and ("0 " + error_list.get(0)) not in current_errors:
                         temp_list[0] = "99 LEXERR"
@@ -114,7 +149,8 @@ def machines_of_machines(file_to_analyze):
                         # for key, value in id_dic.iteritems():
                         #     symbol_table_file.writelines("{0}\t{1}\n".format(key, value))
 
-                    token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
+                    token_file.writelines(
+                        table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     # for i in token:
                     #     print i
@@ -124,56 +160,74 @@ def machines_of_machines(file_to_analyze):
                     fp = temp_fp
                     break
                 success, temp_fp, token = long_real_machine(l, fp)
-                t = token
-                try:
-                    temp_list = list(t)
-                except TypeError:
-                    pass
-                current_word = temp_list[1]
-                current_errors = temp_list[2]
+                # t = token
+                # try:
+                #     temp_list = list(t)
+                # except TypeError:
+                #     pass
+                # current_word = temp_list[1]
+                # current_errors = temp_list[2]
 
                 if success:
+                    t = token
+                    try:
+                        temp_list = list(t)
+                    except TypeError:
+                        pass
+                    current_word = temp_list[1]
+                    current_errors = temp_list[2]
                     if current_errors and ("0 " + error_list.get(0)) not in current_errors:
                         temp_list[0] = "99 LEXERR"
                         token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
-                    token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
+                    token_file.writelines(
+                        table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     # for i in token:
                     #     print i
                     break
                 success, temp_fp, token = real_machine(l, fp)
-                t = token
-                try:
-                    temp_list = list(t)
-                except TypeError:
-                    pass
-                current_word = temp_list[1]
-                current_errors = temp_list[2]
+
                 if success:
+                    t = token
+                    try:
+                        temp_list = list(t)
+                    except TypeError:
+                        pass
+                    current_word = temp_list[1]
+                    current_errors = temp_list[2]
                     if current_errors and ("0 " + error_list.get(0)) not in current_errors:
                         temp_list[0] = "99 LEXERR"
                         token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
-                    token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
+                    token_file.writelines(
+                        table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     # for i in token:
                     #     print i
                     break
                 success, temp_fp, token = int_machine(l, fp)
-                t = token
-                try:
-                    temp_list = list(t)
-                except TypeError:
-                    pass
-                current_word = temp_list[1]
-                current_errors = temp_list[2]
+                # t = token
+                # try:
+                #     temp_list = list(t)
+                # except TypeError:
+                #     pass
+                # current_word = temp_list[1]
+                # current_errors = temp_list[2]
                 if success:
+                    t = token
+                    try:
+                        temp_list = list(t)
+                    except TypeError:
+                        pass
+                    current_word = temp_list[1]
+                    current_errors = temp_list[2]
                     if current_errors and ("0 " + error_list.get(0)) not in current_errors:
                         temp_list[0] = "99 LEXERR"
                         token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
-                    token_file.writelines(table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
+                    token_file.writelines(
+                        table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     # for i in token:
                     #     print i
@@ -181,15 +235,21 @@ def machines_of_machines(file_to_analyze):
                 success, temp_fp, token = relop_machine(l, fp)
                 if success:
                     #  add relops to table
-                    relop_table = []
                     relop_table.append(token[2])
                     item_index = relop_table.index(token[2])
-
-                    token_file.writelines(table_template.format(line_number, token[2], token[0], item_index))
+                    token_file.writelines(
+                        table_template.format(line_number, token[2], token[0], 'Index ' + str(item_index)))
                     fp = temp_fp
-                    for i in token:
-                        print i
+                    # for i in token:
+                    #     print i
                     break
+                success, temp_fp, token = catch_all_machine(l, fp)
+                if success:
+                    token_file.writelines(table_template.format(line_number, token[2], token[1], token[0]))
+
+                    fp = temp_fp
+    token_file.writelines(
+        table_template.format(line_number+1, 'EOF', 'EOF', 'END OF FILE'))
     for key, value in id_dic.iteritems():
         symbol_table_file.writelines("{0}\t{1}\n".format(key, value))
     token_file.close()  # close token file.

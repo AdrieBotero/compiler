@@ -21,7 +21,7 @@ error_list = {
     17: "LONGREAL yy with trailer of zeros",
     18: "ID too long"
 }
-
+operand_list = ['or', 'div', 'mod', 'and']
 
 # open file  and load it into a datastructure
 
@@ -50,6 +50,8 @@ def id_machine(string_line, forward_p):
             current_character = string_line[forward_p]  # get next character in the string
         except IndexError:
             break
+        # if word in operand_list:
+        #     return False, None, None
     # if len(string_line) > 72 and error_list.get(1) not in error:
     #     error.append(error_list.get(1))
     if not error:

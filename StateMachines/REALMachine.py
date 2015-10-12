@@ -41,13 +41,16 @@ def real_machine(line, forward_p):
             # add one to xx counter
             xx_counter += 1
             forward_p += 1
-            current_char = line[forward_p]
+            try:
+                current_char = line[forward_p]
+            except IndexError:
+                break
             # here we are checking if xx counter goes over limit
             if xx_counter > 5 and ('5 ' + error_list.get(5)) not in error:
                 key = '5'
                 error_string = error_list.get(5)
                 error.append(key + " " + error_string)  # if it does then we add error to the error array
-            if current_char is '.':
+            if current_char is '.' and line[forward_p + 1].isdigit():
                 forward_p += 1  # increase pointer
                 my_string += current_char  # add current character to the string
                 # get next character
