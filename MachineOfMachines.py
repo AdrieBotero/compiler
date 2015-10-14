@@ -108,20 +108,6 @@ def machines_of_machines(file_to_analyze):
 
                     break
                 success, temp_fp, token = id_machine(l, fp)  # get status, pointer and token of id machine
-                # t = token
-                # try:
-                #     temp_list = list(t)
-                # except TypeError:
-                #     pass
-                # current_word = temp_list[1]
-                # current_errors = temp_list[2]
-                #
-                # # list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(line_errors), current_word))
-                # # check if current word is a reserve word
-                # if current_word in reserve_dic.values():
-                #     # set temp variable for
-                #     temp_list[0] = "14 REV"
-                #     token = tuple(temp_list)
                 if success:
                     t = token
                     try:
@@ -160,13 +146,6 @@ def machines_of_machines(file_to_analyze):
                     fp = temp_fp
                     break
                 success, temp_fp, token = long_real_machine(l, fp)
-                # t = token
-                # try:
-                #     temp_list = list(t)
-                # except TypeError:
-                #     pass
-                # current_word = temp_list[1]
-                # current_errors = temp_list[2]
 
                 if success:
                     t = token
@@ -245,9 +224,12 @@ def machines_of_machines(file_to_analyze):
                     break
                 success, temp_fp, token = catch_all_machine(l, fp)
                 if success:
+                    if token[1] == '99 LEXERR':
+                        list_file.write("LEXERR: {0}: {1}\n".format(token[0], token[2]))
                     token_file.writelines(table_template.format(line_number, token[2], token[1], token[0]))
-
                     fp = temp_fp
+
+                    break
     token_file.writelines(
         table_template.format(line_number+1, 'EOF', 'EOF', 'END OF FILE'))
     for key, value in id_dic.iteritems():
