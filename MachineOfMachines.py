@@ -130,13 +130,16 @@ def machines_of_machines(file_to_analyze):
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
                     # add ids to dictionary that are not rev and ids that dont have errors
                     if token[0] == '10 ID' and current_errors[0] == '0 NULL':
-                        id_dic[token[1]] = hex(id(token[1]))
+                        # id_dic[token[1]] = hex(id(token[1]))
                         current_errors[0] = hex(id(token[1]))
-                        # for key, value in id_dic.iteritems():
-                        #     symbol_table_file.writelines("{0}\t{1}\n".format(key, value))
-
-                    token_file.writelines(
-                        table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
+                    if token[1] in id_dic.keys():
+                        memory_id = id_dic.get(token[1])
+                        token_file.writelines(
+                            table_template.format(line_number, token[1], token[0], memory_id))
+                    else:
+                        id_dic[token[1]] = hex(id(token[1]))
+                        token_file.writelines(
+                            table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
                     # for i in token:
                     #     print i
@@ -231,7 +234,7 @@ def machines_of_machines(file_to_analyze):
 
                     break
     token_file.writelines(
-        table_template.format(line_number+1, 'EOF', 'EOF', 'END OF FILE'))
+        table_template.format(line_number + 1, 'EOF', 'EOF', 'END OF FILE'))
     for key, value in id_dic.iteritems():
         symbol_table_file.writelines("{0}\t{1}\n".format(key, value))
     token_file.close()  # close token file.
