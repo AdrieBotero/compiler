@@ -2,22 +2,26 @@ Line No.|Lexeme          |Token-Type      |Attribute
        1|$               |99 LEXERR       |Unrecog Symbol
        1|$               |99 LEXERR       |Unrecog Symbol
        2|3.4             |13 REAL         |0 NULL 
-       2|E               |10 ID           |0x10c739170
+       2|E               |10 ID           |0x100c5b170
        2|+               |ADDOP           |Index 0
        3|3               |11 INT          |0 NULL 
-       3|E4              |10 ID           |0x10c7f9120
+       3|E4              |10 ID           |0x100d800f8
        3|+               |ADDOP           |Index 0
        3|.               |DOT             |CATCHALL
        4|3               |11 INT          |0 NULL 
        4|+               |ADDOP           |Index 0
-       4|E4              |10 ID           |0x10c7f9120
+       4|E4              |10 ID           |0x100d800f8
        4|.               |DOT             |CATCHALL
-       5|3               |11 INT          |0 NULL 
-       5|.               |DOT             |CATCHALL
-       5|E4              |10 ID           |0x10c7f9120
-       5|+               |ADDOP           |Index 0
-       6|34              |11 INT          |0 NULL 
-       6|E               |10 ID           |0x10c739170
-       6|+               |ADDOP           |Index 0
+       5|NEW             |10 ID           |0x100d80120
+       6|3               |11 INT          |0 NULL 
        6|.               |DOT             |CATCHALL
-       7|EOF             |EOF             |END OF FILE
+       6|E4              |10 ID           |0x100d800f8
+       6|+               |ADDOP           |Index 0
+       7|34              |11 INT          |0 NULL 
+       7|E               |10 ID           |0x100c5b170
+       7|+               |ADDOP           |Index 0
+       7|.               |DOT             |CATCHALL
+       8|NEW             |10 ID           |0x100d80120
+       9|add             |10 ID           |0x100d800d0
+      10|add             |10 ID           |0x100d800d0
+      11|EOF             |EOF             |END OF FILE

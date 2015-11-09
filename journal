@@ -191,3 +191,16 @@ I still need to fix my fix the relops being added to the dictionary
 
 October 11, 2015 Today ill be working go on the relop machines make it more functional and that is put all relops
 in a table and get their index.
+
+October 16, 2015 finished fixing project 1. started massaging grammar.
+
+October 17, 2015 created a word document and started massaging grammar did phase one remove all epsilon variable,
+clean things up.. started on phase 2.
+
+October 19 2015, created new document for phase 2 in massaging grammar. simulate nullable variable for grammar
+
+October 22, 2015 remove left recursion on grammar.
+
+October 23 2015 perform left recursion on grammar. started on parse table but not sure how to do it yet.
+
+October 29 2015 created a excel sheet to do parse table for grammar. almost done with parse table.

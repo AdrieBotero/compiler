@@ -79,7 +79,7 @@ def machines_of_machines(file_to_analyze):
     for rev in open('reserved_words'):  # go through the file for reserve words
         reserve_dic[key_for_rev] = rev[0:len(rev) - 1]
         key_for_rev += 1
-    print reserve_dic
+    # print reserve_dic
     for line in file_to_analyze:
         line_number += 1
         l = line
@@ -102,9 +102,9 @@ def machines_of_machines(file_to_analyze):
                     item_index = mulup_table.index(token[2])
                     token_file.writelines(
                         table_template.format(line_number, token[2], token[0], 'Index ' + str(item_index)))
-                    for i in token:
-                        print i
-                    fp = temp_fp
+                    # for i in token:
+                    #     print i
+                    # fp = temp_fp
 
                     break
                 success, temp_fp, token = id_machine(l, fp)  # get status, pointer and token of id machine

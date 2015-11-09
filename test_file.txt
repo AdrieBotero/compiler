@@ -2,5 +2,9 @@ $$
 3.4E+
 3E4+.
 3+E4.
+NEW
 3.E4+
 34E+.
+NEW
+add
+add
