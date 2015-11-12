@@ -204,3 +204,6 @@ October 22, 2015 remove left recursion on grammar.
 October 23 2015 perform left recursion on grammar. started on parse table but not sure how to do it yet.
 
 October 29 2015 created a excel sheet to do parse table for grammar. almost done with parse table.
+
+November 11 2015 finish parse table, created a file call parse.py and started writing all the non-terminals as methods
+and writing all the methods. Still not done.
