@@ -1,7 +1,7 @@
 __author__ = 'andreasbotero'
 
 from MachineOfMachines import machines_of_machines
-
+import parser
 error_list = {
     1: "ID too long",
     2: "INT to long",
@@ -26,6 +26,7 @@ error_list = {
 def main():
     my_file = open('test_file.txt', 'r')
     machines_of_machines(my_file)
+    parser.parse()
 
 
 if __name__ == "__main__":

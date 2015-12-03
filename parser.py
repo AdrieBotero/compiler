@@ -1,17 +1,47 @@
 __author__ = 'andreasbotero'
 
+tokens = []
 
-def match():
-    pass
+
+def add_tokens():
+    with open('write_it.txt', 'r') as token_file:
+        next(token_file)
+        for line in token_file:
+            tokens.append(line.replace(' ', '').split('|'))
+    for item in tokens:
+        print item
+
+
+def peek_token():
+    return tokens[0]
+
+
+def get_token():
+    return tokens.pop(0)
+
+
+def match(expect_token):
+    peek = peek_token()
+    if peek == expect_token and peek != '$':
+        get_token()
+    elif peek == expect_token and peek == '$':
+        print "PARSE COMPLETE"
+    elif peek != expect_token:
+        syntax_error()
+
 
 def parse():
-    pass
+    add_tokens()
+    prg()
+    match('$')
+
 
 def syntax_error():
-    pass
+    print "ERROR SYNTAX"
 
 
-def prg(token):
+def prg():
+    token = peek_token()
     if token == 'program':
         match('program')
         match('id')
@@ -21,61 +51,57 @@ def prg(token):
         match(';')
         prg_()
     else:
+        print "ERROR"
+
+
+def prg_():
+    token = peek_token()
+    if token == 'begin':
+        compstate()
+        match('.')
+    elif token == 'function':
+        subprgdeclarations()
+        compstate()
+        match('.')
+    elif token == 'var':
+        declarations()
+        prg__()
+    else:
         syntax_error()
 
 
-def prg_(token):
+def prg__():
+    token = peek_token()
     if token == 'begin':
         compstate()
         match('.')
-    if token == 'function':
-        subprgdeclarations()
-        compstate()
-        match('.')
-    if token == 'var':
-        declarations()
-        prg__()
-
-
-def prg__(token):
-    if token == 'begin':
-        compstate()
-        match('.')
-    if token == 'function':
+    elif token == 'function':
         subprgdeclarations()
         compstate()
 
-    
-def idlist(token):
+
+def idlist():
+    token = peek_token()
     if token == 'id':
         match('id')
         idlist_()
+    else:
+        syntax_error()
 
 
-def idlist_(token):
+def idlist_():
+    token = peek_token()
     if token == ')':
         pass
-    if token == ',':
+    elif token == ',':
         match('id')
         idlist_()
+    else:
+        syntax_error()
 
 
-def declarations(toke):
-    if toke == 'var':
-        match('var')
-        match('id')
-        match(':')
-        type_()
-        match(';')
-        declarations_()
-    pass
-
-
-def declarations_(token):
-    if token == 'begin':
-        pass
-    if token == 'function':
-        pass
+def declarations():
+    token = peek_token()
     if token == 'var':
         match('var')
         match('id')
@@ -83,9 +109,29 @@ def declarations_(token):
         type_()
         match(';')
         declarations_()
+    else:
+        syntax_error()
 
 
-def type_(token):
+def declarations_():
+    token = peek_token()
+    if token == 'begin':
+        pass
+    elif token == 'function':
+        pass
+    elif token == 'var':
+        match('var')
+        match('id')
+        match(':')
+        type_()
+        match(';')
+        declarations_()
+    else:
+        syntax_error()
+
+
+def type_():
+    token = peek_token()
     if token == 'array':
         match('array')
         match('[')
@@ -95,128 +141,507 @@ def type_(token):
         match(']')
         match('of')
         standtype()
-    if token == 'integer':
+    elif token == 'integer':
         standtype()
-    if token == 'real':
+    elif token == 'real':
         standtype()
+    else:
+        syntax_error()
 
-    pass
 
-def standtype(token):
+def standtype():
+    token = peek_token()
     if token == 'integer':
         match('integer')
-    if token == 'real':
+    elif token == 'real':
         match('real')
 
 
-
-def subprgdeclarations(token):
+def subprgdeclarations():
+    token = peek_token()
     if token == 'function':
         subprgdeclaration()
         match(';')
         subprgdeclarations_()
+    else:
+        syntax_error()
 
 
-def subprgdeclarations_(token):
+def subprgdeclarations_():
+    token = peek_token()
     if token == 'begin':
         pass
-    if token == 'function':
+    elif token == 'function':
         subprgdeclaration()
         match(';')
         subprgdeclarations_()
+    else:
+        syntax_error()
 
 
-def subprgdeclaration(token):
+def subprgdeclaration():
+    token = peek_token()
     if token == 'function':
         subprghead()
         subprgdeclaration_()
+    else:
+        syntax_error()
 
 
-def subprgdeclaration_(token):
+def subprgdeclaration_():
+    token = peek_token()
     if token == 'begin':
         compstate()
-    if token == 'function':
+    elif token == 'function':
         declarations()
         subprgdeclaration__()
-    if token == 'var':
+    elif token == 'var':
         compstate()
+    else:
+        syntax_error()
 
-    pass
-    
+
 def subprgdeclaration__():
-    pass
-    
+    token = peek_token()
+    if token == 'begin':
+        compstate()
+    elif token == 'function':
+        subprgdeclarations()
+        compstate()
+    else:
+        print "ERROR"
+
+
 def subprghead():
-    pass
+    token = peek_token()
+    if token == 'function':
+        match('function')
+        match('id')
+        subprghead_()
+    else:
+        print "ERROR"
+
 
 def subprghead_():
-    pass
-    
+    token = peek_token()
+    if token == '(':
+        arguments()
+        match(':')
+        standtype()
+        match(';')
+    elif token == ':':
+        match(':')
+        standtype()
+        match(';')
+    else:
+        syntax_error()
+
+
 def arguments():
-    pass
+    token = peek_token()
+    if token == '(':
+        match('(')
+        paramlist()
+        match(')')
+    else:
+        syntax_error()
+
 
 def paramlist():
-    pass
+    token = peek_token()
+    if token == 'id':
+        match('id')
+        match(':')
+        type_()
+        paramlist_()
+    else:
+        syntax_error()
+
 
 def paramlist_():
-    pass
-    
+    token = peek_token()
+    if token == ')':
+        pass
+    elif token == ';':
+        match(';')
+        match('id')
+        match(':')
+        type_()
+        paramlist_()
+    else:
+        syntax_error()
+
+
 def compstate():
-    pass
+    token = peek_token()
+    if token == 'begin':
+        match('begin')
+        compstate_()
+    else:
+        syntax_error()
+
 
 def compstate_():
-    pass
-    
+    token = peek_token()
+    if token == 'begin':
+        optionalstate()
+        match('end')
+    elif token == 'end':
+        match('end')
+    elif token == 'id':
+        optionalstate()
+        match('end')
+    elif token == 'if':
+        optionalstate()
+        match('end')
+    elif token == 'while':
+        optionalstate()
+        match('end')
+    else:
+        syntax_error()
+
+
 def optionalstate():
-    pass
+    token = peek_token()
+    if token == 'begin':
+        statementlist()
+    elif token == 'id':
+        statementlist()
+    elif token == 'if':
+        statementlist()
+    elif token == 'while':
+        statementlist()
+    else:
+        syntax_error()
+
 
 def statementlist():
-    pass
+    token = peek_token()
+    if token == 'begin':
+        statement()
+        statementlist_()
+    elif token == 'id':
+        statement()
+        statementlist_()
+    elif token == 'if':
+        statement()
+        statementlist_()
+    elif token == 'if':
+        statement()
+        statementlist_()
+    else:
+        syntax_error()
+
 
 def statementlist_():
-    pass
-    
+    token = peek_token()
+    if token == ';':
+        match(';')
+        statement()
+        statementlist_()
+    elif token == 'end':
+        pass
+    else:
+        syntax_error()
+
+
 def statement():
-    pass
+    token = peek_token()
+    if token == 'begin':
+        compstate()
+    elif token == 'id':
+        variable()
+        match('assignop')
+        expression()
+    elif token == 'if':
+        match('if')
+        expression()
+        match('then')
+        statement()
+        statement_()
+    elif token == 'while':
+        match('while')
+        expression()
+        match('do')
+        statement()
+    else:
+        syntax_error()
+
 
 def statement_():
-    pass
-    
+    token = peek_token()
+    if token == ';':
+        pass
+    elif token == 'else':
+        match('else')
+        statement_()
+    elif token == 'end':
+        pass
+    else:
+        syntax_error()
+
+
 def variable():
-    pass
+    token = peek_token()
+    if token == 'id':
+        match('id')
+        variable_()
+    else:
+        syntax_error()
+
 
 def variable_():
-    pass
-    
+    token = peek_token()
+    if token == '[':
+        match('[')
+        expression()
+        match(']')
+    elif token == 'assignop':
+        pass
+    else:
+        syntax_error()
+
+
 def expresslist():
-    pass
+    token = peek_token()
+    if token == '(':
+        expression()
+        expresslist_()
+    elif token == '+':
+        expression()
+        expresslist_()
+    elif token == '-':
+        expression()
+        expresslist_()
+    elif token == 'id':
+        expression()
+        expresslist_()
+    elif token == 'not':
+        expression()
+        expresslist_()
+    elif token == 'num':
+        expression()
+        expresslist_()
+    else:
+        syntax_error()
+
 
 def expresslist_():
-    pass
-    
+    token = peek_token()
+    if token == ')':
+        pass
+    elif token == ',':
+        match(',')
+        expression()
+        expresslist_()
+    else:
+        syntax_error()
+
+
 def expression():
-    pass
+    token = peek_token()
+    if token == '(':
+        simpexpression()
+        expression_()
+    elif token == '+':
+        simpexpression()
+        expression_()
+    elif token == '-':
+        simpexpression()
+        expression_()
+    elif token == 'id':
+        simpexpression()
+        expression_()
+    elif token == 'not':
+        simpexpression()
+        expression_()
+    elif token == 'num':
+        simpexpression()
+        expression_()
+    else:
+        syntax_error()
+
 
 def expression_():
-    pass
-    
+    token = peek_token()
+    if token == ')':
+        pass
+    elif token == ',':
+        pass
+    elif token == ';':
+        pass
+    elif token == ']':
+        pass
+    elif token == 'do':
+        pass
+    elif token == 'else':
+        pass
+    elif token == 'end':
+        pass
+    elif token == 'relop':
+        match('relop')
+        simpexpression()
+    elif token == 'then':
+        pass
+    else:
+        syntax_error()
+
+
 def simpexpression():
-    pass
+    token = peek_token()
+    if token == '(':
+        term()
+        simpexpression_()
+    elif token == '+':
+        sign()
+        term()
+        simpexpression_()
+    elif token == '-':
+        sign()
+        term()
+        simpexpression_()
+    elif token == 'id':
+        term()
+        simpexpression_()
+    elif token == 'not':
+        term()
+        simpexpression_()
+    elif token == 'num':
+        term()
+        simpexpression_()
+    else:
+        syntax_error()
+
 
 def simpexpression_():
-    pass
-    
+    token = peek_token()
+    if token == ')':
+        pass
+    elif token == ',':
+        pass
+    elif token == ';':
+        pass
+    elif token == ']':
+        pass
+    elif token == 'addop':
+        match('addop')
+        term()
+        simpexpression_()
+    elif token == 'do':
+        pass
+    elif token == 'end':
+        pass
+    elif token == 'relop':
+        pass
+    elif token == 'then':
+        pass
+    else:
+        syntax_error()
+
+
 def term():
-    pass
+    token = peek_token()
+    if token == '(':
+        factor()
+        term_()
+    elif token == 'id':
+        factor()
+        term_()
+    elif token == 'not':
+        factor()
+        term_()
+    elif token == 'num':
+        factor()
+        term_()
+    else:
+        syntax_error()
+
 
 def term_():
-    pass
-    
+    token = peek_token()
+    if token == ')':
+        pass
+    elif token == ',':
+        pass
+    elif token == ';':
+        pass
+    elif token == ']':
+        pass
+    elif token == 'addop':
+        pass
+    elif token == 'do':
+        pass
+    elif token == 'else':
+        pass
+    elif token == 'end':
+        pass
+    elif token == 'mulop':
+        match('mulop')
+        factor()
+        term_()
+    elif token == 'relop':
+        pass
+    elif token == 'then':
+        pass
+    else:
+        syntax_error()
+
+
 def factor():
-    pass
+    token = peek_token()
+    if token == 'id':
+        match('id')
+        factor_()
+    elif token == 'not':
+        match('not')
+        factor()
+    elif token == 'num':
+        match('num')
+    else:
+        syntax_error()
+
 
 def factor_():
-    pass
-    
+    token = peek_token()
+    if token == '(':
+        match('(')
+        expresslist()
+        match(')')
+    elif token == ')':
+        pass
+    elif token == ',':
+        pass
+    elif token == ';':
+        pass
+    elif token == '[':
+        match('[')
+        expression()
+        match(']')
+    elif token == ']':
+        pass
+    elif token == 'addop':
+        pass
+    elif token == 'do':
+        pass
+    elif token == 'else':
+        pass
+    elif token == 'end':
+        pass
+    elif token == 'mulop':
+        pass
+    elif token == 'relop':
+        pass
+    elif token == 'then':
+        pass
+    else:
+        syntax_error()
+
+
 def sign():
-    pass
+    token = peek_token()
+    if token == '+':
+        match('+')
+    elif token == '-':
+        match('-')
+    else:
+        syntax_error()

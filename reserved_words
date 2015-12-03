@@ -1,7 +1,7 @@
 if
 then
 id
-program id
+program
 var
 array
 num

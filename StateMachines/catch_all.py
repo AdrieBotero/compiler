@@ -16,7 +16,8 @@ token = {
     5: ('CATHCALL', 'SINGOP', ':='),
     6: ('CATCHALL', 'TERMINATE', ';'),
     7: ('CATCHALL', 'COMMA', ','),
-    8: ('Unrecog Symbol', '99 LEXERR')
+    8: ('Unrecog Symbol', '99 LEXERR'),
+    9: ('CATCHALL', 'colon', ':')
 }
 
 
@@ -37,6 +38,9 @@ def catch_all_machine(line, pointer):
     elif current_char == ':' and line[pointer + 1] == '=':
         pointer += 2
         return True, pointer, token[5]
+    elif current_char == ':' and line[pointer + 1] != '=':
+        pointer += 1
+        return True, pointer, token[9]
     elif current_char == ';':
         pointer += 1
         return True, pointer, token[6]
