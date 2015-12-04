@@ -1,8 +1,9 @@
-program p1(id1, id2);
-function f1(id3:real):real;
+program p1 ( id1, id2 ) ;
+    function f1 (id3:real) :real;
+    begin
+        id3 := 10;
+        id3 := 5;
+    end;
 begin
-1d3 := 10
-end;
-begin
-id2 := 10
+    id3 : 3;
 end.

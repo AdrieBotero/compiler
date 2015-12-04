@@ -23,6 +23,7 @@ token = {
 
 def catch_all_machine(line, pointer):
     current_char = line[pointer]
+    length = len(line)
     if current_char == '(':
         pointer += 1
         return True, pointer, token[1]
@@ -30,11 +31,16 @@ def catch_all_machine(line, pointer):
         pointer += 1
         return True, pointer, token[2]
     elif current_char == '.':
-        pointer += 1
-        return True, pointer, token[3]
-    elif current_char == '.' and line[pointer+1] == '.':
-        pointer += 2
-        return True, pointer, token[4]
+        try:
+            if line[pointer+1] == '.':
+                pointer += 2
+                return True, pointer, token[4]
+            else:
+                pointer += 1
+                return True, pointer, token[3]
+        except IndexError:
+            pointer += 1
+            return True, pointer, token[3]
     elif current_char == ':' and line[pointer + 1] == '=':
         pointer += 2
         return True, pointer, token[5]

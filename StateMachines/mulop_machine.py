@@ -1,6 +1,5 @@
 __author__ = 'andreasbotero'
 
-
 token = {
     1: ('MULOP', 'Multiplication', '*'),
     2: ('MULOP', 'Division', '/'),
@@ -13,7 +12,6 @@ token = {
 
 
 def mulop(line, forward_p):
-
     current_char = line[forward_p]
     word = ""
     if current_char is '*':

@@ -1,6 +1,7 @@
 __author__ = 'andreasbotero'
 
 tokens = []
+synch = [';', '$']
 
 
 def add_tokens():
@@ -13,7 +14,25 @@ def add_tokens():
 
 
 def peek_token():
-    return tokens[0]
+    token = tokens[0]
+    conversion = {
+        '14REV': token[1],
+        '10ID': 'id',
+        'COMMA': token[1],
+        'CLOSE-PAR': token[1],
+        'TERMINATE': token[1],
+        'OPEN-PAR': token[1],
+        'colon': token[1],
+        '11INT': 'integer',
+        'SINGOP': 'assignop',
+        'DOT': token[1],
+        'ADDOP': 'addop',
+        'MULOP': 'mulop',
+        'RELOP': 'relop',
+        'D-DOT': token[1],
+        'EOF': '$'
+    }
+    return conversion[token[2]]
 
 
 def get_token():
@@ -21,13 +40,24 @@ def get_token():
 
 
 def match(expect_token):
-    peek = peek_token()
-    if peek == expect_token and peek != '$':
-        get_token()
-    elif peek == expect_token and peek == '$':
-        print "PARSE COMPLETE"
-    elif peek != expect_token:
-        syntax_error()
+    if expect_token == 'num':
+        expected_tokens = ['integer', 'real']
+        peek = peek_token()
+        if peek in expected_tokens:
+            if peek != '$':
+                get_token()
+            else:
+                print 'Parse Complete'
+        else:
+            syntax_error(peek, expected_tokens)
+    else:
+        peek = peek_token()
+        if peek == expect_token and peek != '$':
+            get_token()
+        elif peek == expect_token and peek == '$':
+            print "PARSE COMPLETE"
+        elif peek != expect_token:
+            syntax_error(peek, expect_token)
 
 
 def parse():
@@ -36,8 +66,11 @@ def parse():
     match('$')
 
 
-def syntax_error():
-    print "ERROR SYNTAX"
+def syntax_error(given_token, *expected):
+    print "Syntax Error: Expecting %s" % (expected,) + "received " + given_token
+    token = peek_token()
+    while token not in synch:
+        token = get_token()
 
 
 def prg():
@@ -67,7 +100,7 @@ def prg_():
         declarations()
         prg__()
     else:
-        syntax_error()
+        syntax_error(token, 'begin', 'function', 'var')
 
 
 def prg__():
@@ -78,7 +111,8 @@ def prg__():
     elif token == 'function':
         subprgdeclarations()
         compstate()
-
+    else:
+        syntax_error(token, 'begin', 'function')
 
 def idlist():
     token = peek_token()
@@ -86,7 +120,7 @@ def idlist():
         match('id')
         idlist_()
     else:
-        syntax_error()
+        syntax_error(token, 'id')
 
 
 def idlist_():
@@ -94,10 +128,11 @@ def idlist_():
     if token == ')':
         pass
     elif token == ',':
+        match(',')
         match('id')
         idlist_()
     else:
-        syntax_error()
+        syntax_error(token, ')', ',')
 
 
 def declarations():
@@ -110,7 +145,7 @@ def declarations():
         match(';')
         declarations_()
     else:
-        syntax_error()
+        syntax_error(token, 'var')
 
 
 def declarations_():
@@ -127,7 +162,7 @@ def declarations_():
         match(';')
         declarations_()
     else:
-        syntax_error()
+        syntax_error(token, 'begin', 'function', 'var')
 
 
 def type_():
@@ -146,7 +181,7 @@ def type_():
     elif token == 'real':
         standtype()
     else:
-        syntax_error()
+        syntax_error(token, 'array', 'integer', 'real')
 
 
 def standtype():
@@ -155,7 +190,8 @@ def standtype():
         match('integer')
     elif token == 'real':
         match('real')
-
+    else:
+        syntax_error(token, 'integer', 'real')
 
 def subprgdeclarations():
     token = peek_token()
@@ -164,7 +200,7 @@ def subprgdeclarations():
         match(';')
         subprgdeclarations_()
     else:
-        syntax_error()
+        syntax_error(token, 'function')
 
 
 def subprgdeclarations_():
@@ -176,7 +212,7 @@ def subprgdeclarations_():
         match(';')
         subprgdeclarations_()
     else:
-        syntax_error()
+        syntax_error(token, 'begin', 'function')
 
 
 def subprgdeclaration():
@@ -185,7 +221,7 @@ def subprgdeclaration():
         subprghead()
         subprgdeclaration_()
     else:
-        syntax_error()
+        syntax_error(token, 'function')
 
 
 def subprgdeclaration_():
@@ -198,7 +234,7 @@ def subprgdeclaration_():
     elif token == 'var':
         compstate()
     else:
-        syntax_error()
+        syntax_error(token, 'begin', 'function', 'var')
 
 
 def subprgdeclaration__():
@@ -209,7 +245,7 @@ def subprgdeclaration__():
         subprgdeclarations()
         compstate()
     else:
-        print "ERROR"
+        syntax_error(token, 'begin', 'function')
 
 
 def subprghead():
@@ -219,7 +255,7 @@ def subprghead():
         match('id')
         subprghead_()
     else:
-        print "ERROR"
+        syntax_error(token, 'function')
 
 
 def subprghead_():
@@ -234,7 +270,7 @@ def subprghead_():
         standtype()
         match(';')
     else:
-        syntax_error()
+        syntax_error(token, '(', ':')
 
 
 def arguments():
@@ -244,7 +280,7 @@ def arguments():
         paramlist()
         match(')')
     else:
-        syntax_error()
+        syntax_error(token, '(')
 
 
 def paramlist():
@@ -255,7 +291,7 @@ def paramlist():
         type_()
         paramlist_()
     else:
-        syntax_error()
+        syntax_error(token, 'id')
 
 
 def paramlist_():
@@ -269,7 +305,7 @@ def paramlist_():
         type_()
         paramlist_()
     else:
-        syntax_error()
+        syntax_error(token, '(', ';')
 
 
 def compstate():
@@ -278,7 +314,7 @@ def compstate():
         match('begin')
         compstate_()
     else:
-        syntax_error()
+        syntax_error(token, 'begin')
 
 
 def compstate_():
@@ -298,7 +334,7 @@ def compstate_():
         optionalstate()
         match('end')
     else:
-        syntax_error()
+        syntax_error(token, 'begin', 'end', 'id', 'if', 'while')
 
 
 def optionalstate():
@@ -312,7 +348,7 @@ def optionalstate():
     elif token == 'while':
         statementlist()
     else:
-        syntax_error()
+        syntax_error(token, 'begin', 'id', 'if', 'while')
 
 
 def statementlist():
@@ -326,11 +362,8 @@ def statementlist():
     elif token == 'if':
         statement()
         statementlist_()
-    elif token == 'if':
-        statement()
-        statementlist_()
     else:
-        syntax_error()
+        syntax_error(token, 'begin', 'id', 'if')
 
 
 def statementlist_():
@@ -342,7 +375,7 @@ def statementlist_():
     elif token == 'end':
         pass
     else:
-        syntax_error()
+        syntax_error(token, ';', 'end')
 
 
 def statement():
@@ -365,7 +398,7 @@ def statement():
         match('do')
         statement()
     else:
-        syntax_error()
+        syntax_error(token, 'begin', 'id', 'assignop', 'if', 'while')
 
 
 def statement_():
@@ -378,7 +411,7 @@ def statement_():
     elif token == 'end':
         pass
     else:
-        syntax_error()
+        syntax_error(token, ';', 'else', 'end')
 
 
 def variable():
@@ -387,7 +420,7 @@ def variable():
         match('id')
         variable_()
     else:
-        syntax_error()
+        syntax_error(token, 'id')
 
 
 def variable_():
@@ -399,7 +432,7 @@ def variable_():
     elif token == 'assignop':
         pass
     else:
-        syntax_error()
+        syntax_error(token, '[', 'assignop')
 
 
 def expresslist():
@@ -423,7 +456,7 @@ def expresslist():
         expression()
         expresslist_()
     else:
-        syntax_error()
+        syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
 
 
 def expresslist_():
@@ -435,31 +468,16 @@ def expresslist_():
         expression()
         expresslist_()
     else:
-        syntax_error()
+        syntax_error(token, ')', ',')
 
 
 def expression():
     token = peek_token()
-    if token == '(':
-        simpexpression()
-        expression_()
-    elif token == '+':
-        simpexpression()
-        expression_()
-    elif token == '-':
-        simpexpression()
-        expression_()
-    elif token == 'id':
-        simpexpression()
-        expression_()
-    elif token == 'not':
-        simpexpression()
-        expression_()
-    elif token == 'num':
+    if token == '(' or token == '+' or token == '-' or token == 'id' or token == 'not' or token == 'real' or token == 'integer':
         simpexpression()
         expression_()
     else:
-        syntax_error()
+        syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
 
 
 def expression_():
@@ -484,7 +502,7 @@ def expression_():
     elif token == 'then':
         pass
     else:
-        syntax_error()
+        syntax_error(token, ')', ',', ';', ']', 'do', 'else', 'end', 'relop', 'then')
 
 
 def simpexpression():
@@ -506,11 +524,11 @@ def simpexpression():
     elif token == 'not':
         term()
         simpexpression_()
-    elif token == 'num':
+    elif token == 'real' or token == 'integer':
         term()
         simpexpression_()
     else:
-        syntax_error()
+        syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
 
 
 def simpexpression_():
@@ -536,7 +554,7 @@ def simpexpression_():
     elif token == 'then':
         pass
     else:
-        syntax_error()
+        syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'end', 'relop', 'then')
 
 
 def term():
@@ -550,11 +568,11 @@ def term():
     elif token == 'not':
         factor()
         term_()
-    elif token == 'num':
+    elif token == 'integer' or token == 'real':
         factor()
         term_()
     else:
-        syntax_error()
+        syntax_error('(', 'id', 'not', 'num')
 
 
 def term_():
@@ -584,7 +602,7 @@ def term_():
     elif token == 'then':
         pass
     else:
-        syntax_error()
+        syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
 
 
 def factor():
@@ -595,10 +613,10 @@ def factor():
     elif token == 'not':
         match('not')
         factor()
-    elif token == 'num':
+    elif token == 'integer' or token == 'real':
         match('num')
     else:
-        syntax_error()
+        syntax_error(token, 'id', 'not', 'num')
 
 
 def factor_():
@@ -634,7 +652,7 @@ def factor_():
     elif token == 'then':
         pass
     else:
-        syntax_error()
+        syntax_error(token, '(', ')', ',', ';', '[', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
 
 
 def sign():
@@ -644,4 +662,4 @@ def sign():
     elif token == '-':
         match('-')
     else:
-        syntax_error()
+        syntax_error(token, '+', '-')

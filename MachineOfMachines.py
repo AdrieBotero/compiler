@@ -102,6 +102,7 @@ def machines_of_machines(file_to_analyze):
                     item_index = mulup_table.index(token[2])
                     token_file.writelines(
                         table_template.format(line_number, token[2], token[0], 'Index ' + str(item_index)))
+                    fp = temp_fp
                     # for i in token:
                     #     print i
                     # fp = temp_fp

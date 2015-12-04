@@ -1,33 +1,38 @@
 Line No.|Lexeme          |Token-Type      |Attribute
        1|program         |14 REV          |0 NULL 
-       1|p1              |10 ID           |0x1034e3288
+       1|p1              |10 ID           |0x102f682b0
        1|(               |OPEN-PAR        |CATCHALL
-       1|id1             |10 ID           |0x1034e32b0
+       1|id1             |10 ID           |0x102f682d8
        1|,               |COMMA           |CATCHALL
-       1|id2             |10 ID           |0x1034e3300
+       1|id2             |10 ID           |0x102f68300
        1|)               |CLOSE-PAR       |CATCHALL
        1|;               |TERMINATE       |CATCHALL
        2|function        |14 REV          |0 NULL 
-       2|f1              |10 ID           |0x1034e3328
+       2|f1              |10 ID           |0x102f68328
        2|(               |OPEN-PAR        |CATCHALL
-       2|id3             |10 ID           |0x1034e3350
+       2|id3             |10 ID           |0x102f68350
        2|:               |colon           |CATCHALL
        2|real            |14 REV          |0 NULL 
        2|)               |CLOSE-PAR       |CATCHALL
        2|:               |colon           |CATCHALL
-       2|real            |14 REV          |0x1034cac90
+       2|real            |14 REV          |0x102f67d80
        2|;               |TERMINATE       |CATCHALL
        3|begin           |14 REV          |0 NULL 
-       4|1               |11 INT          |0 NULL 
-       4|d3              |10 ID           |0x1034e3378
+       4|id3             |10 ID           |0x102f68350
        4|:=              |SINGOP          |CATHCALL
        4|10              |11 INT          |0 NULL 
-       5|end             |14 REV          |0 NULL 
+       4|;               |TERMINATE       |CATCHALL
+       5|id3             |10 ID           |0x102f68350
+       5|:=              |SINGOP          |CATHCALL
+       5|5               |11 INT          |0 NULL 
        5|;               |TERMINATE       |CATCHALL
-       6|begin           |14 REV          |0x1034cacc0
-       7|id2             |10 ID           |0x1034e3300
-       7|:=              |SINGOP          |CATHCALL
-       7|10              |11 INT          |0 NULL 
-       8|end             |14 REV          |0x1034e33c8
-       8|.               |DOT             |CATCHALL
-       9|EOF             |EOF             |END OF FILE
+       6|end             |14 REV          |0 NULL 
+       6|;               |TERMINATE       |CATCHALL
+       7|begin           |14 REV          |0x102f67db0
+       8|id3             |10 ID           |0x102f68350
+       8|:               |colon           |CATCHALL
+       8|3               |11 INT          |0 NULL 
+       8|;               |TERMINATE       |CATCHALL
+       9|end             |14 REV          |0x102f68378
+       9|.               |DOT             |CATCHALL
+      10|EOF             |EOF             |END OF FILE
