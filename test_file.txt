@@ -5,5 +5,5 @@ program p1 ( id1, id2 ) ;
         id3 := 5;
     end;
 begin
-    id3 : 3;
+    id3 := 3
 end.

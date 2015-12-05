@@ -1,7 +1,7 @@
 __author__ = 'andreasbotero'
 
 tokens = []
-synch = [';', '$']
+synch = [';', 'EOF']
 
 
 def add_tokens():
@@ -11,6 +11,7 @@ def add_tokens():
             tokens.append(line.replace(' ', '').split('|'))
     for item in tokens:
         print item
+
 
 
 def peek_token():
@@ -84,7 +85,7 @@ def prg():
         match(';')
         prg_()
     else:
-        print "ERROR"
+        syntax_error(token, 'program')
 
 
 def prg_():
