@@ -2,6 +2,7 @@ __author__ = 'andreasbotero'
 
 from MachineOfMachines import machines_of_machines
 import parser
+
 error_list = {
     1: "ID too long",
     2: "INT to long",

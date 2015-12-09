@@ -1,7 +1,12 @@
 __author__ = 'andreasbotero'
+import sys
 
 tokens = []
 synch = [';', 'EOF']
+syntax_er = []
+new_list_file = {}
+# list_file = open('list_file', 'w')
+lex_analysis_listing_file = open('list_file', 'r')
 
 
 def add_tokens():
@@ -9,13 +14,34 @@ def add_tokens():
         next(token_file)
         for line in token_file:
             tokens.append(line.replace(' ', '').split('|'))
-    for item in tokens:
-        print item
+            # for item in tokens:
+            #     print item
+    last_line = 0
+    for line in lex_analysis_listing_file:
+        if line[0].isdigit():
+            new_list_file[line.split('\t')[0]] = [line]
+            last_line = int(line.split('\t')[0])
+        else:
+            new_list_file[str(last_line)].append(line)
 
+
+# def add_syntax_errors():
+#     if not syntax_er:
+#         with open('list_file', 'r') as list_f:
+#             for line in list_f:
+#                 temp_list.append(line)
+#         for i in temp_list:
+#             print i
+
+
+def get_line_number():
+    token = tokens[0]
+    return token[0]
 
 
 def peek_token():
     token = tokens[0]
+    # line_number = token[0]
     conversion = {
         '14REV': token[1],
         '10ID': 'id',
@@ -31,13 +57,26 @@ def peek_token():
         'MULOP': 'mulop',
         'RELOP': 'relop',
         'D-DOT': token[1],
-        'EOF': '$'
+        'EOF': '$',
+        '13REAL': 'real',
+        '99LEXERR': 'LEXERR',
+        'OPEN-BRA': token[1],
+        'CLOSE-BRA': token[1]
     }
     return conversion[token[2]]
 
 
 def get_token():
-    return tokens.pop(0)
+    try:
+        return tokens.pop(0)
+    except IndexError:
+        return False
+
+
+def finish():
+    print 'PARSE COMPLETE'
+    write_new_listing_file()
+    sys.exit(0)
 
 
 def match(expect_token):
@@ -48,7 +87,7 @@ def match(expect_token):
             if peek != '$':
                 get_token()
             else:
-                print 'Parse Complete'
+                finish()
         else:
             syntax_error(peek, expected_tokens)
     else:
@@ -56,7 +95,7 @@ def match(expect_token):
         if peek == expect_token and peek != '$':
             get_token()
         elif peek == expect_token and peek == '$':
-            print "PARSE COMPLETE"
+            finish()
         elif peek != expect_token:
             syntax_error(peek, expect_token)
 
@@ -65,13 +104,32 @@ def parse():
     add_tokens()
     prg()
     match('$')
+    write_new_listing_file()
+
+
+def write_new_listing_file():
+    new_file = open('final_listing_file.txt', 'w')
+    for key in sorted(new_list_file):
+        for line in new_list_file[key]:
+            new_file.write(line + '\n')
+    new_file.close()
 
 
 def syntax_error(given_token, *expected):
-    print "Syntax Error: Expecting %s" % (expected,) + "received " + given_token
+    line_number = get_line_number()
+
+    error = "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
+    # syntax_er.append(error)
+    new_list_file[line_number].append(error)
+
+    print "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
     token = peek_token()
     while token not in synch:
-        token = get_token()
+        get_token()
+        if len(tokens) != 0:
+            token = peek_token()
+        else:
+            finish()
 
 
 def prg():
@@ -112,8 +170,10 @@ def prg__():
     elif token == 'function':
         subprgdeclarations()
         compstate()
+        match('.')
     else:
         syntax_error(token, 'begin', 'function')
+
 
 def idlist():
     token = peek_token()
@@ -194,6 +254,7 @@ def standtype():
     else:
         syntax_error(token, 'integer', 'real')
 
+
 def subprgdeclarations():
     token = peek_token()
     if token == 'function':
@@ -233,7 +294,8 @@ def subprgdeclaration_():
         declarations()
         subprgdeclaration__()
     elif token == 'var':
-        compstate()
+        declarations()
+        subprgdeclaration__()
     else:
         syntax_error(token, 'begin', 'function', 'var')
 

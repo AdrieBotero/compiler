@@ -1,9 +1,9 @@
-program p1 ( id1, id2 ) ;
-    function f1 (id3:real) :real;
+program prg1 ( input, output ) ;
+    var test1: integer;
+    var test2: array[1..50] of real;
+    function func1 (param:integer) :integer;
     begin
-        id3 := 10;
-        id3 := 5;
+        param := 20
     end;
-begin
-    id3 := 3
-end.
+    begin
+    end.
