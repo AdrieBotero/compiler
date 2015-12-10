@@ -2,11 +2,15 @@ __author__ = 'andreasbotero'
 
 
 class Node:
-    def __init__(self, data, w_type, next_node, previous_node):
-        self.data = data
+    def __init__(self, i, w_type):
+        self.i = i
         self.w_type = w_type
-        self.next_node = next_node
-        self.previous_node = previous_node
+        self.next_node = None
+        self.previous_node = None
+
+    def __str__(self):
+        return "testing nodes" + \
+               self.i + self.w_type + str(id(self.next_node))
 
     def set_data(self, d):
         self.data = d

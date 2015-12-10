@@ -1,12 +1,28 @@
 __author__ = 'andreasbotero'
 import sys
 
+from GreenNode import GreenNode
+
+from BlueNode import BlueNode
+
+from Node import Node
+
+
 tokens = []
-synch = [';', 'EOF']
+
+synch_set = []
 syntax_er = []
 new_list_file = {}
 # list_file = open('list_file', 'w')
 lex_analysis_listing_file = open('list_file', 'r')
+
+
+
+
+
+def createBlueNode(d, t, n, p):
+    blue_node = BlueNode(d, t, n, p)
+    return blue_node
 
 
 def add_tokens():
@@ -14,8 +30,8 @@ def add_tokens():
         next(token_file)
         for line in token_file:
             tokens.append(line.replace(' ', '').split('|'))
-            # for item in tokens:
-            #     print item
+    for item in tokens:
+        print item
     last_line = 0
     for line in lex_analysis_listing_file:
         if line[0].isdigit():
@@ -23,15 +39,6 @@ def add_tokens():
             last_line = int(line.split('\t')[0])
         else:
             new_list_file[str(last_line)].append(line)
-
-
-# def add_syntax_errors():
-#     if not syntax_er:
-#         with open('list_file', 'r') as list_f:
-#             for line in list_f:
-#                 temp_list.append(line)
-#         for i in temp_list:
-#             print i
 
 
 def get_line_number():
@@ -121,28 +128,49 @@ def syntax_error(given_token, *expected):
     error = "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
     # syntax_er.append(error)
     new_list_file[line_number].append(error)
-
+    print new_list_file
     print "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
     token = peek_token()
-    while token not in synch:
-        get_token()
-        if len(tokens) != 0:
-            token = peek_token()
-        else:
-            finish()
+    my_set = handle_sync()
+
+    get_token()
+    if len(tokens) != 0:
+        token = peek_token()
+    else:
+        finish()
+
+
+def handle_sync():
+    return synch_set
+
+green_node = GreenNode("dummy", 'Sometype')
+print green_node
+green_node2 = GreenNode("dummy2", 'Sometype2')
+green_node3 = GreenNode("dummy3", 'Sometype3')
+green_node.next_node = green_node2
+green_node2.previous_node = green_node
+green_node2.next_node = green_node3
+green_node3.previous_node = green_node2
+while green_node is not None:
+    print green_node
+    green_node = green_node.get_next_node()
 
 
 def prg():
     token = peek_token()
     if token == 'program':
         match('program')
+        # lexem = tokens[1]
         match('id')
+        # createGreenNode(lexem, "pname", )
         match('(')
         idlist()
         match(')')
         match(';')
         prg_()
     else:
+        synch_set.append('$')
+        handle_sync()
         syntax_error(token, 'program')
 
 
@@ -159,6 +187,8 @@ def prg_():
         declarations()
         prg__()
     else:
+        synch_set.append('$')
+        handle_sync()
         syntax_error(token, 'begin', 'function', 'var')
 
 
@@ -172,6 +202,8 @@ def prg__():
         compstate()
         match('.')
     else:
+        synch_set.append('$')
+        handle_sync()
         syntax_error(token, 'begin', 'function')
 
 
@@ -181,6 +213,8 @@ def idlist():
         match('id')
         idlist_()
     else:
+        synch_set.append(')')
+        handle_sync()
         syntax_error(token, 'id')
 
 
@@ -193,6 +227,8 @@ def idlist_():
         match('id')
         idlist_()
     else:
+        synch_set.append(')')
+        handle_sync()
         syntax_error(token, ')', ',')
 
 
@@ -206,6 +242,10 @@ def declarations():
         match(';')
         declarations_()
     else:
+        # synch_set = ['function', 'begin']
+        synch_set.append('function')
+        synch_set.append('begin')
+        handle_sync()
         syntax_error(token, 'var')
 
 
@@ -223,6 +263,10 @@ def declarations_():
         match(';')
         declarations_()
     else:
+        # synch_set = ['function', 'begin']
+        synch_set.append('function')
+        synch_set.append('begin')
+        handle_sync()
         syntax_error(token, 'begin', 'function', 'var')
 
 
@@ -242,6 +286,9 @@ def type_():
     elif token == 'real':
         standtype()
     else:
+        synch_set.append(';')
+        synch_set.append(')')
+        handle_sync()
         syntax_error(token, 'array', 'integer', 'real')
 
 
@@ -252,6 +299,9 @@ def standtype():
     elif token == 'real':
         match('real')
     else:
+        synch_set.append(';')
+        synch_set.append(')')
+        handle_sync()
         syntax_error(token, 'integer', 'real')
 
 
@@ -262,6 +312,8 @@ def subprgdeclarations():
         match(';')
         subprgdeclarations_()
     else:
+        synch_set.append('begin')
+        handle_sync()
         syntax_error(token, 'function')
 
 
@@ -274,6 +326,8 @@ def subprgdeclarations_():
         match(';')
         subprgdeclarations_()
     else:
+        synch_set.append('begin')
+        handle_sync()
         syntax_error(token, 'begin', 'function')
 
 
@@ -283,6 +337,8 @@ def subprgdeclaration():
         subprghead()
         subprgdeclaration_()
     else:
+        synch_set.append(';')
+        handle_sync()
         syntax_error(token, 'function')
 
 
@@ -297,6 +353,8 @@ def subprgdeclaration_():
         declarations()
         subprgdeclaration__()
     else:
+        synch_set.append(';')
+        handle_sync()
         syntax_error(token, 'begin', 'function', 'var')
 
 
@@ -308,6 +366,8 @@ def subprgdeclaration__():
         subprgdeclarations()
         compstate()
     else:
+        synch_set.append(';')
+        handle_sync()
         syntax_error(token, 'begin', 'function')
 
 
@@ -318,6 +378,11 @@ def subprghead():
         match('id')
         subprghead_()
     else:
+        # synch_set = ['function', 'begin', 'var']
+        synch_set.append('function')
+        synch_set.append('begin')
+        synch_set.append('var')
+        handle_sync()
         syntax_error(token, 'function')
 
 
@@ -333,6 +398,10 @@ def subprghead_():
         standtype()
         match(';')
     else:
+        my_set = ['function', 'begin', 'var']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, '(', ':')
 
 
@@ -343,6 +412,8 @@ def arguments():
         paramlist()
         match(')')
     else:
+        synch_set.append(':')
+        handle_sync()
         syntax_error(token, '(')
 
 
@@ -354,6 +425,8 @@ def paramlist():
         type_()
         paramlist_()
     else:
+        synch_set.append(')')
+        # handle_sync()
         syntax_error(token, 'id')
 
 
@@ -368,6 +441,8 @@ def paramlist_():
         type_()
         paramlist_()
     else:
+        synch_set.append(')')
+        # handle_sync()
         syntax_error(token, '(', ';')
 
 
@@ -377,6 +452,10 @@ def compstate():
         match('begin')
         compstate_()
     else:
+        my_set = [';', 'end', '.']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, 'begin')
 
 
@@ -397,6 +476,11 @@ def compstate_():
         optionalstate()
         match('end')
     else:
+        my_set = [';', 'end', '.', 'else']
+        for i in my_set:
+            synch_set.append(i)
+
+        # handle_sync()
         syntax_error(token, 'begin', 'end', 'id', 'if', 'while')
 
 
@@ -411,6 +495,8 @@ def optionalstate():
     elif token == 'while':
         statementlist()
     else:
+        synch_set.append('end')
+        # handle_sync()
         syntax_error(token, 'begin', 'id', 'if', 'while')
 
 
@@ -426,6 +512,8 @@ def statementlist():
         statement()
         statementlist_()
     else:
+        synch_set.append('end')
+        # handle_sync()
         syntax_error(token, 'begin', 'id', 'if')
 
 
@@ -438,6 +526,8 @@ def statementlist_():
     elif token == 'end':
         pass
     else:
+        synch_set.append('end')
+        # handle_sync()
         syntax_error(token, ';', 'end')
 
 
@@ -461,6 +551,10 @@ def statement():
         match('do')
         statement()
     else:
+        my_set = ['else', ';', 'end']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, 'begin', 'id', 'assignop', 'if', 'while')
 
 
@@ -474,6 +568,10 @@ def statement_():
     elif token == 'end':
         pass
     else:
+        my_set = [';', 'end', 'else']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, ';', 'else', 'end')
 
 
@@ -483,6 +581,8 @@ def variable():
         match('id')
         variable_()
     else:
+        synch_set.append('assignop')
+        # handle_sync()
         syntax_error(token, 'id')
 
 
@@ -495,6 +595,8 @@ def variable_():
     elif token == 'assignop':
         pass
     else:
+        synch_set.append('assignop')
+        # handle_sync()
         syntax_error(token, '[', 'assignop')
 
 
@@ -519,6 +621,9 @@ def expresslist():
         expression()
         expresslist_()
     else:
+        synch_set.append(')')
+
+        # handle_sync()
         syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
 
 
@@ -531,6 +636,8 @@ def expresslist_():
         expression()
         expresslist_()
     else:
+        synch_set.append(')')
+        # handle_sync()
         syntax_error(token, ')', ',')
 
 
@@ -540,6 +647,10 @@ def expression():
         simpexpression()
         expression_()
     else:
+        my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
 
 
@@ -565,6 +676,10 @@ def expression_():
     elif token == 'then':
         pass
     else:
+        my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, ')', ',', ';', ']', 'do', 'else', 'end', 'relop', 'then')
 
 
@@ -591,6 +706,10 @@ def simpexpression():
         term()
         simpexpression_()
     else:
+        my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
 
 
@@ -617,6 +736,10 @@ def simpexpression_():
     elif token == 'then':
         pass
     else:
+        my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'end', 'relop', 'then')
 
 
@@ -635,6 +758,10 @@ def term():
         factor()
         term_()
     else:
+        my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error('(', 'id', 'not', 'num')
 
 
@@ -665,6 +792,10 @@ def term_():
     elif token == 'then':
         pass
     else:
+        my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
 
 
@@ -679,6 +810,8 @@ def factor():
     elif token == 'integer' or token == 'real':
         match('num')
     else:
+        synch_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop', 'mulop']
+        handle_sync()
         syntax_error(token, 'id', 'not', 'num')
 
 
@@ -715,6 +848,10 @@ def factor_():
     elif token == 'then':
         pass
     else:
+        my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop', 'mulop']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, '(', ')', ',', ';', '[', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
 
 
@@ -725,4 +862,8 @@ def sign():
     elif token == '-':
         match('-')
     else:
+        my_set = ['id', 'num', 'not', '(']
+        for i in my_set:
+            synch_set.append(i)
+        # handle_sync()
         syntax_error(token, '+', '-')

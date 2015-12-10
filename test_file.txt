@@ -1,6 +1,6 @@
 program prg1 ( input, output ) ;
     var test1: integer;
-    var test2: array[1..50] of real;
+    var test2: array[1..50 ] of real;
     function func1 (param:integer) :integer;
     begin
         param := 20
