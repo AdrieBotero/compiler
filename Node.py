@@ -2,15 +2,17 @@ __author__ = 'andreasbotero'
 
 
 class Node:
-    def __init__(self, i, w_type):
-        self.i = i
+    def __init__(self, data, w_type):
+        self.data = data
         self.w_type = w_type
-        self.next_node = None
+        self.parent = None
+        self.right_sibling = None
+        self.left_child = None
         self.previous_node = None
 
     def __str__(self):
-        return "testing nodes" + \
-               self.i + self.w_type + str(id(self.next_node))
+        return "testing nodes " + \
+               self.data + " " + self.w_type + " " + str(id(self.left_child))
 
     def set_data(self, d):
         self.data = d
@@ -24,14 +26,8 @@ class Node:
     def get_type(self):
         return self.w_type
 
-    def set_next_node(self, n):
-        self.next_node = n
-
-    def get_next_node(self):
-        return self.next_node
-
     def set_previous_node(self):
-        self.previous_node
+        return self.previous_node
 
     def get_previous_node(self):
         return self.previous_node

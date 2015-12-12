@@ -7,9 +7,8 @@ from BlueNode import BlueNode
 
 from Node import Node
 
-
 tokens = []
-
+nodes = []
 synch_set = []
 syntax_er = []
 new_list_file = {}
@@ -17,21 +16,13 @@ new_list_file = {}
 lex_analysis_listing_file = open('list_file', 'r')
 
 
-
-
-
-def createBlueNode(d, t, n, p):
-    blue_node = BlueNode(d, t, n, p)
-    return blue_node
-
-
 def add_tokens():
     with open('write_it.txt', 'r') as token_file:
         next(token_file)
         for line in token_file:
             tokens.append(line.replace(' ', '').split('|'))
-    for item in tokens:
-        print item
+    # for item in tokens:
+    #     print item
     last_line = 0
     for line in lex_analysis_listing_file:
         if line[0].isdigit():
@@ -107,9 +98,30 @@ def match(expect_token):
             syntax_error(peek, expect_token)
 
 
+# green_node = GreenNode("dummy", 'Sometype')
+# print green_node
+# green_node2 = GreenNode("dummy2", 'Sometype2')
+# green_node3 = GreenNode("dummy3", 'Sometype3')
+# green_node.next_node = green_node2
+# green_node2.previous_node = green_node
+# green_node2.next_node = green_node3
+# green_node3.previous_node = green_node2
+# while green_node is not None:
+#     print green_node
+#     green_node = green_node.get_next_node()
+
+
 def parse():
     add_tokens()
     prg()
+    green_node_one = nodes[0]
+    node = green_node_one.right_sibling
+    green_node_two = nodes[1]
+    node_2 = green_node_two.right_sibling
+    # for item in nodes:
+    #     while item is not None:
+    #         print item
+    #         item = item.right_sibling
     match('$')
     write_new_listing_file()
 
@@ -124,14 +136,11 @@ def write_new_listing_file():
 
 def syntax_error(given_token, *expected):
     line_number = get_line_number()
-
     error = "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
     # syntax_er.append(error)
     new_list_file[line_number].append(error)
-    print new_list_file
+    # print new_list_file
     print "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
-    token = peek_token()
-    my_set = handle_sync()
 
     get_token()
     if len(tokens) != 0:
@@ -143,26 +152,28 @@ def syntax_error(given_token, *expected):
 def handle_sync():
     return synch_set
 
-green_node = GreenNode("dummy", 'Sometype')
-print green_node
-green_node2 = GreenNode("dummy2", 'Sometype2')
-green_node3 = GreenNode("dummy3", 'Sometype3')
-green_node.next_node = green_node2
-green_node2.previous_node = green_node
-green_node2.next_node = green_node3
-green_node3.previous_node = green_node2
-while green_node is not None:
-    print green_node
-    green_node = green_node.get_next_node()
+
+# green_node = GreenNode("dummy", 'Sometype')
+# print green_node
+# green_node2 = GreenNode("dummy2", 'Sometype2')
+# green_node3 = GreenNode("dummy3", 'Sometype3')
+# green_node.next_node = green_node2
+# green_node2.previous_node = green_node
+# green_node2.next_node = green_node3
+# green_node3.previous_node = green_node2
+# while green_node is not None:
+#     print green_node
+#     green_node = green_node.get_next_node()
 
 
 def prg():
     token = peek_token()
     if token == 'program':
         match('program')
-        # lexem = tokens[1]
+        token = tokens[0]
         match('id')
-        # createGreenNode(lexem, "pname", )
+        nodes.insert(0, GreenNode(token[1], 'pname'))
+        # print nodes
         match('(')
         idlist()
         match(')')
@@ -210,7 +221,13 @@ def prg__():
 def idlist():
     token = peek_token()
     if token == 'id':
+        token = tokens[0]
         match('id')
+        green_node = nodes[0]
+        while green_node.right_sibling is not None:
+            green_node = green_node.right_sibling
+        if green_node.right_sibling is None:
+            green_node.right_sibling = BlueNode(token[1], "pname")
         idlist_()
     else:
         synch_set.append(')')
@@ -224,7 +241,13 @@ def idlist_():
         pass
     elif token == ',':
         match(',')
+        token = tokens[0]
         match('id')
+        green_node = nodes[0]
+        while green_node.right_sibling is not None:
+            green_node = green_node.right_sibling
+        if green_node.right_sibling is None:
+            green_node.right_sibling = BlueNode(token[1], "pname")
         idlist_()
     else:
         synch_set.append(')')
@@ -236,9 +259,19 @@ def declarations():
     token = peek_token()
     if token == 'var':
         match('var')
+        token = tokens[0]
         match('id')
         match(':')
         type_()
+        if nodes:
+            node = nodes[0]
+            # node.right_sibling.right_sibling.right_sibling
+            # if nodes.right_sibling is not None:
+            # blue_node = BlueNode(token[1], "pname")
+            while node.right_sibling is not None:
+                node = node.right_sibling
+            if node.right_sibling is None:
+                node.right_sibling = BlueNode(token[1], "pname")
         match(';')
         declarations_()
     else:
@@ -257,9 +290,16 @@ def declarations_():
         pass
     elif token == 'var':
         match('var')
+        token = tokens[0]
         match('id')
         match(':')
         type_()
+        if nodes:
+            node = nodes[0]
+            while node.right_sibling is not None:
+                node = node.right_sibling
+            if node.right_sibling is None:
+                node.right_sibling = BlueNode(token[1], "pname")
         match(';')
         declarations_()
     else:
@@ -280,15 +320,19 @@ def type_():
         match('num')
         match(']')
         match('of')
-        standtype()
+        current_type = standtype()
+        return current_type
     elif token == 'integer':
-        standtype()
+        current_type = standtype()
+        return current_type
     elif token == 'real':
-        standtype()
+        current_type = standtype()
+        return current_type
+
     else:
         synch_set.append(';')
         synch_set.append(')')
-        handle_sync()
+        # handle_sync()
         syntax_error(token, 'array', 'integer', 'real')
 
 
@@ -296,8 +340,10 @@ def standtype():
     token = peek_token()
     if token == 'integer':
         match('integer')
+        return "integer"
     elif token == 'real':
         match('real')
+        return "real"
     else:
         synch_set.append(';')
         synch_set.append(')')
@@ -375,7 +421,10 @@ def subprghead():
     token = peek_token()
     if token == 'function':
         match('function')
+        token = tokens[0]
         match('id')
+        nodes.insert(0, GreenNode(token[1], "pname"))
+        # print nodes
         subprghead_()
     else:
         # synch_set = ['function', 'begin', 'var']
@@ -420,9 +469,14 @@ def arguments():
 def paramlist():
     token = peek_token()
     if token == 'id':
+        token = tokens[0]
         match('id')
         match(':')
         type_()
+        # token = tokens[0]
+        if nodes:
+            first_item_in_stack = nodes[0]
+            first_item_in_stack.right_sibling = BlueNode(token[1], "fname")
         paramlist_()
     else:
         synch_set.append(')')
@@ -436,9 +490,13 @@ def paramlist_():
         pass
     elif token == ';':
         match(';')
+        token = tokens[0]
         match('id')
         match(':')
         type_()
+        if nodes:
+            first_item_in_stack = nodes[0]
+            first_item_in_stack.right_sibling = BlueNode(token[1], "fname")
         paramlist_()
     else:
         synch_set.append(')')

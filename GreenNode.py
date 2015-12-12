@@ -6,4 +6,6 @@ from Node import Node
 class GreenNode(Node):
     def __init__(self, d, t):
         Node.__init__(self, d, t)
+        self.return_type = None
+        self.params = None
 

@@ -4,5 +4,6 @@ from Node import Node
 
 
 class BlueNode(Node):
-    def __init__(self, d, t, n, p):
-        Node.__init__(self, d, t, n, p)
+    def __init__(self, d, t):
+        Node.__init__(self, d, t)
+
