@@ -1,9 +1,18 @@
 program prg1 ( input, output ) ;
     var test1: integer;
-    var test2: array[1..50 ] of real;
+    var test2 : integer;
+    var test3: array[1..50 ] of integer;
+    var a: integer;
+    var b: real;
     function func1 (param:integer) :integer;
     begin
-        param := 20
-    end;
+        param := 20;
+        a := func1(1);
+        if ( test1 > test2 ) then
+            test1 :=2
+        else a := b + 2;
+        a:= a+b;
+        b:= a
+     end;
     begin
     end.

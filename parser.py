@@ -14,7 +14,7 @@ syntax_er = []
 new_list_file = {}
 # list_file = open('list_file', 'w')
 lex_analysis_listing_file = open('list_file', 'r')
-
+variable_types = {}
 
 def add_tokens():
     with open('write_it.txt', 'r') as token_file:
@@ -172,7 +172,8 @@ def prg():
         match('program')
         token = tokens[0]
         match('id')
-        nodes.insert(0, GreenNode(token[1], 'pname'))
+
+        nodes.insert(0, GreenNode(token[1], 'pname'),)
         # print nodes
         match('(')
         idlist()
@@ -219,6 +220,7 @@ def prg__():
 
 
 def idlist():
+    line = tokens[0]
     token = peek_token()
     if token == 'id':
         token = tokens[0]
@@ -236,6 +238,7 @@ def idlist():
 
 
 def idlist_():
+    line = tokens[0]
     token = peek_token()
     if token == ')':
         pass
@@ -256,13 +259,16 @@ def idlist_():
 
 
 def declarations():
+    line = tokens[0]
     token = peek_token()
     if token == 'var':
         match('var')
         token = tokens[0]
         match('id')
         match(':')
-        type_()
+        the_type = type_()
+        variable_types.update({token[1]: the_type})
+
         if nodes:
             node = nodes[0]
             # node.right_sibling.right_sibling.right_sibling
@@ -271,7 +277,7 @@ def declarations():
             while node.right_sibling is not None:
                 node = node.right_sibling
             if node.right_sibling is None:
-                node.right_sibling = BlueNode(token[1], "pname")
+                node.right_sibling = BlueNode(token[1], the_type)
         match(';')
         declarations_()
     else:
@@ -283,6 +289,7 @@ def declarations():
 
 
 def declarations_():
+    line = tokens[0]
     token = peek_token()
     if token == 'begin':
         pass
@@ -293,13 +300,14 @@ def declarations_():
         token = tokens[0]
         match('id')
         match(':')
-        type_()
+        the_type = type_()
+        variable_types.update({token[1]: the_type})
         if nodes:
             node = nodes[0]
             while node.right_sibling is not None:
                 node = node.right_sibling
             if node.right_sibling is None:
-                node.right_sibling = BlueNode(token[1], "pname")
+                node.right_sibling = BlueNode(token[1], the_type)
         match(';')
         declarations_()
     else:
@@ -311,6 +319,7 @@ def declarations_():
 
 
 def type_():
+    line = tokens[0]
     token = peek_token()
     if token == 'array':
         match('array')
@@ -321,13 +330,22 @@ def type_():
         match(']')
         match('of')
         current_type = standtype()
-        return current_type
+        if current_type == "integer":
+            return "a-integer"
+        else:
+            return "a-real"
     elif token == 'integer':
         current_type = standtype()
-        return current_type
+        if current_type == 'a-integer':
+            return current_type
+        else:
+            return 'integer'
     elif token == 'real':
         current_type = standtype()
-        return current_type
+        if current_type == 'a-real':
+            return current_type
+        else:
+            return 'real'
 
     else:
         synch_set.append(';')
@@ -337,6 +355,7 @@ def type_():
 
 
 def standtype():
+    line = tokens[0]
     token = peek_token()
     if token == 'integer':
         match('integer')
@@ -352,6 +371,7 @@ def standtype():
 
 
 def subprgdeclarations():
+    line = tokens[0]
     token = peek_token()
     if token == 'function':
         subprgdeclaration()
@@ -364,6 +384,7 @@ def subprgdeclarations():
 
 
 def subprgdeclarations_():
+    line = tokens[0]
     token = peek_token()
     if token == 'begin':
         pass
@@ -378,10 +399,12 @@ def subprgdeclarations_():
 
 
 def subprgdeclaration():
+    line = tokens[0]
     token = peek_token()
     if token == 'function':
-        subprghead()
+        var_type = subprghead()
         subprgdeclaration_()
+        return var_type
     else:
         synch_set.append(';')
         handle_sync()
@@ -418,14 +441,18 @@ def subprgdeclaration__():
 
 
 def subprghead():
+    line = tokens[0]
     token = peek_token()
     if token == 'function':
         match('function')
-        token = tokens[0]
+        line = tokens[0]
         match('id')
-        nodes.insert(0, GreenNode(token[1], "pname"))
+
+        nodes.insert(0, GreenNode(line[1], "pname"))
         # print nodes
-        subprghead_()
+        var_type = subprghead_()
+        variable_types.update({line[1]: var_type})
+        return var_type
     else:
         # synch_set = ['function', 'begin', 'var']
         synch_set.append('function')
@@ -436,16 +463,19 @@ def subprghead():
 
 
 def subprghead_():
+    line = tokens[0]
     token = peek_token()
     if token == '(':
         arguments()
         match(':')
-        standtype()
+        var_type = standtype()
         match(';')
+        return var_type
     elif token == ':':
         match(':')
-        standtype()
+        var_type = standtype()
         match(';')
+        return var_type
     else:
         my_set = ['function', 'begin', 'var']
         for i in my_set:
@@ -467,16 +497,22 @@ def arguments():
 
 
 def paramlist():
+    line = tokens[0]
     token = peek_token()
     if token == 'id':
         token = tokens[0]
+        lexeme = token[1]
         match('id')
         match(':')
-        type_()
+        my_type = type_()
         # token = tokens[0]
+        variable_types.update({token[1]: my_type})
         if nodes:
-            first_item_in_stack = nodes[0]
-            first_item_in_stack.right_sibling = BlueNode(token[1], "fname")
+            node = nodes[0]
+            while node.right_sibling is not None:
+                node = node.right_sibling
+            if node.right_sibling is None:
+                node.right_sibling = BlueNode(token[1], my_type)
         paramlist_()
     else:
         synch_set.append(')')
@@ -493,10 +529,13 @@ def paramlist_():
         token = tokens[0]
         match('id')
         match(':')
-        type_()
+        my_type = type_()
         if nodes:
-            first_item_in_stack = nodes[0]
-            first_item_in_stack.right_sibling = BlueNode(token[1], "fname")
+            node = nodes[0]
+            while node.right_sibling is not None:
+                node = node.right_sibling
+            if node.right_sibling is None:
+                node.right_sibling = BlueNode(token[1], my_type)
         paramlist_()
     else:
         synch_set.append(')')
@@ -589,14 +628,22 @@ def statementlist_():
         syntax_error(token, ';', 'end')
 
 
+def assignop_error(v, e):
+    print "type error: You are trying to assign an " + str(v) + str(e)
+
+
 def statement():
+    line = tokens[0]
+    node = nodes[0]
     token = peek_token()
     if token == 'begin':
         compstate()
     elif token == 'id':
-        variable()
+        variable_type = variable()
         match('assignop')
-        expression()
+        var_type = expression()
+        if variable_type != var_type:
+            assignop_error(variable_type, var_type)
     elif token == 'if':
         match('if')
         expression()
@@ -622,7 +669,7 @@ def statement_():
         pass
     elif token == 'else':
         match('else')
-        statement_()
+        statement()
     elif token == 'end':
         pass
     else:
@@ -632,12 +679,39 @@ def statement_():
         # handle_sync()
         syntax_error(token, ';', 'else', 'end')
 
+def peek_stack():
+    return nodes[0]
+
+def semantic_error(lexem):
+    return "Semantic Error " + lexem + "does not exist in scope"
+
+
 
 def variable():
     token = peek_token()
+    line = tokens[0]
     if token == 'id':
+        line = tokens[0]
+        temp_type = ""
+        error = ""
+        variables = variable_types
+        # looking_at_node = peek_stack()
+        # while looking_at_node.right_sibling is not None:
+        #     looking_at_node = looking_at_node.right_sibling
+        #     if looking_at_node.data == line[1]:
+        #         temp_type = looking_at_node.w_type
+        #     else:
+        #         error = semantic_error(line[1])
+        # make sure is declare
+        if line[1] in variables:
+            temp_type = variables[line[1]]
         match('id')
-        variable_()
+
+        is_array = variable_()
+        if temp_type or is_array:
+            return temp_type
+        elif error:
+            return error
     else:
         synch_set.append('assignop')
         # handle_sync()
@@ -646,16 +720,19 @@ def variable():
 
 def variable_():
     token = peek_token()
+    line = tokens[0]
     if token == '[':
         match('[')
         expression()
         match(']')
+        return True
     elif token == 'assignop':
         pass
     else:
         synch_set.append('assignop')
         # handle_sync()
         syntax_error(token, '[', 'assignop')
+        return False
 
 
 def expresslist():
@@ -670,12 +747,18 @@ def expresslist():
         expression()
         expresslist_()
     elif token == 'id':
+        line = tokens[0]
+        node = peek_stack()
+        while node.right_sibling is not None:
+            node = node.right_sibling
+            if node.w_type == line[1]:
+                print "Hey"
         expression()
         expresslist_()
     elif token == 'not':
         expression()
         expresslist_()
-    elif token == 'num':
+    elif token == 'integer' or token == 'real':
         expression()
         expresslist_()
     else:
@@ -701,15 +784,18 @@ def expresslist_():
 
 def expression():
     token = peek_token()
+    line = tokens[0]
     if token == '(' or token == '+' or token == '-' or token == 'id' or token == 'not' or token == 'real' or token == 'integer':
-        simpexpression()
+        var_type = simpexpression()
         expression_()
+        return var_type
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else']
         for i in my_set:
             synch_set.append(i)
         # handle_sync()
         syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
+        return 0
 
 
 def expression_():
@@ -743,6 +829,7 @@ def expression_():
 
 def simpexpression():
     token = peek_token()
+    line = tokens[0]
     if token == '(':
         term()
         simpexpression_()
@@ -761,8 +848,9 @@ def simpexpression():
         term()
         simpexpression_()
     elif token == 'real' or token == 'integer':
-        term()
+        var_type = term()
         simpexpression_()
+        return var_type
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop']
         for i in my_set:
@@ -793,6 +881,8 @@ def simpexpression_():
         pass
     elif token == 'then':
         pass
+    elif token == 'else':
+        pass
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop']
         for i in my_set:
@@ -803,6 +893,7 @@ def simpexpression_():
 
 def term():
     token = peek_token()
+    line = tokens[0]
     if token == '(':
         factor()
         term_()
@@ -813,8 +904,9 @@ def term():
         factor()
         term_()
     elif token == 'integer' or token == 'real':
-        factor()
+        var_type = factor()
         term_()
+        return var_type
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop']
         for i in my_set:
@@ -825,6 +917,7 @@ def term():
 
 def term_():
     token = peek_token()
+    line = token[0]
     if token == ')':
         pass
     elif token == ',':
@@ -858,27 +951,50 @@ def term_():
 
 
 def factor():
+    line = tokens[0]
     token = peek_token()
-    if token == 'id':
+    node = nodes[0]
+    var_type = ""
+    if token == '(':
+        match('(')
+        expression()
+        match(')')
+    elif token == 'id':
+        while node.right_sibling is not None:
+            node = node.right_sibling
+            if node.data == line[1]:
+                var_type = node.w_type
         match('id')
-        factor_()
+        factor_(var_type)
     elif token == 'not':
         match('not')
         factor()
     elif token == 'integer' or token == 'real':
+        while node.right_sibling is not None:
+            node = node.right_sibling
+            if node.w_type == token:
+                var_type = node.w_type
+            else:
+                print "Type error: expecting " + node.w_type + " " + "but got " + token
         match('num')
+        return var_type
     else:
         synch_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop', 'mulop']
         handle_sync()
         syntax_error(token, 'id', 'not', 'num')
 
 
-def factor_():
+def factor_(var_type):
+    line = tokens[0]
     token = peek_token()
+    node = peek_stack()
     if token == '(':
+
         match('(')
         expresslist()
+
         match(')')
+        #return True
     elif token == ')':
         pass
     elif token == ',':
@@ -889,6 +1005,7 @@ def factor_():
         match('[')
         expression()
         match(']')
+        # return True
     elif token == ']':
         pass
     elif token == 'addop':
@@ -911,6 +1028,7 @@ def factor_():
             synch_set.append(i)
         # handle_sync()
         syntax_error(token, '(', ')', ',', ';', '[', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
+        return False
 
 
 def sign():
