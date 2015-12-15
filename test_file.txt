@@ -6,12 +6,12 @@ program prg1 ( input, output ) ;
     var b: real;
     function func1 (param:integer) :integer;
     begin
+        a:= a * b;
         param := 20;
         a := func1(1);
         if ( test1 > test2 ) then
             test1 :=2
-        else a := b + 2;
-        a:= a+b;
+        else a := b * 2;
         b:= a
      end;
     begin

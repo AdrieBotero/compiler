@@ -16,6 +16,7 @@ new_list_file = {}
 lex_analysis_listing_file = open('list_file', 'r')
 variable_types = {}
 
+
 def add_tokens():
     with open('write_it.txt', 'r') as token_file:
         next(token_file)
@@ -173,7 +174,7 @@ def prg():
         token = tokens[0]
         match('id')
 
-        nodes.insert(0, GreenNode(token[1], 'pname'),)
+        nodes.insert(0, GreenNode(token[1], 'pname'), )
         # print nodes
         match('(')
         idlist()
@@ -628,11 +629,12 @@ def statementlist_():
         syntax_error(token, ';', 'end')
 
 
-def assignop_error(v, e):
-    print "type error: You are trying to assign an " + str(v) + str(e)
+def assignop_error(line, v, e):
+    print "type error in line " + str(line) + ": You are trying to assign a " + str(v) + " with an " + str(e)
 
 
 def statement():
+    line_number = get_line_number()
     line = tokens[0]
     node = nodes[0]
     token = peek_token()
@@ -643,7 +645,7 @@ def statement():
         match('assignop')
         var_type = expression()
         if variable_type != var_type:
-            assignop_error(variable_type, var_type)
+            assignop_error(line_number, variable_type, var_type)
     elif token == 'if':
         match('if')
         expression()
@@ -679,12 +681,13 @@ def statement_():
         # handle_sync()
         syntax_error(token, ';', 'else', 'end')
 
+
 def peek_stack():
     return nodes[0]
 
+
 def semantic_error(lexem):
     return "Semantic Error " + lexem + "does not exist in scope"
-
 
 
 def variable():
@@ -832,7 +835,7 @@ def simpexpression():
     line = tokens[0]
     if token == '(':
         term()
-        simpexpression_()
+        simpexpression_(None)
     elif token == '+':
         sign()
         term()
@@ -840,16 +843,17 @@ def simpexpression():
     elif token == '-':
         sign()
         term()
-        simpexpression_()
+        simpexpression_(None)
     elif token == 'id':
-        term()
-        simpexpression_()
+        var_type = term()
+        simpexpression_(var_type)
+        return var_type
     elif token == 'not':
         term()
-        simpexpression_()
+        simpexpression_(None)
     elif token == 'real' or token == 'integer':
         var_type = term()
-        simpexpression_()
+        simpexpression_(var_type)
         return var_type
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop']
@@ -859,8 +863,15 @@ def simpexpression():
         syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
 
 
-def simpexpression_():
+def addop_error(line, v, e):
+    print "ADDOP ERROR in line " + line + " You can't add " \
+          + str(v) + " with a " + str(e)
+
+
+def simpexpression_(var_type):
+    line = tokens[0]
     token = peek_token()
+    line_number = get_line_number()
     if token == ')':
         pass
     elif token == ',':
@@ -871,8 +882,11 @@ def simpexpression_():
         pass
     elif token == 'addop':
         match('addop')
-        term()
-        simpexpression_()
+        test = term()
+        simpexpression_(var_type)
+        if var_type != test:
+            addop_error(line_number, test, var_type)
+
     elif token == 'do':
         pass
     elif token == 'end':
@@ -896,16 +910,17 @@ def term():
     line = tokens[0]
     if token == '(':
         factor()
-        term_()
+        term_(None)
     elif token == 'id':
-        factor()
-        term_()
+        var_type = factor()
+        term_(var_type)
+        return var_type
     elif token == 'not':
         factor()
-        term_()
+        term_(None)
     elif token == 'integer' or token == 'real':
         var_type = factor()
-        term_()
+        term_(None)
         return var_type
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop']
@@ -915,9 +930,10 @@ def term():
         syntax_error('(', 'id', 'not', 'num')
 
 
-def term_():
+def term_(var_type):
+    line_number = get_line_number()
     token = peek_token()
-    line = token[0]
+    line = tokens[0]
     if token == ')':
         pass
     elif token == ',':
@@ -936,8 +952,10 @@ def term_():
         pass
     elif token == 'mulop':
         match('mulop')
-        factor()
-        term_()
+        other_variable_type = factor()
+        term_(var_type)
+        if var_type != other_variable_type:
+            mulop_error(line_number, var_type, other_variable_type)
     elif token == 'relop':
         pass
     elif token == 'then':
@@ -949,23 +967,31 @@ def term_():
         # handle_sync()
         syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
 
+def mulop_error(line, v, v2):
+    print "Mulop Error: Line " + str(line) + " you can't Multiply or Divide a " + str(v) + " with a " + str(v2)
 
 def factor():
     line = tokens[0]
     token = peek_token()
     node = nodes[0]
+    checking = variable_types
     var_type = ""
+    line_number = get_line_number()
     if token == '(':
         match('(')
         expression()
         match(')')
     elif token == 'id':
         while node.right_sibling is not None:
-            node = node.right_sibling
             if node.data == line[1]:
                 var_type = node.w_type
+            node = node.right_sibling
+        if var_type != 'integer' or var_type != 'real':
+                if line[1] in variable_types:
+                    var_type = variable_types[line[1]]
         match('id')
         factor_(var_type)
+        return var_type
     elif token == 'not':
         match('not')
         factor()
@@ -975,7 +1001,7 @@ def factor():
             if node.w_type == token:
                 var_type = node.w_type
             else:
-                print "Type error: expecting " + node.w_type + " " + "but got " + token
+                print "Type error Line " + line_number + ": expecting " + node.w_type + " " + "but got " + token
         match('num')
         return var_type
     else:
@@ -994,7 +1020,7 @@ def factor_(var_type):
         expresslist()
 
         match(')')
-        #return True
+        # return True
     elif token == ')':
         pass
     elif token == ',':
