@@ -17,7 +17,9 @@ token = {
     6: ('CATCHALL', 'TERMINATE', ';'),
     7: ('CATCHALL', 'COMMA', ','),
     8: ('Unrecog Symbol', '99 LEXERR'),
-    9: ('CATCHALL', 'colon', ':')
+    9: ('CATCHALL', 'colon', ':'),
+    10: ('CATCHALL', 'OPEN-BRA', '['),
+    11: ('CATCHALL', 'CLOSE-BRA', ']')
 }
 
 
@@ -53,6 +55,12 @@ def catch_all_machine(line, pointer):
     elif current_char == ',':
         pointer += 1
         return True, pointer, token[7]
+    elif current_char == '[':
+        pointer += 1
+        return True, pointer, token[10]
+    elif current_char == ']':
+        pointer += 1
+        return True, pointer, token[11]
     else:
         pointer += 1
         temp_list = list(token[8])

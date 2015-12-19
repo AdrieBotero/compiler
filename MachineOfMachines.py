@@ -10,6 +10,7 @@ from StateMachines.addop_machine import addop
 from StateMachines.mulop_machine import mulop
 from StateMachines.catch_all import catch_all_machine
 
+
 error_list = {
     0: "NULL",
     1: "ID too long",
@@ -209,6 +210,7 @@ def machines_of_machines(file_to_analyze):
                         temp_list[0] = "99 LEXERR"
                         token = tuple(temp_list)
                         list_file.writelines("LEXERR: {0}: {1}\n".format(','.join(current_errors), current_word))
+
                     token_file.writelines(
                         table_template.format(line_number, token[1], token[0], ','.join(current_errors)))
                     fp = temp_fp
