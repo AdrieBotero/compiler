@@ -558,6 +558,7 @@ def compstate():
 
 
 def compstate_():
+    line = tokens[0]
     token = peek_token()
     if token == 'begin':
         optionalstate()
@@ -630,7 +631,7 @@ def statementlist_():
 
 
 def assignop_error(line, v, e):
-    print "type error in line " + str(line) + ": You are trying to assign a " + str(v) + " with an " + str(e)
+    print "Assignop Error in line " + str(line) + ": You are trying to assign a " + str(v) + " with an " + str(e)
 
 
 def statement():
@@ -790,7 +791,7 @@ def expression():
     line = tokens[0]
     if token == '(' or token == '+' or token == '-' or token == 'id' or token == 'not' or token == 'real' or token == 'integer':
         var_type = simpexpression()
-        expression_()
+        expression_(var_type)
         return var_type
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else']
@@ -800,8 +801,13 @@ def expression():
         syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
         return 0
 
+def relop_error(line, v, v2):
+    print "Relop Error: Line " + str(line) + " you can't compare a " + str(v) + " with " + str(v2)
 
-def expression_():
+def expression_(var_type):
+    line_number = get_line_number()
+    test = var_type
+    line = tokens[0]
     token = peek_token()
     if token == ')':
         pass
@@ -819,7 +825,9 @@ def expression_():
         pass
     elif token == 'relop':
         match('relop')
-        simpexpression()
+        variable_type = simpexpression()
+        if var_type != variable_type:
+            relop_error(line_number, var_type, variable_type)
     elif token == 'then':
         pass
     else:
@@ -996,13 +1004,15 @@ def factor():
         match('not')
         factor()
     elif token == 'integer' or token == 'real':
-        while node.right_sibling is not None:
-            node = node.right_sibling
-            if node.w_type == token:
-                var_type = node.w_type
-            else:
-                print "Type error Line " + line_number + ": expecting " + node.w_type + " " + "but got " + token
+        # while node.right_sibling is not None:
+        #     # node = node.right_sibling
+        #     if node.w_type == token:
+        #         var_type = node.w_type
+        #     else:
+        #         print "Type error Line " + line_number + ": expecting " + node.w_type + " " + "but got " + token
+        #     node = node.right_sibling
         match('num')
+        var_type = token
         return var_type
     else:
         synch_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop', 'mulop']
