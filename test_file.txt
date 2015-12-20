@@ -8,6 +8,7 @@ program test (input, output);
                   q: real) : integer;
     var d: integer;
     begin
+      a:= 2;
       z[a] := 4;
       c[2] := 3;
       fun1 := c[1]

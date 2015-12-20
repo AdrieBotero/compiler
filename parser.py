@@ -173,8 +173,9 @@ def prg():
         match('program')
         token = tokens[0]
         match('id')
-
-        nodes.insert(0, GreenNode(token[1], 'pname'), )
+        green_node = GreenNode(token[1], 'pname')
+        green_node.previous_node = "root"
+        nodes.insert(0, green_node)
         # print nodes
         match('(')
         idlist()
@@ -445,12 +446,15 @@ def subprghead():
     line = tokens[0]
     token = peek_token()
     if token == 'function':
+
         match('function')
         line = tokens[0]
         match('id')
-
-        nodes.insert(0, GreenNode(line[1], "pname"))
-        # print nodes
+        test = nodes
+        node = nodes[0]
+        green_node = GreenNode(line[1], "pname")
+        node.left_child = green_node
+        nodes.insert(0, node.left_child)
         var_type = subprghead_()
         variable_types.update({line[1]: var_type})
         return var_type
@@ -486,6 +490,7 @@ def subprghead_():
 
 
 def arguments():
+    line = tokens[0]
     token = peek_token()
     if token == '(':
         match('(')
@@ -531,6 +536,7 @@ def paramlist_():
         match('id')
         match(':')
         my_type = type_()
+        variable_types.update({token[1]: my_type})
         if nodes:
             node = nodes[0]
             while node.right_sibling is not None:
@@ -645,6 +651,14 @@ def statement():
         variable_type = variable()
         match('assignop')
         var_type = expression()
+        if variable_type == 'a-integer':
+            variable_type = 'integer'
+        elif variable_type == 'a-real':
+            variable_type = 'real'
+        if var_type == 'a-integer':
+            var_type = 'integer'
+        elif var_type == 'a-real':
+            var_type = 'real'
         if variable_type != var_type:
             assignop_error(line_number, variable_type, var_type)
     elif token == 'if':
@@ -740,6 +754,7 @@ def variable_():
 
 
 def expresslist():
+    line = tokens[0]
     token = peek_token()
     if token == '(':
         expression()
@@ -826,6 +841,10 @@ def expression_(var_type):
     elif token == 'relop':
         match('relop')
         variable_type = simpexpression()
+        if variable_type == 'a-integer':
+            variable_type = 'integer'
+        elif variable_type == 'a-real':
+            variable_type = 'real'
         if var_type != variable_type:
             relop_error(line_number, var_type, variable_type)
     elif token == 'then':
@@ -842,8 +861,9 @@ def simpexpression():
     token = peek_token()
     line = tokens[0]
     if token == '(':
-        term()
-        simpexpression_(None)
+        var_type = term()
+        simpexpression_(var_type)
+        return var_type
     elif token == '+':
         sign()
         term()
@@ -857,8 +877,9 @@ def simpexpression():
         simpexpression_(var_type)
         return var_type
     elif token == 'not':
-        term()
-        simpexpression_(None)
+        var_type = term()
+        simpexpression_(var_type)
+        return var_type
     elif token == 'real' or token == 'integer':
         var_type = term()
         simpexpression_(var_type)
@@ -917,18 +938,20 @@ def term():
     token = peek_token()
     line = tokens[0]
     if token == '(':
-        factor()
-        term_(None)
+        var_type = factor()
+        term_(var_type)
+        return var_type
     elif token == 'id':
         var_type = factor()
         term_(var_type)
         return var_type
     elif token == 'not':
-        factor()
-        term_(None)
+        var_type = factor()
+        term_(var_type)
+        return var_type
     elif token == 'integer' or token == 'real':
         var_type = factor()
-        term_(None)
+        term_(var_type)
         return var_type
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop']
@@ -987,8 +1010,9 @@ def factor():
     line_number = get_line_number()
     if token == '(':
         match('(')
-        expression()
+        var_type = expression()
         match(')')
+        return var_type
     elif token == 'id':
         while node.right_sibling is not None:
             if node.data == line[1]:
@@ -1002,7 +1026,8 @@ def factor():
         return var_type
     elif token == 'not':
         match('not')
-        factor()
+        var_type = factor()
+        return var_type
     elif token == 'integer' or token == 'real':
         # while node.right_sibling is not None:
         #     # node = node.right_sibling
