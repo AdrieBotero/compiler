@@ -228,8 +228,6 @@ def idlist():
         token = tokens[0]
         match('id')
         green_node = nodes[0]
-        while green_node.right_sibling is not None:
-            green_node = green_node.right_sibling
         if green_node.right_sibling is None:
             green_node.right_sibling = BlueNode(token[1], "pname")
         idlist_()
@@ -270,16 +268,14 @@ def declarations():
         match(':')
         the_type = type_()
         variable_types.update({token[1]: the_type})
-
+        checking = nodes
         if nodes:
-            node = nodes[0]
-            # node.right_sibling.right_sibling.right_sibling
-            # if nodes.right_sibling is not None:
-            # blue_node = BlueNode(token[1], "pname")
-            while node.right_sibling is not None:
-                node = node.right_sibling
-            if node.right_sibling is None:
-                node.right_sibling = BlueNode(token[1], the_type)
+            green_node = nodes[0]
+            while green_node.right_sibling is not None:
+                green_node = green_node.right_sibling
+            if green_node.right_sibling is None:
+                green_node.right_sibling = BlueNode(token[1], the_type)
+        checking = nodes
         match(';')
         declarations_()
     else:
@@ -304,12 +300,14 @@ def declarations_():
         match(':')
         the_type = type_()
         variable_types.update({token[1]: the_type})
+        current_nodes = nodes
         if nodes:
             node = nodes[0]
             while node.right_sibling is not None:
                 node = node.right_sibling
             if node.right_sibling is None:
                 node.right_sibling = BlueNode(token[1], the_type)
+            testing = nodes
         match(';')
         declarations_()
     else:
@@ -446,16 +444,17 @@ def subprghead():
     line = tokens[0]
     token = peek_token()
     if token == 'function':
-
         match('function')
         line = tokens[0]
         match('id')
+        # var_type = subprghead_()
         test = nodes
         node = nodes[0]
-        green_node = GreenNode(line[1], "pname")
+        green_node = GreenNode(line[1], "temptype")
         node.left_child = green_node
-        nodes.insert(0, node.left_child)
+        nodes.insert(0, green_node)
         var_type = subprghead_()
+        green_node.return_type = var_type
         variable_types.update({line[1]: var_type})
         return var_type
     else:
@@ -513,6 +512,7 @@ def paramlist():
         my_type = type_()
         # token = tokens[0]
         variable_types.update({token[1]: my_type})
+        check_nodes = nodes
         if nodes:
             node = nodes[0]
             while node.right_sibling is not None:
