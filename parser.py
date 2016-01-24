@@ -15,7 +15,8 @@ new_list_file = {}
 # list_file = open('list_file', 'w')
 lex_analysis_listing_file = open('list_file', 'r')
 variable_types = {}
-
+bo_flag = ''
+bool_flag = []
 
 def add_tokens():
     with open('write_it.txt', 'r') as token_file:
@@ -115,10 +116,10 @@ def match(expect_token):
 def parse():
     add_tokens()
     prg()
-    green_node_one = nodes[0]
-    node = green_node_one.right_sibling
-    green_node_two = nodes[1]
-    node_2 = green_node_two.right_sibling
+    # green_node_one = nodes[0]
+    # node = green_node_one.right_sibling
+    # green_node_two = nodes[1]
+    # node_2 = green_node_two.right_sibling
     # for item in nodes:
     #     while item is not None:
     #         print item
@@ -230,6 +231,7 @@ def idlist():
         green_node = nodes[0]
         if green_node.right_sibling is None:
             green_node.right_sibling = BlueNode(token[1], "pname")
+            nodes.insert(0, green_node.right_sibling)
         idlist_()
     else:
         synch_set.append(')')
@@ -251,6 +253,7 @@ def idlist_():
             green_node = green_node.right_sibling
         if green_node.right_sibling is None:
             green_node.right_sibling = BlueNode(token[1], "pname")
+            nodes.insert(0, green_node.right_sibling)
         idlist_()
     else:
         synch_set.append(')')
@@ -275,6 +278,7 @@ def declarations():
                 green_node = green_node.right_sibling
             if green_node.right_sibling is None:
                 green_node.right_sibling = BlueNode(token[1], the_type)
+                nodes.insert(0, green_node.right_sibling)
         checking = nodes
         match(';')
         declarations_()
@@ -307,6 +311,7 @@ def declarations_():
                 node = node.right_sibling
             if node.right_sibling is None:
                 node.right_sibling = BlueNode(token[1], the_type)
+                nodes.insert(0, node.right_sibling)
             testing = nodes
         match(';')
         declarations_()
@@ -450,7 +455,9 @@ def subprghead():
         # var_type = subprghead_()
         test = nodes
         node = nodes[0]
+
         green_node = GreenNode(line[1], "temptype")
+
         node.left_child = green_node
         nodes.insert(0, green_node)
         var_type = subprghead_()
@@ -519,6 +526,7 @@ def paramlist():
                 node = node.right_sibling
             if node.right_sibling is None:
                 node.right_sibling = BlueNode(token[1], my_type)
+                nodes.insert(0, node.right_sibling)
         paramlist_()
     else:
         synch_set.append(')')
@@ -543,6 +551,7 @@ def paramlist_():
                 node = node.right_sibling
             if node.right_sibling is None:
                 node.right_sibling = BlueNode(token[1], my_type)
+                nodes.insert(0, node.right_sibling)
         paramlist_()
     else:
         synch_set.append(')')
@@ -551,6 +560,8 @@ def paramlist_():
 
 
 def compstate():
+    linenumber = get_line_number()
+    my_stack = nodes
     token = peek_token()
     if token == 'begin':
         match('begin')
@@ -563,23 +574,67 @@ def compstate():
         syntax_error(token, 'begin')
 
 
+def check_scope(token, line_number):
+    stack = nodes
+    in_stack = any(i.data == token for i in stack)
+    if not in_stack:
+        print "Scope Error: Out of scope Line number " + line_number + " for " + token
+
+
 def compstate_():
+    line_number = get_line_number()
     line = tokens[0]
     token = peek_token()
+    testing_node = nodes
     if token == 'begin':
         optionalstate()
+        my_node = nodes
         match('end')
+        if nodes[0].__class__.__name__ is 'GreenNode':
+            # pop till next green node
+            nodes.pop(0)
+            while nodes[0].__class__.__name__ is 'BlueNode':
+                nodes.pop(0)
+        if nodes[0].__class__.__name__ is 'BlueNode':
+            while nodes[0].__class__.__name__ is 'BlueNode':
+                nodes.pop(0)
+        check = nodes
     elif token == 'end':
+        my_node = nodes
         match('end')
+        if nodes[0].__class__.__name__ is 'GreenNode':
+            # pop till next green node
+            nodes.pop(0)
+            while nodes[0].__class__.__name__ is 'BlueNode':
+                nodes.pop(0)
+        if nodes[0].__class__.__name__ is 'BlueNode':
+            while nodes[0].__class__.__name__ is 'BlueNode':
+                nodes.pop(0)
+        check = nodes
     elif token == 'id':
+        check_scope(line[1], line_number)
+        my_node = nodes
         optionalstate()
         match('end')
+        if nodes[0].__class__.__name__ is 'GreenNode':
+            if nodes[1].__class__.__name__ is not 'GreenNode':
+                # pop till next green node
+                nodes.pop(0)
+                while nodes[0].__class__.__name__ is 'BlueNode':
+                    nodes.pop(0)
+        if nodes[0].__class__.__name__ is 'BlueNode':
+            while nodes[0].__class__.__name__ is 'BlueNode':
+                nodes.pop(0)
+        check = nodes
     elif token == 'if':
         optionalstate()
+        my_node = nodes
         match('end')
     elif token == 'while':
         optionalstate()
+        my_node = nodes
         match('end')
+
     else:
         my_set = [';', 'end', '.', 'else']
         for i in my_set:
@@ -616,10 +671,13 @@ def statementlist():
     elif token == 'if':
         statement()
         statementlist_()
+    elif token == 'while':
+        statement()
+        statementlist_()
     else:
         synch_set.append('end')
         # handle_sync()
-        syntax_error(token, 'begin', 'id', 'if')
+        syntax_error(token, 'begin', 'id', 'if', 'while')
 
 
 def statementlist_():
@@ -661,15 +719,18 @@ def statement():
             var_type = 'real'
         if variable_type != var_type:
             assignop_error(line_number, variable_type, var_type)
+            bool_flag.append('false')
+        else:
+            bool_flag.append('true')
     elif token == 'if':
         match('if')
-        expression()
+        var_type = expression()
         match('then')
         statement()
         statement_()
     elif token == 'while':
         match('while')
-        expression()
+        var_type = expression()
         match('do')
         statement()
     else:
@@ -708,6 +769,7 @@ def semantic_error(lexem):
 def variable():
     token = peek_token()
     line = tokens[0]
+    stack = nodes
     if token == 'id':
         line = tokens[0]
         temp_type = ""
@@ -721,8 +783,16 @@ def variable():
         #     else:
         #         error = semantic_error(line[1])
         # make sure is declare
-        if line[1] in variables:
-            temp_type = variables[line[1]]
+        for node in nodes:
+            if node.data == line[1]:
+                if node.w_type == 'temptype':
+                    temp_type = node.return_type
+                    break
+                else:
+                    temp_type = node.w_type
+                    break
+        # if line[1] in variables:
+        #     temp_type = variables[line[1]]
         match('id')
 
         is_array = variable_()
@@ -847,6 +917,9 @@ def expression_(var_type):
             variable_type = 'real'
         if var_type != variable_type:
             relop_error(line_number, var_type, variable_type)
+            bool_flag.append('false')
+        else:
+            bool_flag.append('true')
     elif token == 'then':
         pass
     else:
@@ -860,18 +933,21 @@ def expression_(var_type):
 def simpexpression():
     token = peek_token()
     line = tokens[0]
+    stack = nodes
     if token == '(':
         var_type = term()
         simpexpression_(var_type)
         return var_type
     elif token == '+':
         sign()
-        term()
-        simpexpression_()
+        var_type = term()
+        simpexpression_(var_type)
+        return var_type
     elif token == '-':
         sign()
-        term()
-        simpexpression_(None)
+        var_type = term()
+        simpexpression_(var_type)
+        return var_type
     elif token == 'id':
         var_type = term()
         simpexpression_(var_type)
@@ -899,6 +975,7 @@ def addop_error(line, v, e):
 
 def simpexpression_(var_type):
     line = tokens[0]
+    stack = nodes
     token = peek_token()
     line_number = get_line_number()
     if token == ')':
@@ -913,6 +990,11 @@ def simpexpression_(var_type):
         match('addop')
         test = term()
         simpexpression_(var_type)
+        testing = bool_flag
+        if var_type == 'a-integer':
+            var_type = 'integer'
+        if var_type == 'a-real':
+            var_type = 'real'
         if var_type != test:
             addop_error(line_number, test, var_type)
 
@@ -984,9 +1066,17 @@ def term_(var_type):
     elif token == 'mulop':
         match('mulop')
         other_variable_type = factor()
+        testing = bool_flag
         term_(var_type)
-        if var_type != other_variable_type:
+        result1 = bool_flag[0]
+        result2 = bool_flag[1]
+        if var_type != other_variable_type and result1 != result2:
             mulop_error(line_number, var_type, other_variable_type)
+        if len(bool_flag) % 2 == 0:
+            bool_flag.pop(0)
+            bool_flag.pop(1)
+        else:
+            bool_flag.pop(0)
     elif token == 'relop':
         pass
     elif token == 'then':
@@ -1004,7 +1094,8 @@ def mulop_error(line, v, v2):
 def factor():
     line = tokens[0]
     token = peek_token()
-    node = nodes[0]
+    # node = nodes[0]
+    stack = nodes
     checking = variable_types
     var_type = ""
     line_number = get_line_number()
@@ -1014,13 +1105,25 @@ def factor():
         match(')')
         return var_type
     elif token == 'id':
-        while node.right_sibling is not None:
+        check_scope(line[1], line_number)
+        # fix this. next time. fix how is checking type
+        for node in nodes:
             if node.data == line[1]:
-                var_type = node.w_type
-            node = node.right_sibling
-        if var_type != 'integer' or var_type != 'real':
-                if line[1] in variable_types:
-                    var_type = variable_types[line[1]]
+                if node.w_type == 'temptype':
+                    var_type = node.return_type
+                    break
+                else:
+                    var_type = node.w_type
+                    break
+        # while node is not None:
+        #     wtf = node.data
+        #     v = line[1]
+        #     if node.data == line[1]:
+        #         var_type = node.w_type
+        #     node = node.right_sibling
+        # if var_type != 'integer' or var_type != 'real':
+        #         if line[1] in variable_types:
+        #             var_type = variable_types[line[1]]
         match('id')
         factor_(var_type)
         return var_type
@@ -1029,13 +1132,6 @@ def factor():
         var_type = factor()
         return var_type
     elif token == 'integer' or token == 'real':
-        # while node.right_sibling is not None:
-        #     # node = node.right_sibling
-        #     if node.w_type == token:
-        #         var_type = node.w_type
-        #     else:
-        #         print "Type error Line " + line_number + ": expecting " + node.w_type + " " + "but got " + token
-        #     node = node.right_sibling
         match('num')
         var_type = token
         return var_type
