@@ -26,9 +26,10 @@ def add_tokens():
     # for item in tokens:
     #     print item
     last_line = 0
+    checking = new_list_file
     for line in lex_analysis_listing_file:
         if line[0].isdigit():
-            new_list_file[line.split('\t')[0]] = [line]
+            new_list_file[int(line.split('\t')[0])] = [line]
             last_line = int(line.split('\t')[0])
         else:
             new_list_file[str(last_line)].append(line)
@@ -995,8 +996,9 @@ def simpexpression_(var_type):
             var_type = 'integer'
         if var_type == 'a-real':
             var_type = 'real'
-        if var_type != test:
-            addop_error(line_number, test, var_type)
+        if var_type is not None and test is not None:
+            if var_type != test:
+                addop_error(line_number, test, var_type)
 
     elif token == 'do':
         pass
@@ -1103,7 +1105,7 @@ def factor():
         match('(')
         var_type = expression()
         match(')')
-        return var_type
+        # return var_type
     elif token == 'id':
         check_scope(line[1], line_number)
         # fix this. next time. fix how is checking type

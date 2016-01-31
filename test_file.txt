@@ -18,4 +18,3 @@ begin
   b:= fun2(c[4], c[5]);
   if (b > 4.2) then a := c[a]
 end.
-
