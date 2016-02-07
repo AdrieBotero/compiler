@@ -18,6 +18,7 @@ variable_types = {}
 bo_flag = ''
 bool_flag = []
 
+
 def add_tokens():
     with open('write_it.txt', 'r') as token_file:
         next(token_file)
@@ -141,7 +142,7 @@ def syntax_error(given_token, *expected):
     line_number = get_line_number()
     error = "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
     # syntax_er.append(error)
-    new_list_file[line_number].append(error)
+    new_list_file[int(line_number)].append(error)
     # print new_list_file
     print "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
 
@@ -580,6 +581,8 @@ def check_scope(token, line_number):
     in_stack = any(i.data == token for i in stack)
     if not in_stack:
         print "Scope Error: Out of scope Line number " + line_number + " for " + token
+        error = "Scope Error: Out of scope Line number " + line_number + " for " + token
+        new_list_file[int(line_number)].append(error)
 
 
 def compstate_():
@@ -697,6 +700,8 @@ def statementlist_():
 
 def assignop_error(line, v, e):
     print "Assignop Error in line " + str(line) + ": You are trying to assign a " + str(v) + " with an " + str(e)
+    error = "Assignop Error in line " + str(line) + ": You are trying to assign a " + str(v) + " with an " + str(e)
+    new_list_file[int(line)].append(error)
 
 
 def statement():
@@ -887,8 +892,12 @@ def expression():
         syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
         return 0
 
+
 def relop_error(line, v, v2):
     print "Relop Error: Line " + str(line) + " you can't compare a " + str(v) + " with " + str(v2)
+    error = "Relop Error: Line " + str(line) + " you can't compare a " + str(v) + " with " + str(v2)
+    new_list_file[int(line)].append(error)
+
 
 def expression_(var_type):
     line_number = get_line_number()
@@ -972,6 +981,9 @@ def simpexpression():
 def addop_error(line, v, e):
     print "ADDOP ERROR in line " + line + " You can't add " \
           + str(v) + " with a " + str(e)
+    error = "ADDOP ERROR in line " + line + " You can't add " \
+            + str(v) + " with a " + str(e)
+    new_list_file[int(line)].append(error)
 
 
 def simpexpression_(var_type):
@@ -1090,8 +1102,11 @@ def term_(var_type):
         # handle_sync()
         syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
 
+
 def mulop_error(line, v, v2):
     print "Mulop Error: Line " + str(line) + " you can't Multiply or Divide a " + str(v) + " with a " + str(v2)
+    error = "Mulop Error: Line " + str(line) + " you can't Multiply or Divide a " + str(v) + " with a " + str(v2)
+    new_list_file[int(line)].append(error)
 
 def factor():
     line = tokens[0]
