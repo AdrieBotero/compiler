@@ -1120,7 +1120,7 @@ def factor():
         match('(')
         var_type = expression()
         match(')')
-        # return var_type
+        return var_type
     elif token == 'id':
         check_scope(line[1], line_number)
         # fix this. next time. fix how is checking type

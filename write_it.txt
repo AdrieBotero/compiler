@@ -1,24 +1,24 @@
 Line No.|Lexeme          |Token-Type      |Attribute
        1|program         |14 REV          |0 NULL 
-       1|test            |10 ID           |0x1010f5ba0
+       1|test            |10 ID           |0x108da2f60
        1|(               |OPEN-PAR        |CATCHALL
-       1|input           |10 ID           |0x1010f5c00
+       1|input           |10 ID           |0x108f6a030
        1|,               |COMMA           |CATCHALL
-       1|output          |10 ID           |0x1010f5c60
+       1|output          |10 ID           |0x108f6a090
        1|)               |CLOSE-PAR       |CATCHALL
        1|;               |TERMINATE       |CATCHALL
        2|var             |14 REV          |0 NULL 
-       2|a               |10 ID           |0x101004530
+       2|a               |10 ID           |0x108cbb558
        2|:               |colon           |CATCHALL
        2|integer         |14 REV          |0 NULL 
        2|;               |TERMINATE       |CATCHALL
-       3|var             |14 REV          |0x1010ed4b8
-       3|b               |10 ID           |0x101004558
+       3|var             |14 REV          |0x108f68328
+       3|b               |10 ID           |0x108cbb580
        3|:               |colon           |CATCHALL
        3|real            |14 REV          |0 NULL 
        3|;               |TERMINATE       |CATCHALL
-       4|var             |14 REV          |0x1010ed4b8
-       4|c               |10 ID           |0x101004b98
+       4|var             |14 REV          |0x108f68328
+       4|c               |10 ID           |0x108cbbbc0
        4|:               |colon           |CATCHALL
        4|array           |14 REV          |0 NULL 
        4|[               |OPEN-BRA        |CATCHALL
@@ -27,232 +27,232 @@ Line No.|Lexeme          |Token-Type      |Attribute
        4|2               |11 INT          |0 NULL 
        4|]               |CLOSE-BRA       |CATCHALL
        4|of              |14 REV          |0 NULL 
-       4|integer         |14 REV          |0x1010f5d20
+       4|integer         |14 REV          |0x108f6a150
        4|;               |TERMINATE       |CATCHALL
        6|function        |14 REV          |0 NULL 
-       6|fun1            |10 ID           |0x1010f5ed0
+       6|fun1            |10 ID           |0x108f6a360
        6|(               |OPEN-PAR        |CATCHALL
-       6|x               |10 ID           |0x100f99d00
+       6|x               |10 ID           |0x108c50d00
        6|:               |colon           |CATCHALL
-       6|integer         |14 REV          |0x1010f5d20
+       6|integer         |14 REV          |0x108f6a150
        6|;               |TERMINATE       |CATCHALL
-       6|y               |10 ID           |0x1010a33f0
+       6|y               |10 ID           |0x108d5b418
        6|:               |colon           |CATCHALL
-       6|real            |14 REV          |0x1010f5d80
+       6|real            |14 REV          |0x108f6a1b0
        6|;               |TERMINATE       |CATCHALL
-       7|z               |10 ID           |0x1010a3c88
+       7|z               |10 ID           |0x108d5bcb0
        7|:               |colon           |CATCHALL
-       7|array           |14 REV          |0x1010f5e10
+       7|array           |14 REV          |0x108f6a2a0
        7|[               |OPEN-BRA        |CATCHALL
        7|1               |11 INT          |0 NULL 
        7|..              |D-DOT           |CATCHALL
        7|2               |11 INT          |0 NULL 
        7|]               |CLOSE-BRA       |CATCHALL
-       7|of              |14 REV          |0x1010ed4e0
-       7|integer         |14 REV          |0x1010f5d20
+       7|of              |14 REV          |0x108f68350
+       7|integer         |14 REV          |0x108f6a150
        7|;               |TERMINATE       |CATCHALL
-       8|q               |10 ID           |0x100f99a08
+       8|q               |10 ID           |0x108c50a08
        8|:               |colon           |CATCHALL
-       8|real            |14 REV          |0x1010f5d80
+       8|real            |14 REV          |0x108f6a1b0
        8|)               |CLOSE-PAR       |CATCHALL
        8|:               |colon           |CATCHALL
-       8|integer         |14 REV          |0x1010f5d20
+       8|integer         |14 REV          |0x108f6a150
        8|;               |TERMINATE       |CATCHALL
-       9|var             |14 REV          |0x1010ed4b8
-       9|d               |10 ID           |0x100f996c0
+       9|var             |14 REV          |0x108f68328
+       9|d               |10 ID           |0x108c506c0
        9|:               |colon           |CATCHALL
-       9|integer         |14 REV          |0x1010f5d20
+       9|integer         |14 REV          |0x108f6a150
        9|;               |TERMINATE       |CATCHALL
       10|begin           |14 REV          |0 NULL 
-      11|a               |10 ID           |0x101004530
+      11|a               |10 ID           |0x108cbb558
       11|:=              |SINGOP          |CATHCALL
       11|2               |11 INT          |0 NULL 
       11|;               |TERMINATE       |CATCHALL
-      12|z               |10 ID           |0x1010a3c88
+      12|z               |10 ID           |0x108d5bcb0
       12|[               |OPEN-BRA        |CATCHALL
-      12|a               |10 ID           |0x101004530
+      12|a               |10 ID           |0x108cbb558
       12|]               |CLOSE-BRA       |CATCHALL
       12|:=              |SINGOP          |CATHCALL
       12|4               |11 INT          |0 NULL 
       12|;               |TERMINATE       |CATCHALL
-      13|c               |10 ID           |0x101004b98
+      13|c               |10 ID           |0x108cbbbc0
       13|[               |OPEN-BRA        |CATCHALL
       13|2               |11 INT          |0 NULL 
       13|]               |CLOSE-BRA       |CATCHALL
       13|:=              |SINGOP          |CATHCALL
       13|3               |11 INT          |0 NULL 
       13|;               |TERMINATE       |CATCHALL
-      14|fun1            |10 ID           |0x1010f5ed0
+      14|fun1            |10 ID           |0x108f6a360
       14|:=              |SINGOP          |CATHCALL
-      14|c               |10 ID           |0x101004b98
+      14|c               |10 ID           |0x108cbbbc0
       14|[               |OPEN-BRA        |CATCHALL
       14|1               |11 INT          |0 NULL 
       14|]               |CLOSE-BRA       |CATCHALL
       15|end             |14 REV          |0 NULL 
       15|;               |TERMINATE       |CATCHALL
-      17|function        |14 REV          |0x1010f5ea0
-      17|fun2            |10 ID           |0x101100180
+      17|function        |14 REV          |0x108f6a330
+      17|fun2            |10 ID           |0x108f6a630
       17|(               |OPEN-PAR        |CATCHALL
-      17|x               |10 ID           |0x100f99d00
+      17|x               |10 ID           |0x108c50d00
       17|:               |colon           |CATCHALL
-      17|integer         |14 REV          |0x1010f5d20
+      17|integer         |14 REV          |0x108f6a150
       17|;               |TERMINATE       |CATCHALL
-      17|y               |10 ID           |0x1010a33f0
+      17|y               |10 ID           |0x108d5b418
       17|:               |colon           |CATCHALL
-      17|integer         |14 REV          |0x1010f5d20
+      17|integer         |14 REV          |0x108f6a150
       17|)               |CLOSE-PAR       |CATCHALL
       17|:               |colon           |CATCHALL
-      17|real            |14 REV          |0x1010f5d80
+      17|real            |14 REV          |0x108f6a1b0
       17|;               |TERMINATE       |CATCHALL
-      18|var             |14 REV          |0x1010ed4b8
-      18|e               |10 ID           |0x100f99c60
+      18|var             |14 REV          |0x108f68328
+      18|e               |10 ID           |0x108c50c60
       18|:               |colon           |CATCHALL
-      18|real            |14 REV          |0x1010f5d80
+      18|real            |14 REV          |0x108f6a1b0
       18|;               |TERMINATE       |CATCHALL
-      20|function        |14 REV          |0x1010f5ea0
-      20|fun3            |10 ID           |0x1011001b0
+      20|function        |14 REV          |0x108f6a330
+      20|fun3            |10 ID           |0x108f6a660
       20|(               |OPEN-PAR        |CATCHALL
-      20|n               |10 ID           |0x100f99788
+      20|n               |10 ID           |0x108c50788
       20|:               |colon           |CATCHALL
-      20|integer         |14 REV          |0x1010f5d20
+      20|integer         |14 REV          |0x108f6a150
       20|;               |TERMINATE       |CATCHALL
-      20|z               |10 ID           |0x1010a3c88
+      20|z               |10 ID           |0x108d5bcb0
       20|:               |colon           |CATCHALL
-      20|real            |14 REV          |0x1010f5d80
+      20|real            |14 REV          |0x108f6a1b0
       20|)               |CLOSE-PAR       |CATCHALL
       20|:               |colon           |CATCHALL
-      20|integer         |14 REV          |0x1010f5d20
+      20|integer         |14 REV          |0x108f6a150
       20|;               |TERMINATE       |CATCHALL
-      21|var             |14 REV          |0x1010ed4b8
-      21|e               |10 ID           |0x100f99c60
+      21|var             |14 REV          |0x108f68328
+      21|e               |10 ID           |0x108c50c60
       21|:               |colon           |CATCHALL
-      21|integer         |14 REV          |0x1010f5d20
+      21|integer         |14 REV          |0x108f6a150
       21|;               |TERMINATE       |CATCHALL
-      22|begin           |14 REV          |0x101100090
-      23|a               |10 ID           |0x101004530
+      22|begin           |14 REV          |0x108f6a480
+      23|a               |10 ID           |0x108cbb558
       23|:=              |SINGOP          |CATHCALL
-      23|e               |10 ID           |0x100f99c60
+      23|e               |10 ID           |0x108c50c60
       23|;               |TERMINATE       |CATCHALL
-      24|e               |10 ID           |0x100f99c60
+      24|e               |10 ID           |0x108c50c60
       24|:=              |SINGOP          |CATHCALL
-      24|c               |10 ID           |0x101004b98
+      24|c               |10 ID           |0x108cbbbc0
       24|[               |OPEN-BRA        |CATCHALL
-      24|e               |10 ID           |0x100f99c60
+      24|e               |10 ID           |0x108c50c60
       24|]               |CLOSE-BRA       |CATCHALL
       24|;               |TERMINATE       |CATCHALL
-      25|fun3            |10 ID           |0x1011001b0
+      25|fun3            |10 ID           |0x108f6a660
       25|:=              |SINGOP          |CATHCALL
       25|3               |11 INT          |0 NULL 
-      26|end             |14 REV          |0x1010ed508
+      26|end             |14 REV          |0x108f68378
       26|;               |TERMINATE       |CATCHALL
-      28|begin           |14 REV          |0x101100090
-      29|a               |10 ID           |0x101004530
+      28|begin           |14 REV          |0x108f6a480
+      29|a               |10 ID           |0x108cbb558
       29|:=              |SINGOP          |CATHCALL
-      29|fun1            |10 ID           |0x1010f5ed0
+      29|fun1            |10 ID           |0x108f6a360
       29|(               |OPEN-PAR        |CATCHALL
-      29|x               |10 ID           |0x100f99d00
+      29|x               |10 ID           |0x108c50d00
       29|,               |COMMA           |CATCHALL
-      29|e               |10 ID           |0x100f99c60
+      29|e               |10 ID           |0x108c50c60
       29|,               |COMMA           |CATCHALL
-      29|c               |10 ID           |0x101004b98
+      29|c               |10 ID           |0x108cbbbc0
       29|,               |COMMA           |CATCHALL
-      29|b               |10 ID           |0x101004558
+      29|b               |10 ID           |0x108cbb580
       29|)               |CLOSE-PAR       |CATCHALL
       29|;               |TERMINATE       |CATCHALL
-      30|x               |10 ID           |0x100f99d00
+      30|x               |10 ID           |0x108c50d00
       30|:=              |SINGOP          |CATHCALL
-      30|fun3            |10 ID           |0x1011001b0
+      30|fun3            |10 ID           |0x108f6a660
       30|(               |OPEN-PAR        |CATCHALL
-      30|c               |10 ID           |0x101004b98
+      30|c               |10 ID           |0x108cbbbc0
       30|[               |OPEN-BRA        |CATCHALL
       30|1               |11 INT          |0 NULL 
       30|]               |CLOSE-BRA       |CATCHALL
       30|,               |COMMA           |CATCHALL
-      30|e               |10 ID           |0x100f99c60
+      30|e               |10 ID           |0x108c50c60
       30|)               |CLOSE-PAR       |CATCHALL
       30|;               |TERMINATE       |CATCHALL
-      31|e               |10 ID           |0x100f99c60
+      31|e               |10 ID           |0x108c50c60
       31|:=              |SINGOP          |CATHCALL
-      31|e               |10 ID           |0x100f99c60
+      31|e               |10 ID           |0x108c50c60
       31|+               |ADDOP           |Index 0
       31|4.44            |13 REAL         |0 NULL 
       31|;               |TERMINATE       |CATCHALL
-      32|a               |10 ID           |0x101004530
+      32|a               |10 ID           |0x108cbb558
       32|:=              |SINGOP          |CATHCALL
       32|(               |OPEN-PAR        |CATCHALL
-      32|a               |10 ID           |0x101004530
+      32|a               |10 ID           |0x108cbb558
       32|mod             |MULOP           |Index 0
-      32|y               |10 ID           |0x1010a33f0
+      32|y               |10 ID           |0x108d5b418
       32|)               |CLOSE-PAR       |CATCHALL
       32|div             |MULOP           |Index 1
-      32|x               |10 ID           |0x100f99d00
+      32|x               |10 ID           |0x108c50d00
       32|;               |TERMINATE       |CATCHALL
       33|while           |14 REV          |0 NULL 
       33|(               |OPEN-PAR        |CATCHALL
       33|(               |OPEN-PAR        |CATCHALL
-      33|a               |10 ID           |0x101004530
+      33|a               |10 ID           |0x108cbb558
       33|>=              |RELOP           |Index 0
       33|4               |11 INT          |0 NULL 
       33|)               |CLOSE-PAR       |CATCHALL
       33|and             |MULOP           |Index 2
       33|(               |OPEN-PAR        |CATCHALL
       33|(               |OPEN-PAR        |CATCHALL
-      33|b               |10 ID           |0x101004558
+      33|b               |10 ID           |0x108cbb580
       33|<=              |RELOP           |Index 1
-      33|e               |10 ID           |0x100f99c60
+      33|e               |10 ID           |0x108c50c60
       33|)               |CLOSE-PAR       |CATCHALL
       34|or              |ADDOP           |Index 1
       34|(               |OPEN-PAR        |CATCHALL
       34|not             |14 REV          |0 NULL 
       34|(               |OPEN-PAR        |CATCHALL
-      34|a               |10 ID           |0x101004530
+      34|a               |10 ID           |0x108cbb558
       34|=               |RELOP           |Index 2
-      34|c               |10 ID           |0x101004b98
+      34|c               |10 ID           |0x108cbbbc0
       34|[               |OPEN-BRA        |CATCHALL
-      34|a               |10 ID           |0x101004530
+      34|a               |10 ID           |0x108cbb558
       34|]               |CLOSE-BRA       |CATCHALL
       34|)               |CLOSE-PAR       |CATCHALL
       34|)               |CLOSE-PAR       |CATCHALL
       34|)               |CLOSE-PAR       |CATCHALL
       34|)               |CLOSE-PAR       |CATCHALL
       34|do              |14 REV          |0 NULL 
-      35|begin           |14 REV          |0x101100090
-      36|a               |10 ID           |0x101004530
+      35|begin           |14 REV          |0x108f6a480
+      36|a               |10 ID           |0x108cbb558
       36|:=              |SINGOP          |CATHCALL
-      36|c               |10 ID           |0x101004b98
+      36|c               |10 ID           |0x108cbbbc0
       36|[               |OPEN-BRA        |CATCHALL
-      36|a               |10 ID           |0x101004530
+      36|a               |10 ID           |0x108cbb558
       36|]               |CLOSE-BRA       |CATCHALL
       36|+               |ADDOP           |Index 0
       36|1               |11 INT          |0 NULL 
-      37|end             |14 REV          |0x1010ed508
+      37|end             |14 REV          |0x108f68378
       37|;               |TERMINATE       |CATCHALL
-      38|fun2            |10 ID           |0x101100180
+      38|fun2            |10 ID           |0x108f6a630
       38|:=              |SINGOP          |CATHCALL
       38|2.5             |13 REAL         |0 NULL 
-      39|end             |14 REV          |0x1010ed508
+      39|end             |14 REV          |0x108f68378
       39|;               |TERMINATE       |CATCHALL
-      41|begin           |14 REV          |0x101100090
-      42|b               |10 ID           |0x101004558
+      41|begin           |14 REV          |0x108f6a480
+      42|b               |10 ID           |0x108cbb580
       42|:=              |SINGOP          |CATHCALL
-      42|fun2            |10 ID           |0x101100180
+      42|fun2            |10 ID           |0x108f6a630
       42|(               |OPEN-PAR        |CATCHALL
-      42|c               |10 ID           |0x101004b98
+      42|c               |10 ID           |0x108cbbbc0
       42|[               |OPEN-BRA        |CATCHALL
       42|4               |11 INT          |0 NULL 
       42|]               |CLOSE-BRA       |CATCHALL
       42|,               |COMMA           |CATCHALL
-      42|c               |10 ID           |0x101004b98
+      42|c               |10 ID           |0x108cbbbc0
       42|[               |OPEN-BRA        |CATCHALL
       42|5               |11 INT          |0 NULL 
       42|]               |CLOSE-BRA       |CATCHALL
       42|)               |CLOSE-PAR       |CATCHALL
       42|;               |TERMINATE       |CATCHALL
-      43|b               |10 ID           |0x101004558
+      43|b               |10 ID           |0x108cbb580
       43|:=              |SINGOP          |CATHCALL
-      43|fun2            |10 ID           |0x101100180
+      43|fun2            |10 ID           |0x108f6a630
       43|(               |OPEN-PAR        |CATCHALL
-      43|c               |10 ID           |0x101004b98
+      43|c               |10 ID           |0x108cbbbc0
       43|[               |OPEN-BRA        |CATCHALL
       43|4               |11 INT          |0 NULL 
       43|]               |CLOSE-BRA       |CATCHALL
@@ -262,34 +262,34 @@ Line No.|Lexeme          |Token-Type      |Attribute
       43|;               |TERMINATE       |CATCHALL
       44|if              |14 REV          |0 NULL 
       44|(               |OPEN-PAR        |CATCHALL
-      44|a               |10 ID           |0x101004530
+      44|a               |10 ID           |0x108cbb558
       44|<               |RELOP           |Index 3
       44|2               |11 INT          |0 NULL 
       44|)               |CLOSE-PAR       |CATCHALL
       44|then            |14 REV          |0 NULL 
-      44|a               |10 ID           |0x101004530
+      44|a               |10 ID           |0x108cbb558
       44|:=              |SINGOP          |CATHCALL
       44|1               |11 INT          |0 NULL 
       44|else            |14 REV          |0 NULL 
-      44|a               |10 ID           |0x101004530
+      44|a               |10 ID           |0x108cbb558
       44|:=              |SINGOP          |CATHCALL
-      44|a               |10 ID           |0x101004530
+      44|a               |10 ID           |0x108cbb558
       44|+               |ADDOP           |Index 0
       44|2               |11 INT          |0 NULL 
       44|;               |TERMINATE       |CATCHALL
-      45|if              |14 REV          |0x1010ed5a8
+      45|if              |14 REV          |0x108f68418
       45|(               |OPEN-PAR        |CATCHALL
-      45|b               |10 ID           |0x101004558
+      45|b               |10 ID           |0x108cbb580
       45|>               |RELOP           |Index 4
       45|4.2             |13 REAL         |0 NULL 
       45|)               |CLOSE-PAR       |CATCHALL
-      45|then            |14 REV          |0x101100300
-      45|a               |10 ID           |0x101004530
+      45|then            |14 REV          |0x108f6a7b0
+      45|a               |10 ID           |0x108cbb558
       45|:=              |SINGOP          |CATHCALL
-      45|c               |10 ID           |0x101004b98
+      45|c               |10 ID           |0x108cbbbc0
       45|[               |OPEN-BRA        |CATCHALL
-      45|a               |10 ID           |0x101004530
+      45|a               |10 ID           |0x108cbb558
       45|]               |CLOSE-BRA       |CATCHALL
-      46|end             |14 REV          |0x1010ed508
+      46|end             |14 REV          |0x108f68378
       46|.               |DOT             |CATCHALL
       47|EOF             |EOF             |END OF FILE
