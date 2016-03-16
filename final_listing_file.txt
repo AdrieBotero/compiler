@@ -66,7 +66,6 @@
 
 34		                       or (not (a = c[a])))) do
 
-ADDOP ERROR in line 34 You can't add integer with a real
 35		         begin
 
 36		           a:= c[a] + 1

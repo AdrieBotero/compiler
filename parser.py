@@ -585,6 +585,12 @@ def check_scope(token, line_number):
         new_list_file[int(line_number)].append(error)
 
 
+def write_to_memory_file(fun, v, a):
+    memory_file = open('memory_file.', 'a')
+    memory_file.write(fun + '\n')
+    memory_file.write(v + "      " + a + '\n')
+
+
 def compstate_():
     line_number = get_line_number()
     line = tokens[0]
@@ -623,13 +629,21 @@ def compstate_():
         if nodes[0].__class__.__name__ is 'GreenNode':
             if nodes[1].__class__.__name__ is not 'GreenNode':
                 # pop till next green node
+                # write_to_memory_file(fun, v, a)
                 nodes.pop(0)
                 while nodes[0].__class__.__name__ is 'BlueNode':
+                    # write_to_memory_file(fun, v, a)
                     nodes.pop(0)
+            elif nodes[1].__class__.__name__ is 'GreenNode':
+                # write_to_memory_file(fun, v, a)
+                nodes.pop(1)
+
         if nodes[0].__class__.__name__ is 'BlueNode':
             while nodes[0].__class__.__name__ is 'BlueNode':
+                # write_to_memory_file(fun, v, a)
                 nodes.pop(0)
         check = nodes
+
     elif token == 'if':
         optionalstate()
         my_node = nodes
@@ -882,8 +896,11 @@ def expression():
     line = tokens[0]
     if token == '(' or token == '+' or token == '-' or token == 'id' or token == 'not' or token == 'real' or token == 'integer':
         var_type = simpexpression()
-        expression_(var_type)
-        return var_type
+        var_type2 = expression_(var_type)
+        if var_type2:
+            return var_type2
+        else:
+            return var_type
     else:
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else']
         for i in my_set:
@@ -927,9 +944,9 @@ def expression_(var_type):
             variable_type = 'real'
         if var_type != variable_type:
             relop_error(line_number, var_type, variable_type)
-            bool_flag.append('false')
+            return 'false'
         else:
-            bool_flag.append('true')
+            return 'true'
     elif token == 'then':
         pass
     else:
@@ -1082,15 +1099,10 @@ def term_(var_type):
         other_variable_type = factor()
         testing = bool_flag
         term_(var_type)
-        result1 = bool_flag[0]
-        result2 = bool_flag[1]
-        if var_type != other_variable_type and result1 != result2:
+
+        if var_type != other_variable_type :
             mulop_error(line_number, var_type, other_variable_type)
-        if len(bool_flag) % 2 == 0:
-            bool_flag.pop(0)
-            bool_flag.pop(1)
-        else:
-            bool_flag.pop(0)
+
     elif token == 'relop':
         pass
     elif token == 'then':
