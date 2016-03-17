@@ -17,6 +17,7 @@ lex_analysis_listing_file = open('list_file', 'r')
 variable_types = {}
 bo_flag = ''
 bool_flag = []
+memory_counter = 0
 
 
 def add_tokens():
@@ -588,15 +589,40 @@ def check_scope(token, line_number):
 def write_to_memory_file(fun, v, a):
     memory_file = open('memory_file.', 'a')
     memory_file.write(fun + '\n')
-    memory_file.write(v + "      " + a + '\n')
+    memory_file.write(str(v) + "      " + str(a) + '\n')
+
+
+def set_function_name():
+    green_node = nodes[0].__class__.__name__
+    green_node_type = nodes[0].w_type
+    if (green_node is 'GreenNode' and green_node_type is 'temptype') or (
+            green_node is 'GreenNode' and green_node_type is 'pname'):
+        fun_name = nodes[0].data
+        return fun_name
+
+
+def update_memory_counter():
+    global memory_counter
+    if memory_counter != 0:
+        if nodes[1].w_type is 'real':
+            memory_counter += 8
+            return memory_counter
+        if nodes[1].w_type is 'integer':
+            memory_counter += 4
+            return memory_counter
+    else:
+        return memory_counter
 
 
 def compstate_():
+    global memory_counter
     line_number = get_line_number()
     line = tokens[0]
+
     token = peek_token()
     testing_node = nodes
     if token == 'begin':
+
         optionalstate()
         my_node = nodes
         match('end')
@@ -628,9 +654,19 @@ def compstate_():
         match('end')
         if nodes[0].__class__.__name__ is 'GreenNode':
             if nodes[1].__class__.__name__ is not 'GreenNode':
-                # pop till next green node
-                # write_to_memory_file(fun, v, a)
+
+                # set func name
+                func = set_function_name()
+                # update_memory counter
+                a = memory_counter
+                # set variable
+                v = nodes[0].data
+                # write everything to file.
+                write_to_memory_file(func, v, a)
+                update_memory_counter()
+                # pop current node
                 nodes.pop(0)
+                update_memory_counter()
                 while nodes[0].__class__.__name__ is 'BlueNode':
                     # write_to_memory_file(fun, v, a)
                     nodes.pop(0)
@@ -1100,7 +1136,7 @@ def term_(var_type):
         testing = bool_flag
         term_(var_type)
 
-        if var_type != other_variable_type :
+        if var_type != other_variable_type:
             mulop_error(line_number, var_type, other_variable_type)
 
     elif token == 'relop':
@@ -1119,6 +1155,7 @@ def mulop_error(line, v, v2):
     print "Mulop Error: Line " + str(line) + " you can't Multiply or Divide a " + str(v) + " with a " + str(v2)
     error = "Mulop Error: Line " + str(line) + " you can't Multiply or Divide a " + str(v) + " with a " + str(v2)
     new_list_file[int(line)].append(error)
+
 
 def factor():
     line = tokens[0]
