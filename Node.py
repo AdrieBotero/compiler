@@ -3,12 +3,14 @@ __author__ = 'andreasbotero'
 
 class Node:
     def __init__(self, data, w_type):
+
         self.data = data
         self.w_type = w_type
         self.parent = None
         self.right_sibling = None
         self.left_child = None
         self.previous_node = None
+        self.value = None
 
     def __str__(self):
         return "testing nodes " + \

@@ -1,14 +1,16 @@
+
 program test (input, output);
   var a : integer;
   var b : real;
-  var c : array [1..2] of integer;
+  var c : array [1..6] of integer;
+  var d : integer
 
   function fun1(x:integer; y:real; 
-                  z:array [1..2] of integer; 
+                  z:array [1..2] of integer;
                   q: real) : integer;
     var d: integer;
     begin
-      a:= 2;
+      a :=2;
       z[a] := 4;
       c[2] := 3;
       fun1 := c[1]
@@ -44,3 +46,5 @@ begin
   if (a < 2) then a:= 1 else a := a + 2;
   if (b > 4.2) then a := c[a]
 end.
+
+

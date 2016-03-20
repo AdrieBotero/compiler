@@ -1,92 +1,101 @@
-1		program test (input, output);
+1		
 
-2		  var a : integer;
+2		program test (input, output);
 
-3		  var b : real;
+3		  var a : integer;
 
-4		  var c : array [1..2] of integer;
+4		  var b : real;
 
-5		
+5		  var c : array [1..6] of integer;
 
-6		  function fun1(x:integer; y:real; 
+6		  var d : integer
 
-7		                  z:array [1..2] of integer; 
+Syntax Error: in line 6 Expecting (';', '6')received function
+7		
 
-8		                  q: real) : integer;
+8		  function fun1(x:integer; y:real; 
 
-9		    var d: integer;
+9		                  z:array [1..2] of integer;
 
-10		    begin
+10		                  q: real) : integer;
 
-11		      a:= 2;
+11		    var d: integer;
 
-12		      z[a] := 4;
+12		    begin
 
-13		      c[2] := 3;
+13		      a :=2;
 
-14		      fun1 := c[1]
+14		      z[a] := 4;
 
-15		     end;
+15		      c[2] := 3;
 
-16		
+16		      fun1 := c[1]
 
-17		   function fun2(x: integer; y: integer) : real;
+17		     end;
 
-18		     var e: real;
+18		
 
-19		
+19		   function fun2(x: integer; y: integer) : real;
 
-20		     function fun3(n: integer; z: real) : integer;
+20		     var e: real;
 
-21		       var e: integer;
+21		
 
-22		       begin
+22		     function fun3(n: integer; z: real) : integer;
 
-23		         a:= e;
+23		       var e: integer;
 
-24		         e:= c[e];
+24		       begin
 
-25		         fun3 := 3
+25		         a:= e;
 
-26		       end;
+26		         e:= c[e];
 
-27		
+27		         fun3 := 3
 
-28		     begin
+28		       end;
 
-29		       a:= fun1(x, e, c, b);
+29		
 
-30		       x:= fun3(c[1], e);
+30		     begin
 
-31		       e := e + 4.44;
+31		       a:= fun1(x, e, c, b);
 
-32		       a:= (a mod y) div x;
+32		       x:= fun3(c[1], e);
 
-33		       while ((a >= 4) and ((b <= e) 
+33		       e := e + 4.44;
 
-34		                       or (not (a = c[a])))) do
+34		       a:= (a mod y) div x;
 
-35		         begin
+35		       while ((a >= 4) and ((b <= e) 
 
-36		           a:= c[a] + 1
+36		                       or (not (a = c[a])))) do
 
-37		         end;
+37		         begin
 
-38		       fun2 := 2.5 
+38		           a:= c[a] + 1
 
-39		     end;
+39		         end;
 
-40		
+40		       fun2 := 2.5 
 
-41		begin
+41		     end;
 
-42		  b:= fun2(c[4], c[5]);
+42		
 
-43		  b:= fun2(c[4],2);
+43		begin
 
-44		  if (a < 2) then a:= 1 else a := a + 2;
+44		  b:= fun2(c[4], c[5]);
 
-45		  if (b > 4.2) then a := c[a]
+45		  b:= fun2(c[4],2);
 
-46		end.
+46		  if (a < 2) then a:= 1 else a := a + 2;
+
+47		  if (b > 4.2) then a := c[a]
+
+48		end.
+
+49		
+
+50		
 

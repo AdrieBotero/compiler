@@ -18,7 +18,7 @@ variable_types = {}
 bo_flag = ''
 bool_flag = []
 memory_counter = 0
-
+line_number = None
 
 def add_tokens():
     with open('write_it.txt', 'r') as token_file:
@@ -83,6 +83,7 @@ def finish():
 
 
 def match(expect_token):
+    global line_number
     if expect_token == 'num':
         expected_tokens = ['integer', 'real']
         peek = peek_token()
@@ -100,7 +101,7 @@ def match(expect_token):
         elif peek == expect_token and peek == '$':
             finish()
         elif peek != expect_token:
-            syntax_error(peek, expect_token)
+            syntax_error(peek, expect_token, line_number)
 
 
 # green_node = GreenNode("dummy", 'Sometype')
@@ -140,22 +141,25 @@ def write_new_listing_file():
 
 
 def syntax_error(given_token, *expected):
-    line_number = get_line_number()
-    error = "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
+    # line_number = get_line_number()
+    global line_number
+    # line_number = int(expected[-1])
+
+    error = "Syntax Error: in line " + str(line_number) + " Expecting %s" % (expected,) + "received " + str(given_token)
     # syntax_er.append(error)
     new_list_file[int(line_number)].append(error)
     # print new_list_file
-    print "Syntax Error: in line " + line_number + " Expecting %s" % (expected,) + "received " + str(given_token)
+    print "Syntax Error: in line " + str(line_number) + " Expecting %s" % (expected,) + "received " + str(given_token)
 
-    get_token()
+    # get_token()
     if len(tokens) != 0:
         token = peek_token()
     else:
         finish()
 
 
-def handle_sync():
-    return synch_set
+# def handle_sync():
+#     return synch_set
 
 
 # green_node = GreenNode("dummy", 'Sometype')
@@ -172,6 +176,7 @@ def handle_sync():
 
 
 def prg():
+    line = get_line_number()
     token = peek_token()
     if token == 'program':
         match('program')
@@ -187,12 +192,14 @@ def prg():
         match(';')
         prg_()
     else:
+        del synch_set[:]
         synch_set.append('$')
         handle_sync()
-        syntax_error(token, 'program')
+        syntax_error(token, 'program', line)
 
 
 def prg_():
+    line = get_line_number()
     token = peek_token()
     if token == 'begin':
         compstate()
@@ -205,12 +212,14 @@ def prg_():
         declarations()
         prg__()
     else:
+        del synch_set[:]
         synch_set.append('$')
         handle_sync()
-        syntax_error(token, 'begin', 'function', 'var')
+        syntax_error(token, 'begin', 'function', 'var', line)
 
 
 def prg__():
+    line = get_line_number()
     token = peek_token()
     if token == 'begin':
         compstate()
@@ -220,12 +229,14 @@ def prg__():
         compstate()
         match('.')
     else:
+        del synch_set[:]
         synch_set.append('$')
         handle_sync()
-        syntax_error(token, 'begin', 'function')
+        syntax_error(token, 'begin', 'function', line)
 
 
 def idlist():
+    line_number = get_line_number()
     line = tokens[0]
     token = peek_token()
     if token == 'id':
@@ -237,12 +248,14 @@ def idlist():
             nodes.insert(0, green_node.right_sibling)
         idlist_()
     else:
+        del synch_set[:]
         synch_set.append(')')
         handle_sync()
-        syntax_error(token, 'id')
+        syntax_error(token, 'id', line_number)
 
 
 def idlist_():
+    line_number = get_line_number()
     line = tokens[0]
     token = peek_token()
     if token == ')':
@@ -259,13 +272,18 @@ def idlist_():
             nodes.insert(0, green_node.right_sibling)
         idlist_()
     else:
+        del synch_set[:]
         synch_set.append(')')
         handle_sync()
-        syntax_error(token, ')', ',')
+        syntax_error(token, ')', ',', line_number)
 
 
 def declarations():
+    global memory_counter
+    global synch_set
     line = tokens[0]
+    global line_number
+    line_number = get_line_number()
     token = peek_token()
     if token == 'var':
         match('var')
@@ -273,29 +291,67 @@ def declarations():
         match('id')
         match(':')
         the_type = type_()
+        if type(the_type) is tuple:
+            array_size = the_type[1]
+            the_type = the_type[0]
         variable_types.update({token[1]: the_type})
         checking = nodes
+        value_counter = 0
         if nodes:
             green_node = nodes[0]
             while green_node.right_sibling is not None:
                 green_node = green_node.right_sibling
             if green_node.right_sibling is None:
-                green_node.right_sibling = BlueNode(token[1], the_type)
+                new_blue_node = BlueNode(token[1], the_type)
+                memory_counter = 0
+                new_blue_node.value = memory_counter
+                if new_blue_node.w_type is 'integer':
+                    memory_counter += 4
+                elif new_blue_node.w_type is 'real':
+                    memory_counter += 8
+                elif new_blue_node.w_type == "a-real":
+                    memory_counter += 8 * array_size
+                elif new_blue_node.w_type == "a-integer":
+                    memory_counter += 4 * array_size
+
+                green_node.right_sibling = new_blue_node
                 nodes.insert(0, green_node.right_sibling)
+                write_to_memory_file('name', new_blue_node.data, new_blue_node.value)
         checking = nodes
         match(';')
         declarations_()
     else:
         # synch_set = ['function', 'begin']
-        synch_set.append('function')
+        del synch_set[:]
+        synch_set.append('var')
         synch_set.append('begin')
+        synch_set.append('$')
         handle_sync()
-        syntax_error(token, 'var')
+        syntax_error(token, 'var', line_number)
+
+
+def handle_sync():
+    global synch_set
+    line = tokens[0]
+    checking = tokens
+    token = peek_token()
+    testing = synch_set
+    while token not in synch_set:
+        line = tokens[0]
+        if tokens:
+            get_token()
+            token = peek_token()
+        else:
+            break
 
 
 def declarations_():
     line = tokens[0]
     token = peek_token()
+    array_size = 0
+    global line_number
+    line_number = get_line_number()
+    global memory_counter
     if token == 'begin':
         pass
     elif token == 'function':
@@ -306,6 +362,9 @@ def declarations_():
         match('id')
         match(':')
         the_type = type_()
+        if type(the_type) is tuple:
+            array_size = the_type[1]
+            the_type = the_type[0]
         variable_types.update({token[1]: the_type})
         current_nodes = nodes
         if nodes:
@@ -313,35 +372,52 @@ def declarations_():
             while node.right_sibling is not None:
                 node = node.right_sibling
             if node.right_sibling is None:
-                node.right_sibling = BlueNode(token[1], the_type)
+                new_blue_node = BlueNode(token[1], the_type)
+                new_blue_node.value = memory_counter
+                if new_blue_node.w_type == 'integer':
+                    memory_counter += 4
+                elif new_blue_node.w_type == 'real':
+                    memory_counter += 8
+                elif new_blue_node.w_type == "a-real":
+                    memory_counter += 8 * array_size
+                elif new_blue_node.w_type == "a-integer":
+                    memory_counter += 4 * array_size
+                node.right_sibling = new_blue_node
                 nodes.insert(0, node.right_sibling)
+                write_to_memory_file('', new_blue_node.data, new_blue_node.value)
             testing = nodes
         match(';')
         declarations_()
     else:
         # synch_set = ['function', 'begin']
+        del synch_set[:]
         synch_set.append('function')
         synch_set.append('begin')
         handle_sync()
-        syntax_error(token, 'begin', 'function', 'var')
+        syntax_error(token, 'begin', 'function', 'var', line_number)
 
 
 def type_():
     line = tokens[0]
     token = peek_token()
+    test = peek_stack()
+    line_number = get_line_number()
     if token == 'array':
         match('array')
         match('[')
+        first_avalue = tokens[0][1]
         match('num')
         match('..')
+        secon_value = tokens[0][1]
         match('num')
         match(']')
         match('of')
         current_type = standtype()
+        array_size = (int(secon_value) - int(first_avalue)) + 1
         if current_type == "integer":
-            return "a-integer"
+            return "a-integer", array_size
         else:
-            return "a-real"
+            return "a-real", array_size
     elif token == 'integer':
         current_type = standtype()
         if current_type == 'a-integer':
@@ -356,15 +432,17 @@ def type_():
             return 'real'
 
     else:
+        del synch_set[:]
         synch_set.append(';')
         synch_set.append(')')
-        # handle_sync()
-        syntax_error(token, 'array', 'integer', 'real')
+        handle_sync()
+        syntax_error(token, 'array', 'integer', 'real', line_number)
 
 
 def standtype():
     line = tokens[0]
     token = peek_token()
+    line_number = get_line_number()
     if token == 'integer':
         match('integer')
         return "integer"
@@ -372,28 +450,32 @@ def standtype():
         match('real')
         return "real"
     else:
+        del synch_set[:]
         synch_set.append(';')
         synch_set.append(')')
         handle_sync()
-        syntax_error(token, 'integer', 'real')
+        syntax_error(token, 'integer', 'real', line_number)
 
 
 def subprgdeclarations():
     line = tokens[0]
+    line_number = get_line_number()
     token = peek_token()
     if token == 'function':
         subprgdeclaration()
         match(';')
         subprgdeclarations_()
     else:
+        del synch_set[:]
         synch_set.append('begin')
         handle_sync()
-        syntax_error(token, 'function')
+        syntax_error(token, 'function', line_number)
 
 
 def subprgdeclarations_():
     line = tokens[0]
     token = peek_token()
+    line_number = get_line_number()
     if token == 'begin':
         pass
     elif token == 'function':
@@ -401,26 +483,30 @@ def subprgdeclarations_():
         match(';')
         subprgdeclarations_()
     else:
+        del synch_set[:]
         synch_set.append('begin')
         handle_sync()
-        syntax_error(token, 'begin', 'function')
+        syntax_error(token, 'begin', 'function', line_number)
 
 
 def subprgdeclaration():
     line = tokens[0]
     token = peek_token()
+    line_number = get_line_number()
     if token == 'function':
         var_type = subprghead()
         subprgdeclaration_()
         return var_type
     else:
+        del synch_set[:]
         synch_set.append(';')
         handle_sync()
-        syntax_error(token, 'function')
+        syntax_error(token, 'function', line_number)
 
 
 def subprgdeclaration_():
     token = peek_token()
+    line_number = get_line_number()
     if token == 'begin':
         compstate()
     elif token == 'function':
@@ -430,12 +516,14 @@ def subprgdeclaration_():
         declarations()
         subprgdeclaration__()
     else:
+        del synch_set[:]
         synch_set.append(';')
         handle_sync()
-        syntax_error(token, 'begin', 'function', 'var')
+        syntax_error(token, 'begin', 'function', 'var', line_number)
 
 
 def subprgdeclaration__():
+    line_number = get_line_number()
     token = peek_token()
     if token == 'begin':
         compstate()
@@ -443,14 +531,16 @@ def subprgdeclaration__():
         subprgdeclarations()
         compstate()
     else:
+        del synch_set[:]
         synch_set.append(';')
         handle_sync()
-        syntax_error(token, 'begin', 'function')
+        syntax_error(token, 'begin', 'function', line_number)
 
 
 def subprghead():
     line = tokens[0]
     token = peek_token()
+    line_number = get_line_number()
     if token == 'function':
         match('function')
         line = tokens[0]
@@ -469,16 +559,18 @@ def subprghead():
         return var_type
     else:
         # synch_set = ['function', 'begin', 'var']
+        del synch_set[:]
         synch_set.append('function')
         synch_set.append('begin')
         synch_set.append('var')
         handle_sync()
-        syntax_error(token, 'function')
+        syntax_error(token, 'function', line_number)
 
 
 def subprghead_():
     line = tokens[0]
     token = peek_token()
+    line_number = get_line_number()
     if token == '(':
         arguments()
         match(':')
@@ -492,34 +584,40 @@ def subprghead_():
         return var_type
     else:
         my_set = ['function', 'begin', 'var']
+        del synch_set[:]
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, '(', ':')
+        handle_sync()
+        syntax_error(token, '(', ':', line_number)
 
 
 def arguments():
     line = tokens[0]
     token = peek_token()
+    line_number = get_line_number()
     if token == '(':
         match('(')
         paramlist()
         match(')')
     else:
+        del synch_set[:]
         synch_set.append(':')
         handle_sync()
-        syntax_error(token, '(')
+        syntax_error(token, '(', line_number)
 
 
 def paramlist():
     line = tokens[0]
     token = peek_token()
+    line_number = get_line_number()
     if token == 'id':
         token = tokens[0]
         lexeme = token[1]
         match('id')
         match(':')
         my_type = type_()
+        if type(my_type) is tuple:
+            my_type = my_type[0]
         # token = tokens[0]
         variable_types.update({token[1]: my_type})
         check_nodes = nodes
@@ -532,13 +630,15 @@ def paramlist():
                 nodes.insert(0, node.right_sibling)
         paramlist_()
     else:
+        del synch_set[:]
         synch_set.append(')')
-        # handle_sync()
-        syntax_error(token, 'id')
+        handle_sync()
+        syntax_error(token, 'id', line_number)
 
 
 def paramlist_():
     token = peek_token()
+    line_number = get_line_number()
     if token == ')':
         pass
     elif token == ';':
@@ -547,6 +647,8 @@ def paramlist_():
         match('id')
         match(':')
         my_type = type_()
+        if type(my_type) is tuple:
+            my_type = my_type[0]
         variable_types.update({token[1]: my_type})
         if nodes:
             node = nodes[0]
@@ -557,24 +659,26 @@ def paramlist_():
                 nodes.insert(0, node.right_sibling)
         paramlist_()
     else:
+        del synch_set[:]
         synch_set.append(')')
-        # handle_sync()
-        syntax_error(token, '(', ';')
+        handle_sync()
+        syntax_error(token, '(', ';', line_number)
 
 
 def compstate():
-    linenumber = get_line_number()
     my_stack = nodes
+    line_number = get_line_number()
     token = peek_token()
     if token == 'begin':
         match('begin')
         compstate_()
     else:
+        del synch_set[:]
         my_set = [';', 'end', '.']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, 'begin')
+        handle_sync()
+        syntax_error(token, 'begin', line_number)
 
 
 def check_scope(token, line_number):
@@ -588,7 +692,8 @@ def check_scope(token, line_number):
 
 def write_to_memory_file(fun, v, a):
     memory_file = open('memory_file.', 'a')
-    memory_file.write(fun + '\n')
+    if fun is not None:
+        memory_file.write(str(fun) + '\n')
     memory_file.write(str(v) + "      " + str(a) + '\n')
 
 
@@ -596,21 +701,18 @@ def set_function_name():
     green_node = nodes[0].__class__.__name__
     green_node_type = nodes[0].w_type
     if (green_node is 'GreenNode' and green_node_type is 'temptype') or (
-            green_node is 'GreenNode' and green_node_type is 'pname'):
+                    green_node is 'GreenNode' and green_node_type is 'pname'):
         fun_name = nodes[0].data
         return fun_name
 
 
 def update_memory_counter():
     global memory_counter
-    if memory_counter != 0:
-        if nodes[1].w_type is 'real':
-            memory_counter += 8
-            return memory_counter
-        if nodes[1].w_type is 'integer':
-            memory_counter += 4
-            return memory_counter
-    else:
+    if nodes[1].w_type is 'real':
+        memory_counter += 8
+        return memory_counter
+    if nodes[1].w_type is 'integer':
+        memory_counter += 4
         return memory_counter
 
 
@@ -656,19 +758,44 @@ def compstate_():
             if nodes[1].__class__.__name__ is not 'GreenNode':
 
                 # set func name
-                func = set_function_name()
-                # update_memory counter
-                a = memory_counter
-                # set variable
-                v = nodes[0].data
-                # write everything to file.
-                write_to_memory_file(func, v, a)
-                update_memory_counter()
+                # func = set_function_name()
+                # # update_memory counter
+                # if func is not None:
+                #     memory_counter = 0
+                #
+                # a = memory_counter
+                # # set variable
+                # # setting variable but checking
+                #
+                # if nodes[0].__class__.__name__ is 'GreenNode':
+                #     v = nodes[1].data
+                # else:
+                #     v = nodes[0].data
+                #
+                # # write everything to file.
+                # write_to_memory_file(func, v, a)
+                # update_memory_counter()
                 # pop current node
                 nodes.pop(0)
-                update_memory_counter()
                 while nodes[0].__class__.__name__ is 'BlueNode':
                     # write_to_memory_file(fun, v, a)
+                    # set func name
+                    # func = set_function_name()
+                    # # update_memory counter
+                    # if func is not None:
+                    #     memory_counter = 0
+                    # a = memory_counter
+                    # # set variable
+                    # # setting variable but checking
+                    #
+                    # if nodes[0].__class__.__name__ is 'GreenNode':
+                    #     v = nodes[1].data
+                    # else:
+                    #     v = nodes[0].data
+                    #
+                    # # write everything to file.
+                    # write_to_memory_file(func, v, a)
+                    # update_memory_counter()
                     nodes.pop(0)
             elif nodes[1].__class__.__name__ is 'GreenNode':
                 # write_to_memory_file(fun, v, a)
@@ -677,6 +804,21 @@ def compstate_():
         if nodes[0].__class__.__name__ is 'BlueNode':
             while nodes[0].__class__.__name__ is 'BlueNode':
                 # write_to_memory_file(fun, v, a)
+                # set func name
+                # func = set_function_name()
+                # # update_memory counter
+                # if func is not None:
+                #     memory_counter = 0
+                # a = memory_counter
+                # # set variable
+                # # setting variable but checking
+                # if nodes[0].__class__.__name__ is 'GreenNode':
+                #     v = nodes[1].data
+                # else:
+                #     v = nodes[0].data
+                # # write everything to file.
+                # write_to_memory_file(func, v, a)
+                # update_memory_counter()
                 nodes.pop(0)
         check = nodes
 
@@ -690,16 +832,18 @@ def compstate_():
         match('end')
 
     else:
+        del synch_set[:]
         my_set = [';', 'end', '.', 'else']
         for i in my_set:
             synch_set.append(i)
 
-        # handle_sync()
-        syntax_error(token, 'begin', 'end', 'id', 'if', 'while')
+        handle_sync()
+        syntax_error(token, 'begin', 'end', 'id', 'if', 'while', line_number)
 
 
 def optionalstate():
     token = peek_token()
+    line_number = get_line_number()
     if token == 'begin':
         statementlist()
     elif token == 'id':
@@ -709,13 +853,15 @@ def optionalstate():
     elif token == 'while':
         statementlist()
     else:
+        del synch_set[:]
         synch_set.append('end')
-        # handle_sync()
-        syntax_error(token, 'begin', 'id', 'if', 'while')
+        handle_sync()
+        syntax_error(token, 'begin', 'id', 'if', 'while', line_number)
 
 
 def statementlist():
     token = peek_token()
+    line_number = get_line_number()
     if token == 'begin':
         statement()
         statementlist_()
@@ -729,13 +875,15 @@ def statementlist():
         statement()
         statementlist_()
     else:
+        del synch_set[:]
         synch_set.append('end')
-        # handle_sync()
-        syntax_error(token, 'begin', 'id', 'if', 'while')
+        handle_sync()
+        syntax_error(token, 'begin', 'id', 'if', 'while', line_number)
 
 
 def statementlist_():
     token = peek_token()
+    line_number = get_line_number()
     if token == ';':
         match(';')
         statement()
@@ -743,9 +891,10 @@ def statementlist_():
     elif token == 'end':
         pass
     else:
+        del synch_set[:]
         synch_set.append('end')
-        # handle_sync()
-        syntax_error(token, ';', 'end')
+        handle_sync()
+        syntax_error(token, ';', 'end', line_number)
 
 
 def assignop_error(line, v, e):
@@ -755,9 +904,9 @@ def assignop_error(line, v, e):
 
 
 def statement():
-    line_number = get_line_number()
     line = tokens[0]
     node = nodes[0]
+    line_number = get_line_number()
     token = peek_token()
     if token == 'begin':
         compstate()
@@ -790,15 +939,18 @@ def statement():
         match('do')
         statement()
     else:
+        del synch_set[:]
         my_set = ['else', ';', 'end']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, 'begin', 'id', 'assignop', 'if', 'while')
+        handle_sync()
+        syntax_error(token, 'begin', 'id', 'assignop', 'if', 'while', line_number)
 
 
 def statement_():
+    line_number = get_line_number()
     token = peek_token()
+
     if token == ';':
         pass
     elif token == 'else':
@@ -807,11 +959,12 @@ def statement_():
     elif token == 'end':
         pass
     else:
+        del synch_set[:]
         my_set = [';', 'end', 'else']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, ';', 'else', 'end')
+        handle_sync()
+        syntax_error(token, ';', 'else', 'end', line_number)
 
 
 def peek_stack():
@@ -823,6 +976,7 @@ def semantic_error(lexem):
 
 
 def variable():
+    line_number = get_line_number()
     token = peek_token()
     line = tokens[0]
     stack = nodes
@@ -857,14 +1011,16 @@ def variable():
         elif error:
             return error
     else:
+        del synch_set[:]
         synch_set.append('assignop')
-        # handle_sync()
-        syntax_error(token, 'id')
+        handle_sync()
+        syntax_error(token, 'id', line_number)
 
 
 def variable_():
     token = peek_token()
     line = tokens[0]
+    line_number = get_line_number()
     if token == '[':
         match('[')
         expression()
@@ -873,15 +1029,18 @@ def variable_():
     elif token == 'assignop':
         pass
     else:
+        del synch_set[:]
         synch_set.append('assignop')
-        # handle_sync()
-        syntax_error(token, '[', 'assignop')
+        handle_sync()
+        syntax_error(token, '[', 'assignop', line_number)
         return False
 
 
 def expresslist():
     line = tokens[0]
+    line_number = get_line_number()
     token = peek_token()
+
     if token == '(':
         expression()
         expresslist_()
@@ -907,14 +1066,16 @@ def expresslist():
         expression()
         expresslist_()
     else:
+        del synch_set[:]
         synch_set.append(')')
 
-        # handle_sync()
-        syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
+        handle_sync()
+        syntax_error(token, '(', '+', '-', 'id', 'not', 'num', line_number)
 
 
 def expresslist_():
     token = peek_token()
+    line_number = get_line_number()
     if token == ')':
         pass
     elif token == ',':
@@ -922,14 +1083,16 @@ def expresslist_():
         expression()
         expresslist_()
     else:
+        del synch_set[:]
         synch_set.append(')')
-        # handle_sync()
-        syntax_error(token, ')', ',')
+        handle_sync()
+        syntax_error(token, ')', ',', line_number)
 
 
 def expression():
     token = peek_token()
     line = tokens[0]
+    line_number = get_line_number()
     if token == '(' or token == '+' or token == '-' or token == 'id' or token == 'not' or token == 'real' or token == 'integer':
         var_type = simpexpression()
         var_type2 = expression_(var_type)
@@ -938,11 +1101,12 @@ def expression():
         else:
             return var_type
     else:
+        del synch_set[:]
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
+        handle_sync()
+        syntax_error(token, '(', '+', '-', 'id', 'not', 'num', line_number)
         return 0
 
 
@@ -986,17 +1150,19 @@ def expression_(var_type):
     elif token == 'then':
         pass
     else:
+        del synch_set[:]
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, ')', ',', ';', ']', 'do', 'else', 'end', 'relop', 'then')
+        handle_sync()
+        syntax_error(token, ')', ',', ';', ']', 'do', 'else', 'end', 'relop', 'then', line_number)
 
 
 def simpexpression():
     token = peek_token()
     line = tokens[0]
     stack = nodes
+    line_number = get_line_number()
     if token == '(':
         var_type = term()
         simpexpression_(var_type)
@@ -1024,11 +1190,12 @@ def simpexpression():
         simpexpression_(var_type)
         return var_type
     else:
+        del synch_set[:]
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
+        handle_sync()
+        syntax_error(token, '(', '+', '-', 'id', 'not', 'num', line_number)
 
 
 def addop_error(line, v, e):
@@ -1076,16 +1243,18 @@ def simpexpression_(var_type):
     elif token == 'else':
         pass
     else:
+        del synch_set[:]
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'end', 'relop', 'then')
+        handle_sync()
+        syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'end', 'relop', 'then', line_number)
 
 
 def term():
     token = peek_token()
     line = tokens[0]
+    line_number = get_line_number()
     if token == '(':
         var_type = factor()
         term_(var_type)
@@ -1103,11 +1272,12 @@ def term():
         term_(var_type)
         return var_type
     else:
+        del synch_set[:]
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error('(', 'id', 'not', 'num')
+        handle_sync()
+        syntax_error('(', 'id', 'not', 'num', line_number)
 
 
 def term_(var_type):
@@ -1144,11 +1314,12 @@ def term_(var_type):
     elif token == 'then':
         pass
     else:
+        del synch_set[:]
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
+        handle_sync()
+        syntax_error(token, ')', ',', ';', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then', line_number)
 
 
 def mulop_error(line, v, v2):
@@ -1163,6 +1334,7 @@ def factor():
     # node = nodes[0]
     stack = nodes
     checking = variable_types
+
     var_type = ""
     line_number = get_line_number()
     if token == '(':
@@ -1202,15 +1374,19 @@ def factor():
         var_type = token
         return var_type
     else:
-        synch_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop', 'mulop']
+        del synch_set[:]
+        my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop', 'mulop']
+        for i in my_set:
+            synch_set.append(i)
         handle_sync()
-        syntax_error(token, 'id', 'not', 'num')
+        syntax_error(token, 'id', 'not', 'num', line_number)
 
 
 def factor_(var_type):
     line = tokens[0]
     token = peek_token()
     node = peek_stack()
+    line_number = get_line_number()
     if token == '(':
 
         match('(')
@@ -1246,23 +1422,27 @@ def factor_(var_type):
     elif token == 'then':
         pass
     else:
+        del synch_set[:]
         my_set = [']', ',', ')', 'then', 'do', ';', 'end', 'else', 'relop', 'addop', 'mulop']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, '(', ')', ',', ';', '[', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then')
+        handle_sync()
+        syntax_error(token, '(', ')', ',', ';', '[', ']', 'addop', 'do', 'else', 'end', 'mulop', 'relop', 'then',
+                     line_number)
         return False
 
 
 def sign():
+    line_number = get_line_number()
     token = peek_token()
     if token == '+':
         match('+')
     elif token == '-':
         match('-')
     else:
+        del synch_set[:]
         my_set = ['id', 'num', 'not', '(']
         for i in my_set:
             synch_set.append(i)
-        # handle_sync()
-        syntax_error(token, '+', '-')
+        handle_sync()
+        syntax_error(token, '+', '-', line_number)
