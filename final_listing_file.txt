@@ -8,9 +8,8 @@
 
 5		  var c : array [1..6] of integer;
 
-6		  var d : integer
+6		  var d : integer;
 
-Syntax Error: in line 6 Expecting (';', '6')received function
 7		
 
 8		  function fun1(x:integer; y:real; 
@@ -23,7 +22,7 @@ Syntax Error: in line 6 Expecting (';', '6')received function
 
 12		    begin
 
-13		      a :=2;
+13		      a := 2;
 
 14		      z[a] := 4;
 
@@ -85,17 +84,19 @@ Syntax Error: in line 6 Expecting (';', '6')received function
 
 43		begin
 
-44		  b:= fun2(c[4], c[5]);
+44		
 
-45		  b:= fun2(c[4],2);
+45		  b:= fun2(c[4], c[5]);
 
-46		  if (a < 2) then a:= 1 else a := a + 2;
+46		  b:= fun2(c[4],2);
 
-47		  if (b > 4.2) then a := c[a]
+47		  if (a < 2) then a:= 1 else a := a + 2;
 
-48		end.
+48		  if (b > 4.2) then a := c[a]
 
-49		
+49		end.
 
 50		
+
+51		
 
