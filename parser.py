@@ -20,6 +20,7 @@ bool_flag = []
 memory_counter = 0
 line_number = None
 
+
 def add_tokens():
     with open('write_it.txt', 'r') as token_file:
         next(token_file)
@@ -287,6 +288,7 @@ def declarations():
     global line_number
     line_number = get_line_number()
     global synch_set
+    global memory_counter
     line = tokens[0]
 
     token = peek_token()
@@ -302,6 +304,7 @@ def declarations():
         variable_types.update({token[1]: the_type})
         checking = nodes
         value_counter = 0
+        func = set_function_name()
         if nodes:
             green_node = nodes[0]
             while green_node.right_sibling is not None:
@@ -321,7 +324,7 @@ def declarations():
 
                 green_node.right_sibling = new_blue_node
                 nodes.insert(0, green_node.right_sibling)
-                write_to_memory_file('name', new_blue_node.data, new_blue_node.value)
+                write_to_memory_file(func, new_blue_node.data, new_blue_node.value)
         checking = nodes
         match(';')
         declarations_()
@@ -716,12 +719,17 @@ def write_to_memory_file(fun, v, a):
 
 
 def set_function_name():
-    green_node = nodes[0].__class__.__name__
-    green_node_type = nodes[0].w_type
-    if (green_node is 'GreenNode' and green_node_type is 'temptype') or (
-                    green_node is 'GreenNode' and green_node_type is 'pname'):
-        fun_name = nodes[0].data
-        return fun_name
+    # green_node = nodes[0].__class__.__name__
+    # green_node_type = nodes[0].w_type
+    for node in nodes:
+        if node.__class__.__name__ is 'GreenNode':
+            fun_name = node.data
+            return fun_name
+
+    # if (green_node is 'GreenNode' and green_node_type is 'temptype') or (
+    #                 green_node is 'GreenNode' and green_node_type is 'pname'):
+    #     fun_name = nodes[0].data
+    #     return fun_name
 
 
 def update_memory_counter():
