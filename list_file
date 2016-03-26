@@ -1,51 +1,47 @@
-1		
-2		program test (input, output);
-3		  var a : integer;
-4		  var b : real;
-5		  var c : array [1..6] of integer;
-6		  var d : integer;
-7		
-8		  function fun1(x:integer; y:real; 
-9		                  z:array [1..2] of integer;
-10		                  q: real) : integer;
-11		    var d: integer;
-12		    begin
-13		      a := 2;
-14		      z[a] := 4;
-15		      c[2] := 3;
-16		      fun1 := c[1]
-17		     end;
-18		
-19		   function fun2(x: integer; y: integer) : real;
-20		     var e: real;
-21		
-22		     function fun3(n: integer; z: real) : integer;
-23		       var e: integer;
-24		       begin
-25		         a:= e;
-26		         e:= c[e];
-27		         fun3 := 3
-28		       end;
-29		
-30		     begin
-31		       a:= fun1(x, e, c, b);
-32		       x:= fun3(c[1], e);
-33		       e := e + 4.44;
-34		       a:= (a mod y) div x;
-35		       while ((a >= 4) and ((b <= e) 
-36		                       or (not (a = c[a])))) do
-37		         begin
-38		           a:= c[a] + 1
-39		         end;
-40		       fun2 := 2.5 
-41		     end;
-42		
-43		begin
-44		
-45		  b:= fun2(c[4], c[5]);
-46		  b:= fun2(c[4],2);
-47		  if (a < 2) then a:= 1 else a := a + 2;
-48		  if (b > 4.2) then a := c[a]
-49		end.
-50		
-51		
+1		program test (input, output);
+2		  var a : integer;
+3		  var b : real;
+4		  var c : array [1..2] of integer;
+5		  var b : real;
+6		  function fun1(x:integer; y:real; 
+7		                  z:array [1..2] of integer; 
+8		                  q: real) : integer;
+9		    var d: integer;
+10		    var d: integer;
+11		    begin
+12		      a:= 2;
+13		      z[a] := 4;
+14		      c[2] := 3;
+15		      fun1 := c[1]
+16		     end;
+17		
+18		   function fun2(x: integer; y: integer) : real;
+19		     var e: real;
+20		
+21		     function fun2(n: integer; z: real) : integer;
+22		       var e: integer;
+23		       begin
+24		         a:= e;
+25		         e:= c[e];
+26		         fun3 := 3
+27		       end;
+28		
+29		     begin
+30		       a:= fun1(x, e, c, b);
+31		       x:= fun3(c[1], e);
+32		       e := e + 4.44;
+33		       a:= (a mod y) div x;
+34		       while ((a >= 4) and ((b <= e) 
+35		                       or (not (a = c[a])))) do
+36		         begin
+37		           a:= c[a] + 1
+38		         end;
+39		       fun2 := 2.5 
+40		     end;
+41		
+42		begin
+43		  b:= fun2(c[4], c[5]);
+44		  b:= fun2(c[4],2);
+45		  if (a < 2) then a:= 1 else a := a + 2;
+46		  if (b > 4.2) then a := c[a]
+47		end.

@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dac4f008-5893-4162-9289-a667cb2f85ab" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/final_listing_file.txt" afterPath="$PROJECT_DIR$/final_listing_file.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/list_file" afterPath="$PROJECT_DIR$/list_file" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parser.py" afterPath="$PROJECT_DIR$/parser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symbol_file" afterPath="$PROJECT_DIR$/symbol_file" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_file.txt" afterPath="$PROJECT_DIR$/test_file.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_it.txt" afterPath="$PROJECT_DIR$/write_it.txt" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,7 +45,7 @@
             <entry file="file://$PROJECT_DIR$/list_file">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+                  <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
@@ -48,8 +54,8 @@
           <file leaf-file-name="parser.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/parser.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-8.074074">
-                  <caret line="326" column="41" selection-start-line="326" selection-start-column="41" selection-end-line="326" selection-end-column="41" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="430" column="73" selection-start-line="430" selection-start-column="73" selection-end-line="430" selection-end-column="73" />
                   <folding>
                     <element signature="e#29#39#0" expanded="true" />
                   </folding>
@@ -60,8 +66,8 @@
           <file leaf-file-name="memory_file." pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/memory_file.">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.3416149">
-                  <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -71,7 +77,7 @@
             <entry file="file://$PROJECT_DIR$/final_listing_file.txt">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+                  <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -96,8 +102,8 @@
           <file leaf-file-name="test_file.txt" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test_file.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.46583852">
-                  <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+                <state vertical-scroll-proportion="0.29605263">
+                  <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
                   <folding />
                 </state>
               </provider>
@@ -161,9 +167,9 @@
         <option value="$PROJECT_DIR$/final_listing_file.txt" />
         <option value="$PROJECT_DIR$/BlueNode.py" />
         <option value="$PROJECT_DIR$/Node.py" />
-        <option value="$PROJECT_DIR$/test_file.txt" />
         <option value="$PROJECT_DIR$/parser.py" />
         <option value="$PROJECT_DIR$/memory_file." />
+        <option value="$PROJECT_DIR$/test_file.txt" />
       </list>
     </option>
   </component>
@@ -217,8 +223,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -253,6 +257,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -655,14 +661,19 @@
       <option name="project" value="LOCAL" />
       <updated>1458840551019</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="memory file and parser seems to be working finally good. compiler project is done">
+      <created>1458840607446</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1458840607446</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -676,11 +687,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281412" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -699,9 +711,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14765625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22017045" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22017045" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -716,7 +728,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix the list file. it seems to be working now. &#10;Also added code to error in the token file. &#10;Next time i need to work on the attribute for the token file." />
     <MESSAGE value="tight things up. lexical error checks better now." />
     <MESSAGE value="add symbol table file, its printing data twice i gotta check on that" />
     <MESSAGE value="built addop machine, create file and method for mulup, and lastly wrote updat journal" />
@@ -741,7 +752,8 @@
     <MESSAGE value="memory file works but data accurate." />
     <MESSAGE value="finish project 4" />
     <MESSAGE value="fix line problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix line problem" />
+    <MESSAGE value="memory file and parser seems to be working finally good. compiler project is done" />
+    <option name="LAST_COMMIT_MESSAGE" value="memory file and parser seems to be working finally good. compiler project is done" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6923077" />
   </component>
   <component name="XDebuggerManager">
@@ -750,227 +762,312 @@
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>307</line>
-          <option name="timeStamp" value="3071" />
+          <option name="timeStamp" value="3123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>308</line>
-          <option name="timeStamp" value="3072" />
+          <option name="timeStamp" value="3124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>309</line>
-          <option name="timeStamp" value="3073" />
+          <option name="timeStamp" value="3125" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>310</line>
-          <option name="timeStamp" value="3074" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>312</line>
-          <option name="timeStamp" value="3075" />
+          <option name="timeStamp" value="3126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>311</line>
-          <option name="timeStamp" value="3076" />
+          <option name="timeStamp" value="3127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>312</line>
+          <option name="timeStamp" value="3128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>313</line>
-          <option name="timeStamp" value="3077" />
+          <option name="timeStamp" value="3129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>314</line>
-          <option name="timeStamp" value="3078" />
+          <option name="timeStamp" value="3130" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>315</line>
-          <option name="timeStamp" value="3079" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>317</line>
-          <option name="timeStamp" value="3080" />
+          <option name="timeStamp" value="3131" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>316</line>
-          <option name="timeStamp" value="3081" />
+          <option name="timeStamp" value="3133" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>317</line>
+          <option name="timeStamp" value="3134" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>318</line>
-          <option name="timeStamp" value="3082" />
+          <option name="timeStamp" value="3135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>319</line>
-          <option name="timeStamp" value="3083" />
+          <option name="timeStamp" value="3136" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>320</line>
-          <option name="timeStamp" value="3084" />
+          <option name="timeStamp" value="3137" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>322</line>
-          <option name="timeStamp" value="3085" />
+          <option name="timeStamp" value="3138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>321</line>
-          <option name="timeStamp" value="3086" />
+          <option name="timeStamp" value="3139" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>324</line>
-          <option name="timeStamp" value="3087" />
+          <option name="timeStamp" value="3140" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>325</line>
-          <option name="timeStamp" value="3088" />
+          <option name="timeStamp" value="3141" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>326</line>
-          <option name="timeStamp" value="3089" />
+          <line>294</line>
+          <option name="timeStamp" value="3142" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>328</line>
-          <option name="timeStamp" value="3090" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>327</line>
-          <option name="timeStamp" value="3091" />
+          <line>295</line>
+          <option name="timeStamp" value="3143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>381</line>
-          <option name="timeStamp" value="3092" />
+          <option name="timeStamp" value="3144" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>382</line>
-          <option name="timeStamp" value="3093" />
+          <option name="timeStamp" value="3145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>383</line>
-          <option name="timeStamp" value="3094" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>380</line>
-          <option name="timeStamp" value="3096" />
+          <option name="timeStamp" value="3146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>384</line>
-          <option name="timeStamp" value="3097" />
+          <option name="timeStamp" value="3147" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>385</line>
-          <option name="timeStamp" value="3098" />
+          <option name="timeStamp" value="3148" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>386</line>
-          <option name="timeStamp" value="3099" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>388</line>
-          <option name="timeStamp" value="3100" />
+          <option name="timeStamp" value="3149" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>387</line>
-          <option name="timeStamp" value="3101" />
+          <option name="timeStamp" value="3150" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>389</line>
-          <option name="timeStamp" value="3102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>391</line>
-          <option name="timeStamp" value="3103" />
+          <option name="timeStamp" value="3151" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>390</line>
-          <option name="timeStamp" value="3104" />
+          <option name="timeStamp" value="3152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>391</line>
+          <option name="timeStamp" value="3153" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>392</line>
-          <option name="timeStamp" value="3105" />
+          <option name="timeStamp" value="3155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>393</line>
-          <option name="timeStamp" value="3106" />
+          <option name="timeStamp" value="3156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
           <line>394</line>
-          <option name="timeStamp" value="3107" />
+          <option name="timeStamp" value="3157" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>379</line>
-          <option name="timeStamp" value="3109" />
+          <line>395</line>
+          <option name="timeStamp" value="3158" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>720</line>
-          <option name="timeStamp" value="3110" />
+          <line>396</line>
+          <option name="timeStamp" value="3159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>722</line>
-          <option name="timeStamp" value="3111" />
+          <line>412</line>
+          <option name="timeStamp" value="3160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>721</line>
-          <option name="timeStamp" value="3112" />
+          <line>416</line>
+          <option name="timeStamp" value="3161" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>306</line>
-          <option name="timeStamp" value="3117" />
+          <line>415</line>
+          <option name="timeStamp" value="3162" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>723</line>
-          <option name="timeStamp" value="3118" />
+          <line>594</line>
+          <option name="timeStamp" value="3163" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>724</line>
-          <option name="timeStamp" value="3119" />
+          <line>591</line>
+          <option name="timeStamp" value="3164" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>726</line>
-          <option name="timeStamp" value="3120" />
+          <line>592</line>
+          <option name="timeStamp" value="3165" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/parser.py</url>
-          <line>725</line>
-          <option name="timeStamp" value="3121" />
+          <line>596</line>
+          <option name="timeStamp" value="3166" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>597</line>
+          <option name="timeStamp" value="3167" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>581</line>
+          <option name="timeStamp" value="3168" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>582</line>
+          <option name="timeStamp" value="3169" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>583</line>
+          <option name="timeStamp" value="3170" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>599</line>
+          <option name="timeStamp" value="3171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>598</line>
+          <option name="timeStamp" value="3172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>326</line>
+          <option name="timeStamp" value="3173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>397</line>
+          <option name="timeStamp" value="3174" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>400</line>
+          <option name="timeStamp" value="3175" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>402</line>
+          <option name="timeStamp" value="3176" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>403</line>
+          <option name="timeStamp" value="3177" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>407</line>
+          <option name="timeStamp" value="3179" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>410</line>
+          <option name="timeStamp" value="3180" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>408</line>
+          <option name="timeStamp" value="3182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>404</line>
+          <option name="timeStamp" value="3183" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>398</line>
+          <option name="timeStamp" value="3184" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>409</line>
+          <option name="timeStamp" value="3185" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>411</line>
+          <option name="timeStamp" value="3186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>405</line>
+          <option name="timeStamp" value="3187" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/parser.py</url>
+          <line>406</line>
+          <option name="timeStamp" value="3188" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -983,7 +1080,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="3122" />
+      <option name="time" value="3189" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1317,23 +1414,7 @@
     <entry file="file://$PROJECT_DIR$/list_file">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/final_listing_file.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_file.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46583852">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1346,10 +1427,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/final_listing_file.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.074074">
-          <caret line="326" column="41" selection-start-line="326" selection-start-column="41" selection-end-line="326" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="430" column="73" selection-start-line="430" selection-start-column="73" selection-end-line="430" selection-end-column="73" />
           <folding>
             <element signature="e#29#39#0" expanded="true" />
           </folding>
@@ -1358,8 +1447,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/memory_file.">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3416149">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_file.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29605263">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
           <folding />
         </state>
       </provider>

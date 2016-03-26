@@ -360,6 +360,8 @@ def declarations_():
     global line_number
     line_number = get_line_number()
     global memory_counter
+    global variable_exist
+    variable_exist = 0
     if token == 'begin':
         pass
     elif token == 'function':
@@ -375,6 +377,7 @@ def declarations_():
             the_type = the_type[0]
         variable_types.update({token[1]: the_type})
         current_nodes = nodes
+
         if nodes:
             node = nodes[0]
             while node.right_sibling is not None:
@@ -392,7 +395,24 @@ def declarations_():
                     memory_counter += 4 * array_size
                 node.right_sibling = new_blue_node
                 nodes.insert(0, node.right_sibling)
+                next_node = nodes[1]
+                counter = 0
+                current_n = new_blue_node
+                while current_n.__class__.__name__ is not 'GreenNode':
+
+                    if new_blue_node.data == next_node.data:
+                        variable_exist = 1
+                        counter += 1
+                        current_n = nodes[counter]
+                        next_node = nodes[counter]
+                        continue
+
+                    counter += 1
+                    current_n = nodes[counter]
+                    next_node = nodes[counter]
                 write_to_memory_file('', new_blue_node.data, new_blue_node.value)
+            if variable_exist == 1:
+                duplicated_variable(line_number, new_blue_node.data)
             testing = nodes
         match(';')
         declarations_()
@@ -403,6 +423,13 @@ def declarations_():
         synch_set.append('begin')
         handle_sync()
         syntax_error(token, 'begin', 'function', 'var')
+
+
+def duplicated_variable(line, v):
+
+        print "ERROR: In line " + line + " You can't declare " + v + " twice"
+        error = "ERROR: In line " + line + " You can't declare " + v + " twice"
+        new_list_file[int(line_number)].append(error)
 
 
 def type_():
@@ -726,10 +753,10 @@ def set_function_name():
             fun_name = node.data
             return fun_name
 
-    # if (green_node is 'GreenNode' and green_node_type is 'temptype') or (
-    #                 green_node is 'GreenNode' and green_node_type is 'pname'):
-    #     fun_name = nodes[0].data
-    #     return fun_name
+            # if (green_node is 'GreenNode' and green_node_type is 'temptype') or (
+            #                 green_node is 'GreenNode' and green_node_type is 'pname'):
+            #     fun_name = nodes[0].data
+            #     return fun_name
 
 
 def update_memory_counter():
