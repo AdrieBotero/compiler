@@ -7,7 +7,7 @@
 7		                  z:array [1..2] of integer; 
 8		                  q: real) : integer;
 9		    var d: integer;
-10		    var d: integer;
+10		
 11		    begin
 12		      a:= 2;
 13		      z[a] := 4;

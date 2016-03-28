@@ -17,9 +17,8 @@ ERROR: In line 5 You can't declare b twice
 
 9		    var d: integer;
 
-10		    var d: integer;
+10		
 
-ERROR: In line 10 You can't declare d twice
 11		    begin
 
 12		      a:= 2;
@@ -42,6 +41,7 @@ ERROR: In line 10 You can't declare d twice
 
 21		     function fun2(n: integer; z: real) : integer;
 
+ERROR: In line 21 You can't reuse fun2 function
 22		       var e: integer;
 
 23		       begin

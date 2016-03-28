@@ -595,6 +595,9 @@ def subprghead():
         green_node = GreenNode(line[1], "temptype")
 
         node.left_child = green_node
+        for n in nodes:
+            if n.data == green_node.data:
+                green_node_duplicated(line_number, green_node.data)
         nodes.insert(0, green_node)
         var_type = subprghead_()
         green_node.return_type = var_type
@@ -608,6 +611,12 @@ def subprghead():
         synch_set.append('var')
         handle_sync()
         syntax_error(token, 'function')
+
+
+def green_node_duplicated(line, v):
+    print "ERROR: In line " + line + " You can't reuse " + v + " function"
+    error = "ERROR: In line " + line + " You can't reuse " + v + " function"
+    new_list_file[int(line_number)].append(error)
 
 
 def subprghead_():
