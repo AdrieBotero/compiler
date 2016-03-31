@@ -2,7 +2,7 @@
 2		  var a : integer;
 3		  var b : real;
 4		  var c : array [1..2] of integer;
-5		  var b : real;
+5		  var d : real;
 6		  function fun1(x:integer; y:real; 
 7		                  z:array [1..2] of integer; 
 8		                  q: real) : integer;
@@ -18,7 +18,7 @@
 18		   function fun2(x: integer; y: integer) : real;
 19		     var e: real;
 20		
-21		     function fun2(n: integer; z: real) : integer;
+21		     function fun3(n: integer; z: real) : integer;
 22		       var e: integer;
 23		       begin
 24		         a:= e;
@@ -40,8 +40,14 @@
 40		     end;
 41		
 42		begin
-43		  b:= fun2(c[4], c[5]);
-44		  b:= fun2(c[4],2);
-45		  if (a < 2) then a:= 1 else a := a + 2;
-46		  if (b > 4.2) then a := c[a]
-47		end.
+43		  b:= fun2(c[4], c[5,5]);
+44		  b:= fun2(c[4], c[5],5);
+45		  b:= fun2(c[4], c);
+46		  b:= fun2(c[4]);
+47		  b:= fun2();
+48		  b:= fun2;
+49		  b:= fun3(c[4], c[5]);
+50		  b:= fun4(c[4],2);
+51		  if (a < 2) then a:= 1 else a := a + 2;
+52		  if (b > 4.2) then a := c[a]
+53		end.

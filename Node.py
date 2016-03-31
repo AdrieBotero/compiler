@@ -11,6 +11,7 @@ class Node:
         self.left_child = None
         self.previous_node = None
         self.value = None
+        self.param_types = []
 
     def __str__(self):
         return "testing nodes " + \

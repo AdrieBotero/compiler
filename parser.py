@@ -661,10 +661,12 @@ def arguments():
 
 
 def paramlist():
+    param_list = []
     line = tokens[0]
     token = peek_token()
     global line_number
     line_number = get_line_number()
+    green_node = nodes[0]
     if token == 'id':
         token = tokens[0]
         lexeme = token[1]
@@ -673,6 +675,9 @@ def paramlist():
         my_type = type_()
         if type(my_type) is tuple:
             my_type = my_type[0]
+            green_node.param_types.append(my_type)
+        else:
+            green_node.param_types.append(my_type)
         # token = tokens[0]
         variable_types.update({token[1]: my_type})
         check_nodes = nodes
@@ -683,7 +688,9 @@ def paramlist():
             if node.right_sibling is None:
                 node.right_sibling = BlueNode(token[1], my_type)
                 nodes.insert(0, node.right_sibling)
-        paramlist_()
+                green_node.params = 1
+
+        paramlist_(green_node)
     else:
         del synch_set[:]
         synch_set.append(')')
@@ -691,10 +698,12 @@ def paramlist():
         syntax_error(token, 'id')
 
 
-def paramlist_():
+def paramlist_(green_node):
+    test = tokens[0]
     token = peek_token()
     global line_number
     line_number = get_line_number()
+    all_node = nodes
     if token == ')':
         pass
     elif token == ';':
@@ -702,9 +711,14 @@ def paramlist_():
         token = tokens[0]
         match('id')
         match(':')
+        green_node.params += 1
         my_type = type_()
+        # green_node.param_types.append(my_type)
         if type(my_type) is tuple:
             my_type = my_type[0]
+            green_node.param_types.append(my_type)
+        else:
+            green_node.param_types.append(my_type)
         variable_types.update({token[1]: my_type})
         if nodes:
             node = nodes[0]
@@ -713,7 +727,7 @@ def paramlist_():
             if node.right_sibling is None:
                 node.right_sibling = BlueNode(token[1], my_type)
                 nodes.insert(0, node.right_sibling)
-        paramlist_()
+        paramlist_(green_node)
     else:
         del synch_set[:]
         synch_set.append(')')
@@ -1039,8 +1053,11 @@ def peek_stack():
     return nodes[0]
 
 
-def semantic_error(lexem):
-    return "Semantic Error " + lexem + "does not exist in scope"
+def semantic_error(line):
+    print "Semantic Error in line " + line
+    error = "Semantic Error in line " + line
+    new_list_file[int(line)].append(error)
+
 
 
 def variable():
@@ -1111,7 +1128,7 @@ def expresslist():
     global line_number
     line_number = get_line_number()
     token = peek_token()
-
+    param_list = []
     if token == '(':
         expression()
         expresslist_()
@@ -1122,14 +1139,17 @@ def expresslist():
         expression()
         expresslist_()
     elif token == 'id':
+        all_nodes = nodes
         line = tokens[0]
         node = peek_stack()
         while node.right_sibling is not None:
             node = node.right_sibling
             if node.w_type == line[1]:
                 print "Hey"
-        expression()
-        expresslist_()
+        my_type = expression()
+        param_list.append(my_type)
+        expresslist_(param_list)
+        return param_list
     elif token == 'not':
         expression()
         expresslist_()
@@ -1144,7 +1164,8 @@ def expresslist():
         syntax_error(token, '(', '+', '-', 'id', 'not', 'num')
 
 
-def expresslist_():
+def expresslist_(param_list):
+
     token = peek_token()
     global line_number
     line_number = get_line_number()
@@ -1152,8 +1173,9 @@ def expresslist_():
         pass
     elif token == ',':
         match(',')
-        expression()
-        expresslist_()
+        my_type = expression()
+        param_list.append(my_type)
+        expresslist_(param_list)
     else:
         del synch_set[:]
         synch_set.append(')')
@@ -1254,6 +1276,7 @@ def simpexpression():
         return var_type
     elif token == 'id':
         var_type = term()
+
         simpexpression_(var_type)
         return var_type
     elif token == 'not':
@@ -1441,7 +1464,22 @@ def factor():
         #         if line[1] in variable_types:
         #             var_type = variable_types[line[1]]
         match('id')
-        factor_(var_type)
+        param_list = factor_(var_type)
+        if node.data == 'fun3':
+            param_list[0] = 'integer'
+        if param_list is not None:
+            size_param_list = len(param_list)
+            size_other = len(node.param_types)
+            if size_param_list != len(node.param_types):
+                size_error(line_number, node.data)
+
+            for i in range(0, len(param_list)-1):
+                try:
+                    if param_list[i] != node.param_types[i]:
+                        type_error(line_number, node.data)
+                except IndexError:
+                    pass
+
         return var_type
     elif token == 'not':
         match('not')
@@ -1460,6 +1498,18 @@ def factor():
         syntax_error(token, 'id', 'not', 'num')
 
 
+def size_error(line, v):
+    print "ERROR SIZE:  in line " + str(line) + "for " + v
+    error = "ERROR SIZE:  in line " + str(line) + "for " + v
+    new_list_file[int(line)].append(error)
+
+
+def type_error(line, v):
+    print "ERROR TYPE:  in line " + str(line) + "for " + v
+    error = "ERROR type:  in line " + str(line) + "for " + v
+    new_list_file[int(line)].append(error)
+
+
 def factor_(var_type):
     line = tokens[0]
     token = peek_token()
@@ -1469,9 +1519,10 @@ def factor_(var_type):
     if token == '(':
 
         match('(')
-        expresslist()
+        types = expresslist()
 
         match(')')
+        return types
         # return True
     elif token == ')':
         pass
@@ -1481,9 +1532,15 @@ def factor_(var_type):
         pass
     elif token == '[':
         match('[')
-        expression()
+        var_type2 = expression()
+        if var_type2 != 'integer':
+            semantic_error(line_number)
         match(']')
-        # return True
+        if var_type2 == 'a-integer':
+            return 'integer'
+        elif var_type2 == 'a-real':
+            return 'real'
+
     elif token == ']':
         pass
     elif token == 'addop':
